@@ -6,14 +6,23 @@
 /signup
 /login
 /profile/:id
+/favourites
+/conversations
+/conversations/:id
+
 
 
 # Server facing routes
+
+/ (GET)
+/signup (POST)
+/login (POST)
 /api/profile (GET)
 /api/profile (POST)
 /api/profile/:id (PUT)
-/signup (POST)
-/login (POST)
+/api/:categories (GET)
+
+
 
 
 
