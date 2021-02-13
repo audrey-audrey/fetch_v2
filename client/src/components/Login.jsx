@@ -1,18 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import {
-  Route,
-  Switch,
-  Redirect,
-  BrowserRouter as Router,
-} from "react-router-dom";
-import { render } from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import history from "../history";
 
-import App from "../App";
 import Button from "./Button";
-import Register from "./Register";
 
 import "./Login.css";
 
