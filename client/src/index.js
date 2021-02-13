@@ -3,9 +3,8 @@ import { Router } from "react-router";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import { createBrowserHistory } from "history";
 
-const history = createBrowserHistory();
+import history from "./history";
 
 ReactDOM.render(
   <Router history={history}>
