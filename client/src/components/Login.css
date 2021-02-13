@@ -1,0 +1,3 @@
+.login-credential label::after {
+  content: ":";
+}
