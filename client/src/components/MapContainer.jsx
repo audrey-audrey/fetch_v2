@@ -11,7 +11,6 @@ function MapContainer(props) {
     users: []
   });
   // State
-  // console.log(props.users)
   const [ selected, setSelected ] = useState({});
   
   const onSelect = item => {
@@ -20,9 +19,18 @@ function MapContainer(props) {
 
   // Location data from users 
   let pins = [];
+
   props.users.map(user => {
-    console.log(user)
+    pins.push({
+      name: user.name,
+      location: {
+        lat: user.lat, 
+        lng: user.lng
+      }
+    })
   })
+
+  console.log(pins)
 
   const mapStyles = {
     height: "100vh",
@@ -33,8 +41,6 @@ function MapContainer(props) {
     lat: 43.6532, lng: -79.3832
   };
 
-  console.log(process.env.REACT_APP_API_KEY)
-
   return (
     <LoadScript
       googleMapsApiKey={process.env.REACT_APP_API_KEY}>
@@ -42,7 +48,7 @@ function MapContainer(props) {
         mapContainerStyle={mapStyles}
         zoom={13}
         center={defaultCenter}>
-        {/* {
+        {
             pins.map(item => {
               return (
               <Marker key={item.name} 
@@ -63,7 +69,7 @@ function MapContainer(props) {
               <p>{selected.name}</p>
             </InfoWindow>
             )
-         } */}
+         }
       </GoogleMap>
     </LoadScript>
   );
