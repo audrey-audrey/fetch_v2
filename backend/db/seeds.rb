@@ -21,12 +21,19 @@ def genPostalCode
   postalCode = first + second + third + fourth + fifth + sixth
 end
 
+def getLatLng(postalCode)
+  lat = JSON.parse(open('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDxIOZYjqhufR8C8Frdo4XhWeCvi7xWWvg&address=#{postalCode}').read)["message"]
+end
+
 10.times do
+  randomPostalCode = genPostalCode
+  lat = getLatLng(randomPostalCode)
+
   User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.unique.email,
     password: "password",
-    location: genPostalCode,
+    location: lat,
     dog_name: Faker::Creature::Dog.name,
     primary_image: JSON.parse(open('https://dog.ceo/api/breeds/image/random').read)["message"],
     image_2: Faker::LoremFlickr.image(search_terms: ['person']),

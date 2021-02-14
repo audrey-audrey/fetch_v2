@@ -6,52 +6,20 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 
-function MapContainer() {
+function MapContainer(props) {
   // State
+  // console.log(props.users)
   const [ selected, setSelected ] = useState({});
   
   const onSelect = item => {
     setSelected(item);
   }
 
-  // Dummy location data
-  const locations = [
-    {
-      name: "City Hall",
-      location: {
-        lat: 43.6539,
-        lng: -79.3842
-      },
-    },
-    {
-      name: "Sick Kids Hospital",
-      location: {
-        lat: 43.6573,
-        lng: -79.3873
-      },
-    },
-    {
-      name: "Toronto General Hospital",
-      location: {
-        lat: 43.6590,
-        lng: -79.3884
-      },
-    },
-    {
-      name: "Bloor-Yonge Station",
-      location: {
-        lat: 43.6706,
-        lng: -79.3865
-      },
-    },
-    {
-      name: "St. George Station",
-      location: {
-        lat: 43.6683,
-        lng: 79.3999
-      },
-    }
-  ];
+  // Location data from users 
+  let pins = [];
+  props.users.map(user => {
+    console.log(user)
+  })
 
   const mapStyles = {
     height: "100vh",
@@ -71,8 +39,8 @@ function MapContainer() {
         mapContainerStyle={mapStyles}
         zoom={13}
         center={defaultCenter}>
-        {
-            locations.map(item => {
+        {/* {
+            pins.map(item => {
               return (
               <Marker key={item.name} 
                 position={item.location}
@@ -92,7 +60,7 @@ function MapContainer() {
               <p>{selected.name}</p>
             </InfoWindow>
             )
-         }
+         } */}
       </GoogleMap>
     </LoadScript>
   );
