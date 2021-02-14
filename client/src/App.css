@@ -36,3 +36,12 @@
     transform: rotate(360deg);
   }
 }
+
+
+#profile-img {
+  width: 50px;
+}
+
+.main-component {
+  margin-left: 100px;
+}
