@@ -1,7 +1,45 @@
 import React from 'react';
-import { GoogleMap, LoadScript } from '@react-google-maps/api';
+import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 function MapContainer() {
+
+  const locations = [
+    {
+      name: "City Hall",
+      location: {
+        lat: 43.6539,
+        lng: -79.3842
+      },
+    },
+    {
+      name: "Sick Kids Hospital",
+      location: {
+        lat: 43.6573,
+        lng: -79.3873
+      },
+    },
+    {
+      name: "Toronto General Hospital",
+      location: {
+        lat: 43.6590,
+        lng: -79.3884
+      },
+    },
+    {
+      name: "Bloor-Yonge Station",
+      location: {
+        lat: 43.6706,
+        lng: -79.3865
+      },
+    },
+    {
+      name: "St. George Station",
+      location: {
+        lat: 43.6683,
+        lng: 79.3999
+      },
+    }
+  ];
 
   const mapStyles = {
     height: "100vh",
@@ -20,7 +58,15 @@ function MapContainer() {
       <GoogleMap
         mapContainerStyle={mapStyles}
         zoom={13}
-        center={defaultCenter} />
+        center={defaultCenter}>
+        {
+          locations.map(item => {
+            return (
+              <Marker key={item.name} position={item.location} />
+            )
+          })
+        }
+      </GoogleMap>
     </LoadScript>
   );
 }
