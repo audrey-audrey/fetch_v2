@@ -14,6 +14,8 @@ export default function Login(props) {
     password: "",
   });
 
+
+
   const handleSubmit = function (event) {
     event.preventDefault();
     // if (state.username === "" || state.password === "") {
@@ -21,8 +23,11 @@ export default function Login(props) {
     //   return;
     // }
     const params = { username: state.username, password: state.password };
-    console.log(params);
+    console.log(params);    
+    localStorage.setItem('token', 'hi'); // <-- adds navbar
+
     history.push("/");
+    window.location.reload()
     // return axios.post(`/api/login`, params).then((res) => {
     //   if (res.data.code === 200) {
     //     <Redirect to="/login" />;
@@ -30,6 +35,8 @@ export default function Login(props) {
     //     return;
     //   }
     // });
+
+
   };
   //CSS content : instead of having : on label
 
