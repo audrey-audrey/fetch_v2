@@ -22,7 +22,7 @@ def genPostalCode
 end
 
 2.times do
-  User.create!(
+  User.create(
     name: Faker::Name.name,
     email: Faker::Internet.unique.email,
     password: "password",
@@ -40,30 +40,30 @@ end
   )
 end
 # Conversations
-Conversation.destroy_all
+# Conversation.destroy_all
+# User.conversations.create(
+#   initiator: 2,
+#   recipient: 3
+# )
 
-Conversation.create!(
-  initiator: 1,
-  recipient: 2
-)
-# Messages
-Message.destroy_all
+# # Messages
+# Message.destroy_all
 
-2.times do 
-  Message.create!(
-    content: Faker::Lorem.paragraph(sentence_count: 2),
-    user_id: 1,
-    conversation_id: 1
-  )
-end
+# 5.times do 
+#   Message.create!(
+#     content: Faker::Lorem.paragraph(sentence_count: 2),
+#     user_id: 4,
+#     conversation_id: 1
+#   )
+# end
 
 
 
-# Favorites
-Favorite.destroy_all
+# # Favorites
+# Favorite.destroy_all
 
-Favorite.create!(
-  favoriter: 1,
-  favoritee: 2
-)
+# Favorite.create!(
+#   favoriter: 1,
+#   favoritee: 2
+# )
 
