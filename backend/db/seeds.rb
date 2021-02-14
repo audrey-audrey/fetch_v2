@@ -21,6 +21,12 @@ def genPostalCode
   postalCode = first + second + third + fourth + fifth + sixth
 end
 
+User.create!(
+  name: "Alison",
+  email: "alisonhussey@gmail.com",
+  password: "asd"
+)
+
 10.times do
   User.create!(
     name: Faker::Name.name,
