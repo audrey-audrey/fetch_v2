@@ -21,7 +21,7 @@ def genPostalCode
   postalCode = first + second + third + fourth + fifth + sixth
 end
 
-10.times do
+2.times do
   User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.unique.email,
@@ -39,32 +39,31 @@ end
     large: Faker::Boolean.boolean(true_ratio: 0.5)
   )
 end
+# Conversations
+Conversation.destroy_all
 
-# # Messages
-# Message.destroy_all
+Conversation.create!(
+  initiator: 1,
+  recipient: 2
+)
+# Messages
+Message.destroy_all
 
-# 10.times do 
-#   Message.create!(
-#     content: Faker::Lorem.paragraph(sentence_count: 2),
-#     sender: 1,
-#     recipient: 2 ,
-#     conversation_id: 1
-#   )
-# end
+2.times do 
+  Message.create!(
+    content: Faker::Lorem.paragraph(sentence_count: 2),
+    user_id: 1,
+    conversation_id: 1
+  )
+end
 
-# # Conversations
-# Conversation.destroy_all
 
-# Conversation.create!(
-#   initiator: 1,
-#   recipient: 2
-# )
 
-# # Favorites
-# Favorite.destroy_all
+# Favorites
+Favorite.destroy_all
 
-# Favorite.create!(
-#   favoriter: 1,
-#   favoritee: 2
-# )
+Favorite.create!(
+  favoriter: 1,
+  favoritee: 2
+)
 
