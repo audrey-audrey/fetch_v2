@@ -3,6 +3,7 @@ import { Route, Switch } from "react-router";
 import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import MapContainer from "./components/MapContainer";
 
 function App() {
   return (
@@ -14,7 +15,10 @@ function App() {
         <Route path="/register">
           <Register />
         </Route>
-        <Route path="/">Homepage!</Route>
+        <Route path="/">
+          Homepage!
+          <MapContainer />
+        </Route>
       </Switch>
     </div>
   );
