@@ -5,12 +5,27 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import history from "./history";
+import MapContainer from "./components/MapContainer";
 
 import { slide as Menu } from "react-burger-menu";
 
 import "./BurgerMenu.css";
 
 function App() {
+  // State
+  const [ state, setState ] = useState({
+    users: []
+  });
+
+  // setState for users
+  const setUsers = users => setState(prev => ({...prev, users}));
+
+  // fetch users data from backend
+  useEffect(() => {
+    axios.get('api/users')
+    .then(res => setUsers(res.data))
+  },[])
+
   const handleLogout = function (event) {
     localStorage.removeItem('token') 
 
@@ -51,7 +66,10 @@ function App() {
           <Route path="/user">
             <Profile />
           </Route>
-          <Route path="/">Homepage!</Route>
+          <Route path="/">
+            Homepage!
+            <MapContainer users={state.users}/>
+          </Route>
         </Switch>
       </div>
 
