@@ -7,6 +7,9 @@ import {
 } from '@react-google-maps/api';
 
 function MapContainer(props) {
+  const [ state, setState ] = useState({
+    users: []
+  });
   // State
   // console.log(props.users)
   const [ selected, setSelected ] = useState({});
