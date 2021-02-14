@@ -1,9 +1,11 @@
+import { React, useState, useEffect } from 'react';
+import axios from 'axios'
 import { Route, Switch } from "react-router";
 
 import "./App.css";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Profile from "./components/Profile";
+// import Profile from "./components/Profile";
 import history from "./history";
 import MapContainer from "./components/MapContainer";
 
@@ -64,7 +66,7 @@ function App() {
             <Register />
           </Route>
           <Route path="/user">
-            <Profile />
+            {/* <Profile /> */}
           </Route>
           <Route path="/">
             Homepage!
