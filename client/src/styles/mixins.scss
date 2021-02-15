@@ -16,8 +16,8 @@
   opacity: 1;
 }
 
-@mixin border-card($color) {
-  background-color: rgba($color, $inactive-opacity);
-  color: $color;
-  border: 2px solid $color;
-}
+// @mixin border-card($color) {
+//   background-color: rgba($color, $inactive-opacity);
+//   color: $color;
+//   border: 2px solid $color;
+// }

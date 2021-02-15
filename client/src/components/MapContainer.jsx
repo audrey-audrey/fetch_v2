@@ -11,15 +11,28 @@ import Button from './Button'
 import "./MapContainer.scss";
 
 function MapContainer(props) {
-  const [state, setState] = useState({
-    users: []
-  });
   // State
   const [selected, setSelected] = useState({});
 
   const onSelect = item => {
     setSelected(item);
   }
+
+  // state for showing markers 
+  const [state, setState] = useState({
+    showToggle: false,
+
+    // categories 
+    playful: false,
+    affectionate: false,
+    high_energy: false,
+    shy: false,
+    well_trained: false,
+    large: false
+  })
+
+  const toggle = () => setState(prev => ({...prev, playful: !prev.playful }))
+  console.log('playful', state.playful)
 
   // Location data from users 
   let pins = [];
@@ -42,14 +55,31 @@ function MapContainer(props) {
       location: {
         lat: user.lat,
         lng: user.lng
-      }
+      },
+      playful: user.playful,
+      affectionate: user.affectionate,
+      high_energy: user.high_energy,
+      shy: user.shy,
+      well_trained: user.well_trained,
+      large: user.large,
+      show: true
     })
   })
 
-  const shape = {
-    coords: [25, 25, 25],
-    type: 'circle'
-  }
+  const filteredPins = pins.filter(pin => {
+    // console.log(pin.playful)
+    if (pin.playful === false && pin.shy === false) {
+      return true
+    }
+  })
+
+  // state: playful => true, affectionate => true....
+  // each playful category button would toggle the playful state 
+
+  // const shape = {
+  //   coords: [25, 25, 25],
+  //   type: 'circle'
+  // }
 
   const mapStyles = {
     height: "100vh",
@@ -61,6 +91,15 @@ function MapContainer(props) {
   };
 
   return (
+    <>
+    <div className='filter'>
+      <Button confirm onClick={toggle}>Playful</Button>
+      <Button confirm>Affectionate</Button>
+      <Button confirm>High-energy</Button>
+      <Button confirm>Shy</Button>
+      <Button confirm>Well-trained</Button>
+      <Button confirm>Large</Button>
+    </div>
     <LoadScript
       googleMapsApiKey={process.env.REACT_APP_API_KEY}>
       <GoogleMap
@@ -68,12 +107,13 @@ function MapContainer(props) {
         zoom={13}
         center={defaultCenter}>
         {
-          pins.map(item => {
+          filteredPins.map(item => {
             return (
+              // add item && => for conditional rendering
               <Marker key={item.name}
                 position={item.location}
                 icon={item.icon}
-                shape={shape}
+                // shape={shape}
                 onClick={() => onSelect(item)}
               />
             )
@@ -104,6 +144,7 @@ function MapContainer(props) {
         }
       </GoogleMap>
     </LoadScript>
+    </>
   );
 }
 
