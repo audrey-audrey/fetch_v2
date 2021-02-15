@@ -19,29 +19,6 @@ user_list = [
   [ "66 Nassau St, Toronto", Geocoder.search("66 Nassau St, Toronto").first.coordinates[0], Geocoder.search("66 Nassau St, Toronto").first.coordinates[1] ]
 ]
 
-<<<<<<< HEAD
-  postalCode = first + second + third + fourth + fifth + sixth
-end
-
-<<<<<<< HEAD
-2.times do
-  User.create(
-=======
-def getLatLng(postalCode)
-  lat = JSON.parse(open('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDxIOZYjqhufR8C8Frdo4XhWeCvi7xWWvg&address=#{postalCode}').read)["message"]
-end
-
-10.times do
-  randomPostalCode = genPostalCode
-  lat = getLatLng(randomPostalCode)
-
-  User.create!(
->>>>>>> feature/map
-    name: Faker::Name.name,
-    email: Faker::Internet.unique.email,
-    password: "password",
-    location: lat,
-=======
 user_list.each do |location, lat, lng|
   User.create!(
     name: Faker::Name.name,
@@ -50,7 +27,6 @@ user_list.each do |location, lat, lng|
     location: location,
     lat: lat,
     lng: lng,
->>>>>>> feature/user-migration-create
     dog_name: Faker::Creature::Dog.name,
     primary_image: JSON.parse(open('https://dog.ceo/api/breeds/image/random').read)["message"],
     bio: Faker::Lorem.paragraph,

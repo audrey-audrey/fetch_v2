@@ -5,6 +5,9 @@ import {
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
+
+import Button from './Button'
+
 import "./MapContainer.scss";
 
 function MapContainer(props) {
@@ -88,9 +91,13 @@ function MapContainer(props) {
                 {/* <div class="map-info-close">
                   x
                 </div> */}
-              <img src={selected.icon.url}/>
-              <p>{selected.name}</p>
-              <p>{selected.bio}</p>
+                <img src={selected.icon.url} />
+                <br />
+                <p>{selected.name} & {selected.dog_name}</p>
+                <br />
+                <p>{selected.bio}</p>
+                <br />
+                <Button confirm>Profile</Button>
               </div>
             </InfoWindow>
           )
