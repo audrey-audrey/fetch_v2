@@ -20,6 +20,7 @@ user_list = [
 ]
 
 <<<<<<< HEAD
+<<<<<<< HEAD
   postalCode = first + second + third + fourth + fifth + sixth
 end
 
@@ -56,6 +57,8 @@ end
     password: "password",
     location: lat,
 =======
+=======
+>>>>>>> feature/map
 user_list.each do |location, lat, lng|
   User.create!(
     name: Faker::Name.name,
@@ -64,7 +67,6 @@ user_list.each do |location, lat, lng|
     location: location,
     lat: lat,
     lng: lng,
->>>>>>> feature/user-migration-create
     dog_name: Faker::Creature::Dog.name,
     primary_image: JSON.parse(open('https://dog.ceo/api/breeds/image/random').read)["message"],
     bio: Faker::Lorem.paragraph,
