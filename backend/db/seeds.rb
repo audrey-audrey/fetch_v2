@@ -24,6 +24,7 @@ user_list = [
 end
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 User.create!(
   name: "Alison",
   email: "alisonhussey@gmail.com",
@@ -31,12 +32,17 @@ User.create!(
 )
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> main
 2.times do
   User.create(
 =======
 def getLatLng(postalCode)
   lat = JSON.parse(open('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDxIOZYjqhufR8C8Frdo4XhWeCvi7xWWvg&address=#{postalCode}').read)["message"]
 end
+<<<<<<< HEAD
+>>>>>>> main
+=======
 >>>>>>> main
 
 10.times do
