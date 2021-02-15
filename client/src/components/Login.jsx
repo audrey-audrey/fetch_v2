@@ -2,9 +2,10 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Input, Button, Icon } from "semantic-ui-react";
 import history from "../history";
 
-import Button from "./Button";
+// import Button from "./Button";
 
 import "./Login.css";
 
@@ -14,8 +15,6 @@ export default function Login(props) {
     password: "",
     errorMessage: "",
   });
-
-
 
   const handleSubmit = function (event) {
     event.preventDefault();
@@ -41,6 +40,7 @@ export default function Login(props) {
   return (
     <Router>
       <div className="login-container">
+        <p>Log In To Find New Friends!</p>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
             <h3 className="error">
@@ -49,7 +49,7 @@ export default function Login(props) {
           )}
           <div className="login-credential">
             <label htmlFor="email">Email</label>
-            <input
+            <Input
               type="text"
               id="email"
               name="email"
@@ -62,7 +62,7 @@ export default function Login(props) {
           </div>
           <div className="password-credential">
             <label htmlFor="password">Password</label>
-            <input
+            <Input
               type="text"
               id="password"
               required
@@ -73,7 +73,9 @@ export default function Login(props) {
               }}
             />
           </div>
-          <button type="submit">Login</button>
+          <Button type="submit" icon>
+            <Icon name="paw"></Icon> Login
+          </Button>
         </form>
       </div>
     </Router>

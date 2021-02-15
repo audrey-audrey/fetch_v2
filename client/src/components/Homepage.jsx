@@ -1,9 +1,7 @@
 import React from "react";
-import { useState } from "react";
-import axios from "axios";
 import { Link, BrowserRouter as Router } from "react-router-dom";
-import history from "../history";
 import { Container, Image, Button } from "semantic-ui-react";
+import ellaMed from "../images/ellaMed.png"
 
 
 // import Button from "./Button";
@@ -13,8 +11,9 @@ export default function Homepage(props) {
     <Router>
       <Container textAlign='center'>
         <Image
-          src="https://thehappypuppysite.com/wp-content/uploads/2019/02/Australian-Shepherd-Temperament-long.jpg"
+          src={ellaMed}
           circular
+          // size='large'
           fluid
         />
         <Button.Group>

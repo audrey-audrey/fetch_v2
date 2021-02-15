@@ -1,5 +1,5 @@
-import { React, useState, useEffect } from 'react';
-import axios from 'axios'
+import { React, useState, useEffect } from "react";
+import axios from "axios";
 import { Route, Switch } from "react-router";
 
 import "./App.css";
@@ -8,44 +8,44 @@ import Register from "./components/Register";
 // import Profile from "./components/Profile";
 import history from "./history";
 import MapContainer from "./components/MapContainer";
-import Homepage from "./components/Homepage"
+import Homepage from "./components/Homepage";
 
 import { slide as Menu } from "react-burger-menu";
 
 import "./BurgerMenu.css";
 
-import 'semantic-ui-css/semantic.min.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "semantic-ui-css/semantic.min.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   // State
-  const [ state, setState ] = useState({
-    users: []
+  const [state, setState] = useState({
+    users: [],
   });
 
   // setState for users
-  const setUsers = users => setState(prev => ({...prev, users}));
+  const setUsers = (users) => setState((prev) => ({ ...prev, users }));
 
   // fetch users data from backend
   useEffect(() => {
-    axios.get('api/users')
-    .then(res => setUsers(res.data))
-  },[])
+    axios.get("api/users").then((res) => setUsers(res.data));
+  }, []);
 
   const handleLogout = function (event) {
-    localStorage.removeItem('token') 
+    localStorage.removeItem("token");
 
-    history.push('/')
-    window.location.reload()
+    history.push("/");
+    window.location.reload();
   };
 
   return (
     <div>
-      { localStorage.getItem('token') ? (
+      {localStorage.getItem("token") ? (
         <Menu noOverlay>
-
-          <img id="profile-img" src="https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png" />
+          <img
+            id="profile-img"
+            src="https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
+          />
 
           <a id="profile" className="menu-item" href="/profile">
             Profile
@@ -60,7 +60,7 @@ function App() {
             logout
           </a>
         </Menu>
-      ) : null }
+      ) : null}
 
       <div className="main-component">
         <Switch>
@@ -73,16 +73,13 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/user">
-            {/* <Profile /> */}
-          </Route>
+          <Route path="/user">{/* <Profile /> */}</Route>
           <Route path="/">
             Homepage!
-            <MapContainer users={state.users}/>
+            <MapContainer users={state.users} />
           </Route>
         </Switch>
       </div>
-
     </div>
   );
 }

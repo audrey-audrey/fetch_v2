@@ -2,9 +2,10 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
+import { Input, Button, Icon } from "semantic-ui-react";
 import history from "../history";
 
-import Button from "./Button";
+// import Button from "./Button";
 
 export default function Register(props) {
   const [state, setState] = useState({
@@ -50,7 +51,7 @@ export default function Register(props) {
           )}
           <div className="email-credential">
             <label htmlFor="email">Email</label>
-            <input
+            <Input
               type="text"
               id="email"
               required
@@ -63,7 +64,7 @@ export default function Register(props) {
           </div>
           <div className="password-credential">
             <label htmlFor="password">Password</label>
-            <input
+            <Input
               type="text"
               id="password"
               required
@@ -76,7 +77,7 @@ export default function Register(props) {
           </div>
           <div className="password-credential">
             <label htmlFor="password-confirm">Confirm Password</label>
-            <input
+            <Input
               type="text"
               id="password-confirm"
               required
@@ -87,7 +88,9 @@ export default function Register(props) {
               }}
             />
           </div>
-          <button type="submit">Register</button>
+          <Button type="submit" icon>
+            <Icon name="paw"></Icon> Sign Up
+          </Button>
         </form>
       </div>
     </Router>
