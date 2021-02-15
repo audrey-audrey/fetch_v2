@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import "./App.css";
 import history from "./history";
@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 // import Profile from "./components/Profile";
 import Conversations from "./components/Conversations";
+import Message from "./components/Message";
 
 import { slide as Menu } from "react-burger-menu";
 
@@ -43,21 +44,28 @@ function App() {
         </Menu>
       ) : null}
 
-      <div className="main-component">
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/user">{/* <Profile /> */}</Route>
-          <Route path="/conversations">
-            <Conversations />
-          </Route>
-          <Route path="/">Homepage!</Route>
-        </Switch>
-      </div>
+      <Router>
+        <div className="main-component">
+          <Switch>
+            <Route exact path="/">
+              Homepage!
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/user">{/* <Profile /> */}</Route>
+            <Route path="/conversations">
+              <Conversations />
+            </Route>
+            <Route path="/messages/:id">
+              <Message />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 }
