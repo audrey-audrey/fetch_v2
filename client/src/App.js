@@ -8,6 +8,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
+import Favourites from "./components/Favourites";
 
 import history from "./history";
 import MapContainer from "./components/MapContainer";
@@ -17,7 +18,7 @@ import { slide as Menu } from "react-burger-menu";
 import "./BurgerMenu.css";
 
 import 'semantic-ui-css/semantic.min.css'
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
@@ -54,13 +55,13 @@ function App() {
           </Link>
 
           <Link id="messages" className="menu-item" href="/messages">
-            About
+            Messages
           </Link>
-          <Link id="favorites" className="menu-item" href="/favorites">
-            Contact
+          <Link id="favorites" className="menu-item" to="/favourties">
+            Favourties
           </Link>
           <Link id="logout" className="menu-item" onClick={handleLogout}>
-            logout
+            Logout
           </Link>
         </Menu>
       ) : null }
@@ -78,6 +79,9 @@ function App() {
           </Route>
           <Route path="/edit-user">
             <EditProfile />
+          </Route>
+          <Route path="/favourites">
+            <Favourites />
           </Route>
           <Route path="/">
             Homepage!
