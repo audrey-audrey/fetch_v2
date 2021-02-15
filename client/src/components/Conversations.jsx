@@ -1,6 +1,6 @@
 import React, { useState, useEffect, forceUpdate } from "react";
 import axios from "axios";
-import { BrowserRouter as Router } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import history from "../history";
 
 import "./Login.css";
@@ -34,7 +34,7 @@ export default function Conversations(props) {
   };
 
   let filterInitiators = function (arr) {
-    let myId = 1;
+    let myId = 2;
     return arr.filter((item) => item.id !== myId);
   };
 
@@ -42,7 +42,16 @@ export default function Conversations(props) {
     if (!loading) {
       let filteredRecipients = filterRecipients(state.recipients);
       for (const item of filteredRecipients) {
-        return <li>{item.name}</li>;
+        for (const convo of state.conversations) {
+          if (item.id === convo.recipient_id) {
+            const path = `/messages/${convo.id}`;
+            return (
+              <li>
+                <Link to={`/messages/${convo.id}`}>{item.name}</Link>
+              </li>
+            );
+          }
+        }
       }
     }
   };
@@ -51,7 +60,16 @@ export default function Conversations(props) {
     if (!loading) {
       let filteredInitiators = filterInitiators(state.initiators);
       for (const item of filteredInitiators) {
-        return <li>{item.name}</li>;
+        for (const convo of state.conversations) {
+          if (item.id === convo.initiator_id) {
+            const path = `/messages/${convo.id}`;
+            return (
+              <li>
+                <Link to={`/messages/${convo.id}`}>{item.name}</Link>
+              </li>
+            );
+          }
+        }
       }
     }
   };
@@ -59,20 +77,18 @@ export default function Conversations(props) {
   let recipients = displayRecipients();
   let initiators = displayInitiators();
   return (
-    <Router>
+    <div>
+      Conversations
       <div>
-        Conversations
-        <div>
-          {loading ? (
-            <span>Loading</span>
-          ) : (
-            <ul>
-              {recipients}
-              {initiators}
-            </ul>
-          )}
-        </div>
+        {loading ? (
+          <span>Loading</span>
+        ) : (
+          <ul>
+            {recipients}
+            {initiators}
+          </ul>
+        )}
       </div>
-    </Router>
+    </div>
   );
 }
