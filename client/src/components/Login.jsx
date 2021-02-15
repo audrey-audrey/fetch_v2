@@ -12,7 +12,7 @@ export default function Login(props) {
   const [state, setState] = useState({
     email: "",
     password: "",
-    errorMessage:""
+    errorMessage: "",
   });
 
   const handleSubmit = function (event) {
@@ -20,16 +20,19 @@ export default function Login(props) {
 
     const params = { email: state.email, password: state.password };
 
-    return axios.post(`/api/login`, params).then((res) => {
-
-      if (state.email !== res.data[0].email) {
-        return;
-      } 
-          history.push("/")
-    }).catch((err) => {
-      setState({errorMessage: err.message})
-    })
-    
+    return axios
+      .post(`/api/login`, params)
+      .then((res) => {
+        if (state.email !== res.data[0].email) {
+          return;
+        }
+        localStorage.setItem("token", "hi"); // <-- adds navbar
+        history.push("/");
+        window.location.reload();
+      })
+      .catch((err) => {
+        setState({ errorMessage: err.message });
+      });
   };
   //CSS content : instead of having : on label
 
@@ -37,8 +40,11 @@ export default function Login(props) {
     <Router>
       <div className="login-container">
         <form action="/login" method="POST" onSubmit={handleSubmit}>
-        { state.errorMessage &&
-  <h3 className="error">Oops! That email does not exist. Try again.</h3> }
+          {state.errorMessage && (
+            <h3 className="error">
+              Oops! That email does not exist. Try again.
+            </h3>
+          )}
           <div className="login-credential">
             <label htmlFor="email">Email</label>
             <input

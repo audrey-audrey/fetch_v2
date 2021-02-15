@@ -6,36 +6,61 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'open-uri' 
+require 'geocoder'
 
 # Users
 User.destroy_all
 
-def genPostalCode
-  first = ['M', 'L'].shuffle.first
-  second = rand(10).to_s
-  third = ('A'..'P').to_a.sample
-  fourth = rand(10).to_s
-  fifth = ('A'..'P').to_a.sample
-  sixth = rand(10).to_s
+user_list = [
+  [ "60 Queen St W, Toronto", Geocoder.search("60 Queen St W, Toronto").first.coordinates[0], Geocoder.search("60 Queen St W, Toronto").first.coordinates[1]],
+  [ "111 Lombard St, Toronto", Geocoder.search("111 Lombard St, Toronto").first.coordinates[0], Geocoder.search("111 Lombard St, Toronto").first.coordinates[1] ],
+  [ "350 Victoria St, Toronto", Geocoder.search("350 Victoria St, Toronto").first.coordinates[0], Geocoder.search("350 Victoria St, Toronto").first.coordinates[1] ],
+  [ "600 University Ave, Toronto", Geocoder.search("600 University Ave, Toronto").first.coordinates[0], Geocoder.search("600 University Ave, Toronto").first.coordinates[1] ],
+  [ "66 Nassau St, Toronto", Geocoder.search("66 Nassau St, Toronto").first.coordinates[0], Geocoder.search("66 Nassau St, Toronto").first.coordinates[1] ]
+]
 
+<<<<<<< HEAD
   postalCode = first + second + third + fourth + fifth + sixth
 end
 
+<<<<<<< HEAD
 User.create!(
   name: "Alison",
   email: "alisonhussey@gmail.com",
   password: "asd"
 )
+=======
+<<<<<<< HEAD
+2.times do
+  User.create(
+=======
+def getLatLng(postalCode)
+  lat = JSON.parse(open('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyDxIOZYjqhufR8C8Frdo4XhWeCvi7xWWvg&address=#{postalCode}').read)["message"]
+end
+>>>>>>> main
 
 10.times do
+  randomPostalCode = genPostalCode
+  lat = getLatLng(randomPostalCode)
+
+  User.create!(
+>>>>>>> feature/map
+    name: Faker::Name.name,
+    email: Faker::Internet.unique.email,
+    password: "password",
+    location: lat,
+=======
+user_list.each do |location, lat, lng|
   User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.unique.email,
     password: "password",
-    location: genPostalCode,
+    location: location,
+    lat: lat,
+    lng: lng,
+>>>>>>> feature/user-migration-create
     dog_name: Faker::Creature::Dog.name,
     primary_image: JSON.parse(open('https://dog.ceo/api/breeds/image/random').read)["message"],
-    image_2: Faker::LoremFlickr.image(search_terms: ['person']),
     bio: Faker::Lorem.paragraph,
     playful: Faker::Boolean.boolean(true_ratio: 0.5),
     affectionate: Faker::Boolean.boolean(true_ratio: 0.5),
@@ -46,25 +71,25 @@ User.create!(
   )
 end
 
+# Conversations
+# Conversation.destroy_all
+# User.conversations.create(
+#   initiator: 2,
+#   recipient: 3
+# )
+
 # # Messages
 # Message.destroy_all
 
-# 10.times do 
+# 5.times do 
 #   Message.create!(
 #     content: Faker::Lorem.paragraph(sentence_count: 2),
-#     sender: 1,
-#     recipient: 2 ,
+#     user_id: 4,
 #     conversation_id: 1
 #   )
 # end
 
-# # Conversations
-# Conversation.destroy_all
 
-# Conversation.create!(
-#   initiator: 1,
-#   recipient: 2
-# )
 
 # # Favorites
 # Favorite.destroy_all

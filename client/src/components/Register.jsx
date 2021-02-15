@@ -11,6 +11,7 @@ export default function Register(props) {
     email: "",
     password: "",
     passwordConfirm: "",
+    errorMessage: "",
   });
 
   const handleSubmit = function (event) {
@@ -23,35 +24,30 @@ export default function Register(props) {
       email: state.email,
       password: state.password,
     };
-    console.log(params);
-    
-    return axios.post(`/api/register`, params).then((res) => {
-      console.log(res)
-      if (res.data.code === 200) {
-       history.push("/"); 
-      } else {
-        return;
-      }
-    }).catch((err) => {throw err});
+
+    return axios
+      .post(`/api/register`, params)
+      .then((res) => {
+        if (res.status !== 200) {
+          return;
+        }
+
+        history.push("/");
+      })
+      .catch((err) => {
+        setState({ errorMessage: err.message });
+      });
   };
 
   return (
     <Router>
       <div className="login-container">
         <form action="/login" method="POST" onSubmit={handleSubmit}>
-          {/* <div className="login-credential">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              required
-              placeholder="Please enter username"
-              onChange={(event) => {
-                setState({ ...state, username: event.target.value });
-              }}
-            />
-          </div> */}
+          {state.errorMessage && (
+            <h3 className="error">
+              Oops! That email already exists. Try again.
+            </h3>
+          )}
           <div className="email-credential">
             <label htmlFor="email">Email</label>
             <input
