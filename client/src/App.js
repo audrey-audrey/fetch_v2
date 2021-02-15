@@ -8,6 +8,7 @@ import Register from "./components/Register";
 // import Profile from "./components/Profile";
 import history from "./history";
 import MapContainer from "./components/MapContainer";
+import Homepage from "./components/Homepage"
 
 import { slide as Menu } from "react-burger-menu";
 
@@ -63,6 +64,9 @@ function App() {
 
       <div className="main-component">
         <Switch>
+          <Route path="/homepage">
+            <Homepage />
+          </Route>
           <Route path="/login">
             <Login />
           </Route>
