@@ -8,7 +8,6 @@ import Button from "./Button";
 
 export default function Register(props) {
   const [state, setState] = useState({
-    username: "",
     email: "",
     password: "",
     passwordConfirm: "",
@@ -21,26 +20,26 @@ export default function Register(props) {
       return;
     }
     const params = {
-      username: state.username,
       email: state.email,
       password: state.password,
     };
     console.log(params);
-    history.push("/");
-    // return axios.post(`/api/login`, params).then((res) => {
-    //   if (res.data.code === 200) {
-    //     <Redirect to="/login" />;
-    //   } else {
-    //     return;
-    //   }
-    // });
+    
+    return axios.post(`/api/register`, params).then((res) => {
+      console.log(res)
+      if (res.data.code === 200) {
+       history.push("/"); 
+      } else {
+        return;
+      }
+    }).catch((err) => {throw err});
   };
 
   return (
     <Router>
       <div className="login-container">
         <form action="/login" method="POST" onSubmit={handleSubmit}>
-          <div className="login-credential">
+          {/* <div className="login-credential">
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -52,7 +51,7 @@ export default function Register(props) {
                 setState({ ...state, username: event.target.value });
               }}
             />
-          </div>
+          </div> */}
           <div className="email-credential">
             <label htmlFor="email">Email</label>
             <input
