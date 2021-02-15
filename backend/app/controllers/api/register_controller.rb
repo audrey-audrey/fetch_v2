@@ -5,7 +5,6 @@ class Api::RegisterController < ApplicationController
       # name: params["name"], 
       email: params["email"], 
       password: params["password"]
-      password_confirm: params["password"]
     )
     render json: user
   end
