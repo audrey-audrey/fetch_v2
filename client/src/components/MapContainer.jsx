@@ -23,6 +23,10 @@ function MapContainer(props) {
   props.users.map(user => {
     pins.push({
       name: user.name,
+      icon: {
+        url: user.primary_image,
+        scaledSize: { width: 32, height: 32 }
+      },
       location: {
         lat: user.lat, 
         lng: user.lng
@@ -53,6 +57,7 @@ function MapContainer(props) {
               return (
               <Marker key={item.name} 
                 position={item.location}
+                icon={item.icon}
                 onClick={() => onSelect(item)}
               />
               )
