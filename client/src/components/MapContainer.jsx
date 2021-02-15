@@ -25,7 +25,13 @@ function MapContainer(props) {
       name: user.name,
       icon: {
         url: user.primary_image,
-        scaledSize: { width: 32, height: 32 }
+        origin: {x: 0, y: 0},
+        // define pop-up
+        anchor: {x: 25, y: 0},
+        scaledSize: { 
+          width: 50, 
+          height: 50 
+        }
       },
       location: {
         lat: user.lat, 
@@ -33,6 +39,11 @@ function MapContainer(props) {
       }
     })
   })
+
+  const shape = {
+    coords: [25, 25, 25],
+    type: 'circle'
+  }
 
   console.log(pins)
 
@@ -58,6 +69,7 @@ function MapContainer(props) {
               <Marker key={item.name} 
                 position={item.location}
                 icon={item.icon}
+                shape={shape}
                 onClick={() => onSelect(item)}
               />
               )
