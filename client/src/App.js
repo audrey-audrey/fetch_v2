@@ -10,6 +10,10 @@ import { slide as Menu } from "react-burger-menu";
 
 import "./BurgerMenu.css";
 
+import 'semantic-ui-css/semantic.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 function App() {
   const handleLogout = function (event) {
     localStorage.removeItem('token') 
