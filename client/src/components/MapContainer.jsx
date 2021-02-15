@@ -5,14 +5,15 @@ import {
   Marker,
   InfoWindow
 } from '@react-google-maps/api';
+import "./MapContainer.scss";
 
 function MapContainer(props) {
-  const [ state, setState ] = useState({
+  const [state, setState] = useState({
     users: []
   });
   // State
-  const [ selected, setSelected ] = useState({});
-  
+  const [selected, setSelected] = useState({});
+
   const onSelect = item => {
     setSelected(item);
   }
@@ -23,18 +24,20 @@ function MapContainer(props) {
   props.users.map(user => {
     pins.push({
       name: user.name,
+      dog_name: user.dog_name,
+      bio: user.bio,
       icon: {
         url: user.primary_image,
-        origin: {x: 0, y: 0},
+        origin: { x: 0, y: 0 },
         // define pop-up
-        anchor: {x: 25, y: 0},
-        scaledSize: { 
-          width: 50, 
-          height: 50 
+        anchor: { x: 25, y: 0 },
+        scaledSize: {
+          width: 50,
+          height: 50
         }
       },
       location: {
-        lat: user.lat, 
+        lat: user.lat,
         lng: user.lng
       }
     })
@@ -44,8 +47,6 @@ function MapContainer(props) {
     coords: [25, 25, 25],
     type: 'circle'
   }
-
-  console.log(pins)
 
   const mapStyles = {
     height: "100vh",
@@ -64,29 +65,36 @@ function MapContainer(props) {
         zoom={13}
         center={defaultCenter}>
         {
-            pins.map(item => {
-              return (
-              <Marker key={item.name} 
+          pins.map(item => {
+            return (
+              <Marker key={item.name}
                 position={item.location}
                 icon={item.icon}
                 shape={shape}
                 onClick={() => onSelect(item)}
               />
-              )
-            })
-         }
+            )
+          })
+        }
         {
-            selected.location && 
-            (
-              <InfoWindow
+          selected.location &&
+          (
+            <InfoWindow
               position={selected.location}
               clickable={true}
               onCloseClick={() => setSelected({})}
             >
+              <div className="map-info-window">
+                {/* <div class="map-info-close">
+                  x
+                </div> */}
+              <img src={selected.icon.url}/>
               <p>{selected.name}</p>
+              <p>{selected.bio}</p>
+              </div>
             </InfoWindow>
-            )
-         }
+          )
+        }
       </GoogleMap>
     </LoadScript>
   );

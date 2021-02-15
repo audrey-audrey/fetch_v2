@@ -1,0 +1,12 @@
+.map-info-window {
+  display: flex;
+  flex-direction: column;
+  width: 22em;
+
+  img {
+    height: 20em;
+    width: 20em;
+    border-radius: 50%;
+    margin: auto;
+  }
+}
