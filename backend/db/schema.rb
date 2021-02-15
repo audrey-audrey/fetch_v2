@@ -16,8 +16,8 @@ ActiveRecord::Schema.define(version: 2021_02_14_164525) do
   enable_extension "plpgsql"
 
   create_table "conversations", force: :cascade do |t|
-    t.integer "initiator"
-    t.integer "recipient"
+    t.integer "initiator_id"
+    t.integer "recipient_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -31,9 +31,9 @@ ActiveRecord::Schema.define(version: 2021_02_14_164525) do
 
   create_table "messages", force: :cascade do |t|
     t.text "content"
-    t.boolean "read", default: false
     t.bigint "user_id"
     t.bigint "conversation_id"
+    t.boolean "read", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
