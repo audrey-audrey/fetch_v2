@@ -1,10 +1,11 @@
 import { Route, Switch } from "react-router";
 
 import "./App.css";
+import history from "./history";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import Profile from "./components/Profile";
-import history from "./history";
+// import Profile from "./components/Profile";
+import Conversations from "./components/Conversations";
 
 import { slide as Menu } from "react-burger-menu";
 
@@ -12,18 +13,20 @@ import "./BurgerMenu.css";
 
 function App() {
   const handleLogout = function (event) {
-    localStorage.removeItem('token') 
+    localStorage.removeItem("token");
 
-    history.push('/')
-    window.location.reload()
+    history.push("/");
+    window.location.reload();
   };
 
   return (
     <div>
-      { localStorage.getItem('token') ? (
+      {localStorage.getItem("token") ? (
         <Menu noOverlay>
-
-          <img id="profile-img" src="https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png" />
+          <img
+            id="profile-img"
+            src="https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
+          />
 
           <a id="profile" className="menu-item" href="/profile">
             Profile
@@ -38,7 +41,7 @@ function App() {
             logout
           </a>
         </Menu>
-      ) : null }
+      ) : null}
 
       <div className="main-component">
         <Switch>
@@ -48,13 +51,13 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/user">
-            <Profile />
+          <Route path="/user">{/* <Profile /> */}</Route>
+          <Route path="/conversations">
+            <Conversations />
           </Route>
           <Route path="/">Homepage!</Route>
         </Switch>
       </div>
-
     </div>
   );
 }
