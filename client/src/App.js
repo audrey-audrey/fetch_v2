@@ -70,7 +70,7 @@ function App() {
           <Link id="favorites" className="menu-item" to="/favourites">
             Favourties
           </Link>
-          <Link id="logout" className="menu-item" onClick={handleLogout}>
+          <Link id="logout" className="menu-item" onClick={handleLogout} to="/homepage">
             Logout
           </Link>
         </Menu>

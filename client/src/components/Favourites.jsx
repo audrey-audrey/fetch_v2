@@ -14,7 +14,8 @@ export default function Favourites(props) {
   useEffect(() => {
     axios.get(`/api/users/${localStorage.getItem("user_id")}`)
     .then((res) => {
-      console.log(res);
+      const user = res.data[0]
+      console.log("return user data", user);
       // state.favourites.push(res.data[0])
       // setState(...state, state.favourites)
     });
@@ -24,7 +25,7 @@ export default function Favourites(props) {
         {
           id: 1,
           name: "Rene",
-          // user_id: "2",
+          user_id: "2",
           dog_name: "Tofu",
           primary_image:
             "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
@@ -32,7 +33,7 @@ export default function Favourites(props) {
         {
           id: 2,
           name: "Alison",
-          // user_id: "3",
+          user_id: "3",
           dog_name: "Rupert",
           primary_image:
             "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
@@ -44,21 +45,24 @@ export default function Favourites(props) {
   return (
     <div className="favourites-container">
       <Card.Group>
-        {state.favourites.map((user) => (
-          <Card>
+        {state.favourites.map((favourite) => {
+          const {user_id, primary_image, name, dog_name} = favourite
+          return (
+          <Card key={user_id}>
             <Card.Content>
-              <Image floated="right" size="mini" src={user.primary_image} />
+              <Image floated="right" size="mini" src={primary_image} />
               <Card.Header>
-                {user.name} and {user.dog_name}
+                {name} and {dog_name}
               </Card.Header>
             </Card.Content>
             <Card.Content extra>
-              <Button fluid as={Link} to={`/user/${user.user_id}`}>
+              <Button fluid as={Link} to={`/user/${user_id}`}>
                 View Profile
               </Button>
             </Card.Content>
           </Card>
-        ))}
+          )
+        })}
       </Card.Group>
     </div>
   );
