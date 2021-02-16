@@ -1,6 +1,5 @@
-require 'open-uri' 
+require 'open-uri'
 require 'geocoder'
-# Users
 User.destroy_all
 user_list = [
   [ "60 Queen St W, Toronto", Geocoder.search("60 Queen St W, Toronto").first.coordinates[0], Geocoder.search("60 Queen St W, Toronto").first.coordinates[1]],
@@ -9,8 +8,16 @@ user_list = [
   [ "600 University Ave, Toronto", Geocoder.search("600 University Ave, Toronto").first.coordinates[0], Geocoder.search("600 University Ave, Toronto").first.coordinates[1] ],
   [ "66 Nassau St, Toronto", Geocoder.search("66 Nassau St, Toronto").first.coordinates[0], Geocoder.search("66 Nassau St, Toronto").first.coordinates[1] ]
 ]
+# puts "hello"
+user = User.create!(
+  name: 'hello'
+)
+# user2 = User.create!(
+#   name: 'world'
+# )
+Conversation.destroy_all
 user_list.each do |location, lat, lng|
-  User.create!(
+  newUser = User.create!(
     name: Faker::Name.name,
     email: Faker::Internet.unique.email,
     password: "password",
@@ -27,16 +34,20 @@ user_list.each do |location, lat, lng|
     well_trained: Faker::Boolean.boolean(true_ratio: 0.5),
     large: Faker::Boolean.boolean(true_ratio: 0.5)
   )
+  if user != ''
+    Conversation.create!(
+    initiator: user,
+    recipient: newUser,
+    created_at: '2021-02-16',
+    updated_at: '2021-02-16'
+    )
+  end
+  user = newUser
 end
-# Conversations
-# Conversation.destroy_all
-# User.conversations.create(
-#   initiator: 2,
-#   recipient: 3
-# )
+# # Conversations
 # # Messages
 # Message.destroy_all
-# 5.times do 
+# 5.times do
 #   Message.create!(
 #     content: Faker::Lorem.paragraph(sentence_count: 2),
 #     user_id: 4,

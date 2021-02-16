@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
+import axios from "axios";
 import { Button, Card, Image } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
@@ -11,10 +12,11 @@ export default function Favourites(props) {
   console.log("here");
 
   useEffect(() => {
-    // axios.get(`/api/users/${localStorage.get('user_id')}`).then((res) => {
-    //     data = res.data.body[0]
-    //     setState(data)
-    //   })
+    axios.get(`/api/users/${localStorage.getItem('user_id')}`).then((res) => {
+      console.log(res)
+        // state.favourites.push(res.data[0])
+        // setState(...state, state.favourites)
+      })
 
     setState({
       favourites: [
@@ -26,9 +28,9 @@ export default function Favourites(props) {
             "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
         },
         {
-          name: "Rene",
-          user_id: "2",
-          dog_name: "Tofu",
+          name: "Alison",
+          user_id: "3",
+          dog_name: "Rupert",
           primary_image:
             "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
         },

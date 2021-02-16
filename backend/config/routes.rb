@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     resources :users do
         get 'users/:id', to: 'users#show'
     end
-      # resources :favourites
+       resources :favorites
       # resources :conversations, only: [:index, :create] do
         # resources :messages, only: [:index, create]
       # end
