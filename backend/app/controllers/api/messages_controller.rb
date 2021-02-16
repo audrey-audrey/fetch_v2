@@ -9,15 +9,15 @@ class Api::MessagesController < ApplicationController
 
     messages.where("user_id != ? AND read = ?", params[:user_id], false).update_all(read: true)
 
-    user_info = messages.select("*").joins("INNER JOIN users ON messages.user_id = users.id")
+    user_info = messages.select("messages.*, users.name as name").joins("INNER JOIN users ON messages.user_id = users.id")
 
     render json: {messages: messages, user_info: user_info}
   end
 
   def create
-    message = @conversation.messages.create(message_params)
-    # user = User.where(`id = ?`, params[:user_id])
-    # message.user = user
+    message = @conversation.messages.create!(message_params)
+
+    render json: message
   end
 
   private
