@@ -36,7 +36,7 @@ function App() {
   }, []);
 
   const handleLogout = function (event) {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
 
     history.push("/");
     window.location.reload();
@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div>
-      {localStorage.getItem("token") ? (
+      {localStorage.getItem("user_id") ? (
         <Menu noOverlay>
           <img
             id="profile-img"
@@ -54,10 +54,10 @@ function App() {
             Profile
           </Link>
 
-          <Link id="messages" className="menu-item" href="/messages">
+          <Link id="messages" className="menu-item" to="/messages">
             Messages
           </Link>
-          <Link id="favorites" className="menu-item" to="/favourties">
+          <Link id="favorites" className="menu-item" to="/favourites">
             Favourties
           </Link>
           <Link id="logout" className="menu-item" onClick={handleLogout}>
@@ -65,7 +65,7 @@ function App() {
           </Link>
         </Menu>
       ) : null}
-      <Router>
+      {/* <Router> */}
       <div className="main-component">
         <Switch>
           <Route path="/homepage">
@@ -92,7 +92,7 @@ function App() {
           </Route>
         </Switch>
       </div>
-      </Router>
+      {/* </Router> */}
     </div>
   );
 }

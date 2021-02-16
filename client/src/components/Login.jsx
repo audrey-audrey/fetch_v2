@@ -24,10 +24,11 @@ export default function Login(props) {
     return axios
       .post(`/api/login`, params)
       .then((res) => {
+        console.log(res)
         if (state.email !== res.data[0].email) {
           return;
         }
-        localStorage.setItem("token", "hi"); // <-- adds navbar
+        localStorage.setItem("user_id", res.data[0].id); // <-- adds navbar
         history.push("/");
         window.location.reload();
       })
