@@ -6,7 +6,12 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 
-import { Button, Icon } from 'semantic-ui-react'
+import { 
+  Button, 
+  Icon,
+  Card, 
+  Image
+} from 'semantic-ui-react'
 
 import "./MapContainer.scss";
 
@@ -176,6 +181,7 @@ function MapContainer(props) {
                   {/* <div class="map-info-close">
                   x
                 </div> */}
+                  <Icon name='favorite' size='big'/>
                   <img src={selected.icon.url} />
                   <br />
                   <p>{selected.name} & {selected.dog_name}</p>
