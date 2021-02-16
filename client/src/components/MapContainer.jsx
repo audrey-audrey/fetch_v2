@@ -59,8 +59,6 @@ function MapContainer(props) {
   // Location data from users 
   let pins = [];
 
-  const iconBase = "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
-
   props.users.map(user => {
     pins.push({
       name: user.name,
@@ -140,6 +138,8 @@ function MapContainer(props) {
 
   const message = (filteredPins.length > 0) ? `There are ${filteredPins.length} dogs matching your criteria` : 'There are no dogs matching all your criteria!'
 
+  console.log('key', process.env.REACT_APP_API_KEY)
+  console.log('id', process.env.REACT_APP_MAP_ID)
   return (
     <>
       <div className='filter'>
@@ -156,11 +156,14 @@ function MapContainer(props) {
         <p>{message}</p>
       </div>
       <LoadScript
-        googleMapsApiKey={process.env.REACT_APP_API_KEY}>
+        googleMapsApiKey={process.env.REACT_APP_API_KEY}
+        // mapIds="a0bc608c1ca5ac5"
+        >
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={13}
-          center={defaultCenter}>
+          center={defaultCenter}
+          >
           {
             filteredPins.length && filteredPins.map(item => {
               return (
