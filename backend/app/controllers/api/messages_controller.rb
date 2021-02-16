@@ -9,22 +9,19 @@ class Api::MessagesController < ApplicationController
 
     messages.where("user_id != ? AND read = ?", params[:user_id], false).update_all(read: true)
 
-    message = @conversation.messages.new
+    user_info = messages.select("*").joins("INNER JOIN users ON messages.user_id = users.id")
 
-    render json: messages
+    render json: {messages: messages, user_info: user_info}
   end
 
   def create
-    message = @conversation.messages.new(message_params)
-    message.user = current_user
-
-    if message.save
-      redirect_to conversation_messages_path(@conversation)
-    end
+    message = @conversation.messages.create(message_params)
+    # user = User.where(`id = ?`, params[:user_id])
+    # message.user = user
   end
 
   private
     def message_params
-      params.require(:message).permit(:body, :user_id)
+      params.require(:message).permit(:content, :user_id, :conversation_id)
     end
 end
