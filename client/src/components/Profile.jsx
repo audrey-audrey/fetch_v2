@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, useParams } from "react-router-dom";
 import { Card, Divider, Icon, Image } from "semantic-ui-react";
 import "./Profile.css";
+import { Label, Button } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 import {
   CarouselProvider,
@@ -16,7 +18,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import CustomDotGroup from "../components/CustomDotGroup";
 
 export default function Profile(props) {
-  console.log("here");
+  const { user_id } = useParams()
 
   const [state, setState] = useState({
     primary_image: null,
@@ -34,6 +36,15 @@ export default function Profile(props) {
     well_trained: null,
     large: null,
   });
+
+  const [isProfileOwner, setIsProfileOwner ] = useState( 
+
+    true || // TODO: remove
+
+    localStorage.getItem('user_id') === user_id
+  )
+
+  const [favourited, setFavourited ] = useState(false)
 
   useEffect(() => {
     // axios.get(`/api/users/${localStorage.get('user_id')}`).then((res) => {
@@ -65,8 +76,24 @@ export default function Profile(props) {
   }, []);
 
   return (
-    <Router>
-      <div className="profile-container">
+      <div className="profile-container">  
+
+        {
+            !isProfileOwner && !favourited ? 
+            <Button color="yellow">
+            <Icon name="star" /> Favourite
+            </Button>
+            :
+            null
+        }  
+
+        {
+            isProfileOwner ? 
+            <Link to='/edit-user'><Button>Edit Profile</Button></Link>
+            :
+            null
+        }
+
         <Card id="user_card">
           <CarouselProvider
             naturalSlideWidth={100}
@@ -110,38 +137,38 @@ export default function Profile(props) {
           </Card.Content>
           <Card.Content>
             {state.playful ? (
-              <p>
-                <Icon name="check"></Icon> Playful
-              </p>
+              <Label as="a" tag>
+                Playful
+              </Label>
             ) : null}
             {state.affectionate ? (
-              <p>
-                <Icon name="check"></Icon> Affectionate
-              </p>
+              <Label as="a" tag>
+                Affectionate
+              </Label>
             ) : null}
             {state.shy ? (
-              <p>
-                <Icon name="check"></Icon> Shy
-              </p>
+              <Label as="a" tag>
+                Shy
+              </Label>
             ) : null}
             {state.high_energy ? (
-              <p>
-                <Icon name="check"></Icon> High-energy
-              </p>
+              <Label as="a" tag>
+                High-energy
+              </Label>
             ) : null}
             {state.well_trained ? (
-              <p>
-                <Icon name="check"></Icon> Well-trained
-              </p>
+              <Label as="a" tag>
+                Well-trained
+              </Label>
             ) : null}
             {state.large ? (
-              <p>
-                <Icon name="check"></Icon> Large
-              </p>
+              <Label as="a" tag>
+                Large
+              </Label>
             ) : null}
           </Card.Content>
         </Card>
+    
       </div>
-    </Router>
   );
 }
