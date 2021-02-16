@@ -28,8 +28,9 @@ function App() {
     user: {}
   });
 
-  // setState for users
+  // setStates
   const setUsers = (users) => setState((prev) => ({ ...prev, users }));
+  const setUser = (user) => setState((prev) => ({ ...prev, user }))
 
   // fetch users data from backend
   useEffect(() => {
@@ -44,12 +45,11 @@ function App() {
     window.location.reload();
   };
 
-  const user_id = { user_id: localStorage.getItem('user_id') };
-
+  const currentUserId = localStorage.getItem('user_id');
   // fetch current user data
   useEffect(() => {
-    axios.get(`api/users/${user_id}`)
-    .then((res) => console.log(res))
+    axios.get(`api/users/${currentUserId}`)
+    .then((res) => setUser(res.data))
   }, [localStorage])
 
   return (
