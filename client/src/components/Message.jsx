@@ -15,6 +15,7 @@ export default function Message(props) {
   });
   const [message, setMessage] = useState("");
   const conversation_id = useLocation().pathname.split("/")[2];
+  const user_id = localStorage.getItem("user_id");
   useEffect(() => {
     const params = { conversation_id: conversation_id, user_id: 1 }; //useLocation + localStorage
     axios
@@ -24,13 +25,14 @@ export default function Message(props) {
           messages: res.data.messages,
           user_info: res.data.user_info,
         });
+        setLoading(false);
       })
       .catch((e) => console.log(e));
-    setLoading(false);
   }, []);
 
   const displayMessages = function () {
     const arr = [];
+
     if (!loading) {
       for (const item of state.user_info) {
         arr.push(
@@ -47,13 +49,24 @@ export default function Message(props) {
   const messages = displayMessages();
 
   const handleSubmit = function (event) {
+    const name = state.user_info[1].name;
     event.preventDefault();
     const params = {
       content: message,
       conversation_id: conversation_id,
       user_id: 1,
     };
-    axios.post(`/api/conversations/${conversation_id}/messages/`, params);
+    console.log(name);
+    axios
+      .post(`/api/conversations/${conversation_id}/messages/`, params)
+      .then((res) => {
+        res.data.name = name;
+        console.log(res.data);
+        setState((state) => ({
+          ...state,
+          user_info: [res.data, ...state.user_info],
+        }));
+      });
   };
 
   return (
