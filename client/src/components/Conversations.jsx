@@ -39,13 +39,13 @@ export default function Conversations(props) {
   };
 
   const displayRecipients = function () {
+    const arr = [];
     if (!loading) {
       let filteredRecipients = filterRecipients(state.recipients);
       for (const item of filteredRecipients) {
         for (const convo of state.conversations) {
           if (item.id === convo.recipient_id) {
-            const path = `/messages/${convo.id}`;
-            return (
+            arr.push(
               <li>
                 <Link to={`/messages/${convo.id}`}>{item.name}</Link>
               </li>
@@ -54,16 +54,18 @@ export default function Conversations(props) {
         }
       }
     }
+    return arr;
   };
 
   const displayInitiators = function () {
+    const arr = [];
     if (!loading) {
       let filteredInitiators = filterInitiators(state.initiators);
       for (const item of filteredInitiators) {
         for (const convo of state.conversations) {
           if (item.id === convo.initiator_id) {
             const path = `/messages/${convo.id}`;
-            return (
+            arr.push(
               <li>
                 <Link to={`/messages/${convo.id}`}>{item.name}</Link>
               </li>
@@ -72,6 +74,7 @@ export default function Conversations(props) {
         }
       }
     }
+    return arr;
   };
 
   let recipients = displayRecipients();
