@@ -1,6 +1,6 @@
 import { React, useState, useEffect } from "react";
 import axios from "axios";
-import { Route, Switch } from "react-router";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 
 import "./App.css";
 import Login from "./components/Login";
@@ -61,7 +61,7 @@ function App() {
           </a>
         </Menu>
       ) : null}
-
+      <Router>
       <div className="main-component">
         <Switch>
           <Route path="/homepage">
@@ -80,6 +80,7 @@ function App() {
           </Route>
         </Switch>
       </div>
+      </Router>
     </div>
   );
 }

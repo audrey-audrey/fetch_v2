@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Input, Button, Icon } from "semantic-ui-react";
+import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
 import history from "../history";
+import dogpile from "../images/dogpile.png";
 
 // import Button from "./Button";
 
@@ -41,16 +41,20 @@ export default function Register(props) {
   };
 
   return (
-    <Router>
-      <div className="login-container">
+    <Container>
+      <Image size='medium' src={ dogpile } circular floated='right'/>
+        <div className="login-container">
+
+        <h1>Join the Fun! Sign Up Now!</h1>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
             <h3 className="error">
               Oops! That email already exists. Try again.
             </h3>
           )}
+          <br/>
           <div className="email-credential">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email: </label>
             <Input
               type="text"
               id="email"
@@ -62,8 +66,9 @@ export default function Register(props) {
               }}
             />
           </div>
+          <br/>
           <div className="password-credential">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password: </label>
             <Input
               type="text"
               id="password"
@@ -75,8 +80,9 @@ export default function Register(props) {
               }}
             />
           </div>
+          <br/>
           <div className="password-credential">
-            <label htmlFor="password-confirm">Confirm Password</label>
+            <label htmlFor="password-confirm">Confirm Password: </label>
             <Input
               type="text"
               id="password-confirm"
@@ -88,11 +94,12 @@ export default function Register(props) {
               }}
             />
           </div>
+          <br/>
           <Button type="submit" icon>
             <Icon name="paw"></Icon> Sign Up
           </Button>
         </form>
       </div>
-    </Router>
+      </Container>
   );
 }

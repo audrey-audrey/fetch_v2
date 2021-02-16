@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router } from "react-router-dom";
-import { Input, Button, Icon } from "semantic-ui-react";
+import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
 import history from "../history";
+import rupert from "../images/rupert.png"
 
 // import Button from "./Button";
 
@@ -38,17 +38,20 @@ export default function Login(props) {
   //CSS content : instead of having : on label
 
   return (
-    <Router>
+    <Container>
+      <Image size='medium' src={rupert} circular floated='right'/>
       <div className="login-container">
-        <p>Log In To Find New Friends!</p>
+
+        <h1>You're Going to Have a Ball! Log In!</h1>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
             <h3 className="error">
-              Oops! That email does not exist. Try again.
+              Oops! We haven't met you yet. Sign up or Try again!
             </h3>
           )}
+          <br />
           <div className="login-credential">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="email">Email: </label>
             <Input
               type="text"
               id="email"
@@ -60,8 +63,9 @@ export default function Login(props) {
               }}
             />
           </div>
+          <br />
           <div className="password-credential">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Password: </label>
             <Input
               type="text"
               id="password"
@@ -73,11 +77,12 @@ export default function Login(props) {
               }}
             />
           </div>
+          <br />
           <Button type="submit" icon>
             <Icon name="paw"></Icon> Login
           </Button>
         </form>
       </div>
-    </Router>
+    </Container>
   );
 }
