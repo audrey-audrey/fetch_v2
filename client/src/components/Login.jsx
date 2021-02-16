@@ -1,72 +1,88 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { useHistory } from "react-router-dom";
+import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
+import history from "../history";
+import rupert from "../images/rupert.png";
 
-import Button from "./Button";
+// import Button from "./Button";
 
 import "./Login.css";
 
 export default function Login(props) {
   const [state, setState] = useState({
-    username: "",
+    email: "",
     password: "",
+    errorMessage: "",
   });
-
-  let history = useHistory();
 
   const handleSubmit = function (event) {
     event.preventDefault();
-    // if (state.username === "" || state.password === "") {
-    //   console.log("Missing username or password"); //Change later
-    //   return;
-    // }
-    const params = { username: state.username, password: state.password };
-    console.log(params);
-    localStorage.setItem("token", 1); // <-- adds navbar
 
-    return history.push("/");
-    // return axios.post(`/api/login`, params).then((res) => {
-    //   if (res.data.code === 200) {
-    //     <Redirect to="/login" />;
-    //   } else {
-    //     return;
-    //   }
-    // });
+    const params = { email: state.email, password: state.password };
+
+    return axios
+      .post(`/api/login`, params)
+      .then((res) => {
+        console.log(res);
+        if (state.email !== res.data[0].email) {
+          return;
+        }
+        localStorage.setItem("user_id", res.data[0].id); // <-- adds navbar
+        history.push("/");
+        window.location.reload();
+      })
+      .catch((err) => {
+        setState({ errorMessage: err.message });
+      });
   };
   //CSS content : instead of having : on label
 
   return (
-    <div className="login-container">
-      <form action="/login" method="POST" onSubmit={handleSubmit}>
-        <div className="login-credential">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            required
-            placeholder="Please enter username"
-            onChange={(event) => {
-              setState({ ...state, username: event.target.value });
-            }}
-          />
-        </div>
-        <div className="password-credential">
-          <label htmlFor="password">Password</label>
-          <input
-            type="text"
-            id="password"
-            required
-            name="password"
-            placeholder="Please enter password"
-            onChange={(event) => {
-              setState({ ...state, password: event.target.value });
-            }}
-          />
-        </div>
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <Container>
+      <Image size="medium" src={rupert} circular floated="right" />
+      <div className="login-container">
+        <h1>You're Going to Have a Ball! Log In!</h1>
+        <form action="/login" method="POST" onSubmit={handleSubmit}>
+          {state.errorMessage && (
+            <h3 className="error">
+              Oops! We haven't met you yet. Sign up or Try again!
+            </h3>
+          )}
+          <br />
+          <div className="login-credential">
+            <label htmlFor="email">Email: </label>
+            <Input
+              type="text"
+              id="email"
+              name="email"
+              required
+              placeholder="Please enter email"
+              onChange={(event) => {
+                setState({ ...state, email: event.target.value });
+              }}
+            />
+          </div>
+          <br />
+          <div className="password-credential">
+            <label htmlFor="password">Password: </label>
+            <Input
+              type="text"
+              id="password"
+              required
+              name="password"
+              placeholder="Please enter password"
+              onChange={(event) => {
+                setState({ ...state, password: event.target.value });
+              }}
+            />
+          </div>
+          <br />
+          <Button type="submit" icon>
+            <Icon name="paw"></Icon> Login
+          </Button>
+        </form>
+      </div>
+    </Container>
   );
 }

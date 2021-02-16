@@ -1,17 +1,18 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
 import history from "../history";
+import dogpile from "../images/dogpile.png";
 
-import Button from "./Button";
+// import Button from "./Button";
 
 export default function Register(props) {
   const [state, setState] = useState({
-    username: "",
     email: "",
     password: "",
     passwordConfirm: "",
+    errorMessage: "",
   });
 
   const handleSubmit = function (event) {
@@ -21,41 +22,40 @@ export default function Register(props) {
       return;
     }
     const params = {
-      username: state.username,
       email: state.email,
       password: state.password,
     };
-    console.log(params);
-    history.push("/");
-    // return axios.post(`/api/login`, params).then((res) => {
-    //   if (res.data.code === 200) {
-    //     <Redirect to="/login" />;
-    //   } else {
-    //     return;
-    //   }
-    // });
+
+    return axios
+      .post(`/api/register`, params)
+      .then((res) => {
+        if (res.status !== 200) {
+          return;
+        }
+
+        history.push("/");
+      })
+      .catch((err) => {
+        setState({ errorMessage: err.message });
+      });
   };
 
   return (
-    <Router>
-      <div className="login-container">
+    <Container>
+      <Image size='medium' src={ dogpile } circular floated='right'/>
+        <div className="login-container">
+
+        <h1>Join the Fun! Sign Up Now!</h1>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
-          <div className="login-credential">
-            <label htmlFor="username">Username</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              required
-              placeholder="Please enter username"
-              onChange={(event) => {
-                setState({ ...state, username: event.target.value });
-              }}
-            />
-          </div>
+          {state.errorMessage && (
+            <h3 className="error">
+              Oops! That email already exists. Try again.
+            </h3>
+          )}
+          <br/>
           <div className="email-credential">
-            <label htmlFor="email">Email</label>
-            <input
+            <label htmlFor="email">Email: </label>
+            <Input
               type="text"
               id="email"
               required
@@ -66,9 +66,10 @@ export default function Register(props) {
               }}
             />
           </div>
+          <br/>
           <div className="password-credential">
-            <label htmlFor="password">Password</label>
-            <input
+            <label htmlFor="password">Password: </label>
+            <Input
               type="text"
               id="password"
               required
@@ -79,9 +80,10 @@ export default function Register(props) {
               }}
             />
           </div>
+          <br/>
           <div className="password-credential">
-            <label htmlFor="password-confirm">Confirm Password</label>
-            <input
+            <label htmlFor="password-confirm">Confirm Password: </label>
+            <Input
               type="text"
               id="password-confirm"
               required
@@ -92,9 +94,12 @@ export default function Register(props) {
               }}
             />
           </div>
-          <button type="submit">Register</button>
+          <br/>
+          <Button type="submit" icon>
+            <Icon name="paw"></Icon> Sign Up
+          </Button>
         </form>
       </div>
-    </Router>
+      </Container>
   );
 }
