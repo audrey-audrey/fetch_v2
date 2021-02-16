@@ -138,8 +138,8 @@ function MapContainer(props) {
 
   const message = (filteredPins.length > 0) ? `There are ${filteredPins.length} dogs matching your criteria` : 'There are no dogs matching all your criteria!'
 
-  console.log('key', process.env.REACT_APP_API_KEY)
-  console.log('id', process.env.REACT_APP_MAP_ID)
+  const styles = require('../styles/map/GoogleMapStyles.json')
+
   return (
     <>
       <div className='filter'>
@@ -157,12 +157,12 @@ function MapContainer(props) {
       </div>
       <LoadScript
         googleMapsApiKey={process.env.REACT_APP_API_KEY}
-        // mapIds="a0bc608c1ca5ac5"
         >
         <GoogleMap
           mapContainerStyle={mapStyles}
           zoom={13}
           center={defaultCenter}
+          options={{styles:styles}}
           >
           {
             filteredPins.length && filteredPins.map(item => {
