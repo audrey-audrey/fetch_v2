@@ -3,6 +3,10 @@ class Api::FavoriteController < ApplicationController
   end
 
   def create
-    
+    favorite = Favorite.create! (
+      favoritee: "favoritee",
+      favoriter: "favoriter",
+    )
+    render json: favorite
   end
 end

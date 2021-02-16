@@ -34,7 +34,6 @@ user_list.each do |location, lat, lng|
     well_trained: Faker::Boolean.boolean(true_ratio: 0.5),
     large: Faker::Boolean.boolean(true_ratio: 0.5)
   )
-<<<<<<< HEAD
   if user != ''
     Conversation.create!(
     initiator: user,
@@ -43,23 +42,18 @@ user_list.each do |location, lat, lng|
     updated_at: '2021-02-16'
     )
   end
+  if user != ''
+    Favorite.create!(
+      favoriter: user,
+      favoritee: newUser,
+      created_at: '2021-02-16',
+      updated_at: '2021-02-16'
+    )
+  end
   user = newUser
+
 end
 # # Conversations
-=======
-  Conversation.create!(
-  initiator: user,
-  recipient: newUser,
-  created_at: '2021-02-16',
-  updated_at: '2021-02-16'
-  )
-  user = newUser
-end
-
-# # Conversations
-
-
->>>>>>> main
 # # Messages
 # Message.destroy_all
 # 5.times do

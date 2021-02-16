@@ -12,24 +12,27 @@ export default function Favourites(props) {
   console.log("here");
 
   useEffect(() => {
-    axios.get(`/api/users/${localStorage.getItem('user_id')}`).then((res) => {
-      console.log(res)
-        // state.favourites.push(res.data[0])
-        // setState(...state, state.favourites)
-      })
+    axios.get(`/api/users/${localStorage.getItem("user_id")}`)
+    .then((res) => {
+      console.log(res);
+      // state.favourites.push(res.data[0])
+      // setState(...state, state.favourites)
+    });
 
     setState({
       favourites: [
         {
+          id: 1,
           name: "Rene",
-          user_id: "2",
+          // user_id: "2",
           dog_name: "Tofu",
           primary_image:
             "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
         },
         {
+          id: 2,
           name: "Alison",
-          user_id: "3",
+          // user_id: "3",
           dog_name: "Rupert",
           primary_image:
             "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
@@ -50,9 +53,9 @@ export default function Favourites(props) {
               </Card.Header>
             </Card.Content>
             <Card.Content extra>
-                
-                  <Button fluid as={Link} to={`/user/${user.user_id}`}>View Profile</Button>
-                  
+              <Button fluid as={Link} to={`/user/${user.user_id}`}>
+                View Profile
+              </Button>
             </Card.Content>
           </Card>
         ))}
