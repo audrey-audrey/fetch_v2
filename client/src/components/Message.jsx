@@ -56,17 +56,16 @@ export default function Message(props) {
       conversation_id: conversation_id,
       user_id: 1,
     };
-    console.log(name);
     axios
       .post(`/api/conversations/${conversation_id}/messages/`, params)
       .then((res) => {
         res.data.name = name;
-        console.log(res.data);
         setState((state) => ({
           ...state,
           user_info: [res.data, ...state.user_info],
         }));
-      });
+      })
+      .catch((e) => console.log(e));
   };
 
   return (
