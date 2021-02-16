@@ -24,7 +24,8 @@ export default function Message(props) {
           messages: res.data.messages,
           user_info: res.data.user_info,
         });
-      });
+      })
+      .catch((e) => console.log(e));
     setLoading(false);
   }, []);
 
