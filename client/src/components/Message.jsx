@@ -47,7 +47,12 @@ export default function Message(props) {
 
   const handleSubmit = function (event) {
     event.preventDefault();
-    console.log(message);
+    const params = {
+      content: message,
+      conversation_id: conversation_id,
+      user_id: 1,
+    };
+    axios.post(`/api/conversations/${conversation_id}/messages/`, params);
   };
 
   return (
