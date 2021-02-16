@@ -28,6 +28,8 @@ function App() {
     user: {}
   });
 
+  console.log(state.user)
+
   // setStates
   const setUsers = (users) => setState((prev) => ({ ...prev, users }));
   const setUser = (user) => setState((prev) => ({ ...prev, user }))
@@ -70,9 +72,9 @@ function App() {
           <Link id="favorites" className="menu-item" to="/favourites">
             Favourties
           </Link>
-          <Link id="logout" className="menu-item" onClick={handleLogout}>
+          {/* <Link id="logout" className="menu-item" onClick={handleLogout}>
             Logout
-          </Link>
+          </Link> */}
         </Menu>
       ) : null}
       {/* <Router> */}

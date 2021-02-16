@@ -76,8 +76,8 @@ function MapContainer(props) {
         }
       },
       location: {
-        lat: user.lat,
-        lng: user.lng
+        lat: Number(user.lat),
+        lng: Number(user.lng)
       },
       playful: user.playful,
       affectionate: user.affectionate,

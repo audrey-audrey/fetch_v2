@@ -3,7 +3,7 @@ import { useState } from "react";
 // import axios from "axios";
 import { BrowserRouter as Router, useParams } from "react-router-dom";
 import { Card, Divider, Icon, Image } from "semantic-ui-react";
-import "./Profile.css";
+import "./Profile.scss";
 import { Label, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
@@ -18,27 +18,27 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import CustomDotGroup from "../components/CustomDotGroup";
 
 export default function Profile(props) {
-  const { user_id } = useParams()
-
   const { user } = props
-  console.log(props.user)
 
-  // const [state, setState] = useState({
-  //   primary_image: null,
-  //   name: null,
-  //   email: null,
-  //   password: null,
-  //   location: null,
-  //   dog_name: null,
-  //   images: [],
-  //   bio: null,
-  //   playfull: null,
-  //   affectionate: null,
-  //   high_energy: null,
-  //   shy: null,
-  //   well_trained: null,
-  //   large: null,
-  // });
+  console.log('user', user)
+
+  const { user_id } = useParams()
+  const [state, setState] = useState({
+    primary_image: null,
+    name: null,
+    email: null,
+    password: null,
+    location: null,
+    dog_name: null,
+    images: [],
+    bio: null,
+    playfull: null,
+    affectionate: null,
+    high_energy: null,
+    shy: null,
+    well_trained: null,
+    large: null,
+  });
 
   const [isProfileOwner, setIsProfileOwner] = useState(
 
@@ -49,38 +49,9 @@ export default function Profile(props) {
 
   const [favourited, setFavourited] = useState(false)
 
-  // useEffect(() => {
-  // axios.get(`/api/users/${localStorage.get('user_id')}`).then((res) => {
-  //     data = res.data.body[0]
-  //     setState(data)
-  //   })
-
-  //   setState({
-  //     primary_image: null,
-  //     name: "Rene",
-  //     email: "rene@gmail.com",
-  //     password: "hello123",
-  //     location: "Toronto, ON",
-  //     dog_name: "Tofu",
-  //     images: [
-  //       "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-  //       "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-  //       "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-  //       "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-  //     ],
-  //     bio: "I like dogs.",
-  //     playful: true,
-  //     affectionate: true,
-  //     high_energy: true,
-  //     shy: true,
-  //     well_trained: false,
-  //     large: false,
-  //   });
-  // }, []);
-
   return (
     <div className="profile-container">
-
+{/* 
       {
         !isProfileOwner && !favourited ?
           <Button color="yellow">
@@ -95,7 +66,7 @@ export default function Profile(props) {
           <Link to='/edit-user'><Button>Edit Profile</Button></Link>
           :
           null
-      }
+      } */}
 
       <Card id="user_card">
           <CarouselProvider
