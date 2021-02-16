@@ -50,7 +50,6 @@ function App() {
             id="profile-img"
             src="https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
           />
-
           <Link id="profile" className="menu-item" to={`/user/${localStorage.getItem('user_id')}`}>
             Profile
           </Link>
