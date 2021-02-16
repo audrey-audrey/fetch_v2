@@ -59,19 +59,22 @@ function MapContainer(props) {
   // Location data from users 
   let pins = [];
 
+  const iconBase = "https://developers.google.com/maps/documentation/javascript/examples/full/images/";
+
   props.users.map(user => {
     pins.push({
       name: user.name,
       dog_name: user.dog_name,
       bio: user.bio,
+      image: user.primary_image,
       icon: {
-        url: user.primary_image,
+        url: "http://audrey.lol/img/pinorange.png",
         origin: { x: 0, y: 0 },
         // define pop-up
-        anchor: { x: 25, y: 0 },
+        anchor: { x: 13.5, y: 0 },
         scaledSize: {
-          width: 50,
-          height: 50
+          width: 27,
+          height: 36
         }
       },
       location: {
@@ -182,7 +185,7 @@ function MapContainer(props) {
                   x
                 </div> */}
                   <Icon name='favorite' size='big'/>
-                  <img src={selected.icon.url} />
+                  <img src={selected.image} />
                   <br />
                   <p>{selected.name} & {selected.dog_name}</p>
                   <br />

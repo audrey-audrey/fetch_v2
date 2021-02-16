@@ -5,11 +5,8 @@
     align-content: center;
     flex-direction: column;
 
-}
-
-/* .login-credential label::after {
-  content: ":";
 } */
+
 .ui.container {
   margin-top: 4em;
 
@@ -19,4 +16,3 @@
   padding-top: 5em;
 
 }
-

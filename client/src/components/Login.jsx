@@ -1,10 +1,11 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
 import history from "../history";
+import rupert from "../images/rupert.png"
 
-import Button from "./Button";
+// import Button from "./Button";
 
 import "./Login.css";
 
@@ -15,8 +16,6 @@ export default function Login(props) {
     errorMessage: "",
   });
 
-
-
   const handleSubmit = function (event) {
     event.preventDefault();
 
@@ -25,10 +24,11 @@ export default function Login(props) {
     return axios
       .post(`/api/login`, params)
       .then((res) => {
+        console.log(res)
         if (state.email !== res.data[0].email) {
           return;
         }
-        localStorage.setItem("token", "hi"); // <-- adds navbar
+        localStorage.setItem("user_id", res.data[0].id); // <-- adds navbar
         history.push("/");
         window.location.reload();
       })
@@ -39,17 +39,21 @@ export default function Login(props) {
   //CSS content : instead of having : on label
 
   return (
-    <Router>
+    <Container>
+      <Image size='medium' src={rupert} circular floated='right'/>
       <div className="login-container">
+
+        <h1>You're Going to Have a Ball! Log In!</h1>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
             <h3 className="error">
-              Oops! That email does not exist. Try again.
+              Oops! We haven't met you yet. Sign up or Try again!
             </h3>
           )}
+          <br />
           <div className="login-credential">
-            <label htmlFor="email">Email</label>
-            <input
+            <label htmlFor="email">Email: </label>
+            <Input
               type="text"
               id="email"
               name="email"
@@ -60,9 +64,10 @@ export default function Login(props) {
               }}
             />
           </div>
+          <br />
           <div className="password-credential">
-            <label htmlFor="password">Password</label>
-            <input
+            <label htmlFor="password">Password: </label>
+            <Input
               type="text"
               id="password"
               required
@@ -73,9 +78,12 @@ export default function Login(props) {
               }}
             />
           </div>
-          <button type="submit">Login</button>
+          <br />
+          <Button type="submit" icon>
+            <Icon name="paw"></Icon> Login
+          </Button>
         </form>
       </div>
-    </Router>
+    </Container>
   );
 }
