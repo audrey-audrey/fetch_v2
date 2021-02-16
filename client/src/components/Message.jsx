@@ -13,6 +13,7 @@ export default function Message(props) {
     messages: [],
     user_info: [],
   });
+  const [message, setMessage] = useState("");
   const conversation_id = useLocation().pathname.split("/")[2];
   useEffect(() => {
     const params = { conversation_id: conversation_id, user_id: 1 }; //useLocation + localStorage
@@ -31,7 +32,6 @@ export default function Message(props) {
     const arr = [];
     if (!loading) {
       for (const item of state.user_info) {
-        console.log(item);
         arr.push(
           <li key={item.id}>
             <h4>{item.name}</h4>
@@ -45,10 +45,27 @@ export default function Message(props) {
 
   const messages = displayMessages();
 
+  const handleSubmit = function (event) {
+    event.preventDefault();
+    console.log(message);
+  };
+
   return (
     <div>
       Messages
       <div>{loading ? <span>Loading</span> : <ul>{messages}</ul>}</div>
+      <form action="/messages" method="POST" onSubmit={handleSubmit}>
+        <label htmlFor="message">New Message:</label>
+        <input
+          type="text"
+          id="message"
+          name="message"
+          onChange={(event) => {
+            setMessage(event.target.value);
+          }}
+        />
+        <button type="submit">Send Message</button>
+      </form>
     </div>
   );
 }
