@@ -49,7 +49,7 @@ function App() {
   // fetch current user data
   useEffect(() => {
     axios.get(`api/users/${currentUserId}`)
-    .then((res) => setUser(res.data))
+    .then((res) => setUser(res.data[0]))
   }, [localStorage])
 
   return (
@@ -88,7 +88,7 @@ function App() {
             <Register />
           </Route>
           <Route path="/user/:id">
-            <Profile />
+            <Profile user={state.user}/>
           </Route>
           <Route path="/edit-user">
             <EditProfile />
