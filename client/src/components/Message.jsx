@@ -11,30 +11,36 @@ export default function Message(props) {
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState({
     messages: [],
+    user_info: [],
   });
+  const conversation_id = useLocation().pathname.split("/")[2];
   useEffect(() => {
-    const params = { conversation_id: 2, user_id: 1 };
+    const params = { conversation_id: conversation_id, user_id: 1 }; //useLocation + localStorage
     axios
       .get(`/api/conversations/${params.conversation_id}/messages`, { params })
       .then((res) => {
-        setState({ messages: res.data });
+        setState({
+          messages: res.data.messages,
+          user_info: res.data.user_info,
+        });
       });
     setLoading(false);
   }, []);
 
   const displayMessages = function () {
+    const arr = [];
     if (!loading) {
-      for (const item of state.messages) {
-        if (item.content) {
-          return (
-            <li>
-              <h4>{item.user_id}</h4>
-              <p>{item.content}</p>
-            </li>
-          );
-        }
+      for (const item of state.user_info) {
+        console.log(item);
+        arr.push(
+          <li key={item.id}>
+            <h4>{item.name}</h4>
+            <p>{item.content}</p>
+          </li>
+        );
       }
     }
+    return arr.reverse();
   };
 
   const messages = displayMessages();
