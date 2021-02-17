@@ -12,40 +12,12 @@ export default function Favourites(props) {
   console.log("here");
 
   useEffect(() => {
-    axios.get(`/api/users/${localStorage.getItem("user_id")}`)
-    .then((res) => {
-      const user = res.data[0]
-      console.log("return user data", user);
-      return user.id
-      // state.favourites.push(res.data[0])
-      // setState(...state, state.favourites)
-    }).then((id) => {
-      // either create or find REST endpoint that receives user_id and returns arry of favoritees
-      axios.get(`/api/favorites/4`)
-      .then((res) => {
-        console.log("return favorites data: ", res)
-      })
-    })
+    const user_id = localStorage.getItem("user_id");
+    const params = { user_id };
 
-    setState({
-      favourites: [
-        {
-          id: 1,
-          name: "Rene",
-          user_id: "2",
-          dog_name: "Tofu",
-          primary_image:
-            "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
-        },
-        {
-          id: 2,
-          name: "Alison",
-          user_id: "3",
-          dog_name: "Rupert",
-          primary_image:
-            "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png",
-        },
-      ],
+    axios.get(`/api/users/${user_id}/favorites/`, { params }).then((res) => {
+      console.log(res);
+      setState({ favourites: res.data });
     });
   }, []);
 
@@ -53,22 +25,27 @@ export default function Favourites(props) {
     <div className="favourites-container">
       <Card.Group>
         {state.favourites.map((favourite) => {
-          const {user_id, primary_image, name, dog_name} = favourite
+          const {
+            user_id,
+            primary_image,
+            name,
+            dog_name,
+          } = favourite.favoritee;
           return (
-          <Card key={user_id}>
-            <Card.Content>
-              <Image floated="right" size="mini" src={primary_image} />
-              <Card.Header>
-                {name} and {dog_name}
-              </Card.Header>
-            </Card.Content>
-            <Card.Content extra>
-              <Button fluid as={Link} to={`/user/${user_id}`}>
-                View Profile
-              </Button>
-            </Card.Content>
-          </Card>
-          )
+            <Card key={user_id}>
+              <Card.Content>
+                <Image floated="right" size="mini" src={primary_image} />
+                <Card.Header>
+                  {name} and {dog_name}
+                </Card.Header>
+              </Card.Content>
+              <Card.Content extra>
+                <Button fluid as={Link} to={`/user/${user_id}`}>
+                  View Profile
+                </Button>
+              </Card.Content>
+            </Card>
+          );
         })}
       </Card.Group>
     </div>
