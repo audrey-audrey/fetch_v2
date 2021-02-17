@@ -17,21 +17,24 @@ import CustomDotGroup from "./CustomDotGroup";
 
 export default function Profile(props) {
 
+  const { user } = props;
+  // console.log('user', user)
+
   const [state, setState] = useState({
-    primary_image: null,
-    name: null,
-    email: null,
-    password: null,
-    location: null,
-    dog_name: null,
+    primary_image: "",
+    name: "",
+    email: "",
+    password: "",
+    location: "",
+    dog_name: "",
     images: [],
-    bio: null,
-    playfull: null,
-    affectionate: null,
-    high_energy: null,
-    shy: null,
-    well_trained: null,
-    large: null,
+    bio: "",
+    playfull: true,
+    affectionate: true,
+    high_energy: true,
+    shy: true,
+    well_trained: true,
+    large: true,
   });
 
   useEffect(() => {
@@ -63,13 +66,14 @@ export default function Profile(props) {
     });
   }, []);
 
-  const handleChange = (e, { name, value }) => 
-    // const value = target.type === 'checkbox' ? target.checked : target.value;
+  const handleChange = (event) => {
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
 
+    setState(prev => ({...prev, [name]: value}));
 
-  setState({ [name]: value }
-    
-    );
+  }
 
   const handleSubmit = () => {
     // const { name, email } = this.state
@@ -123,7 +127,7 @@ export default function Profile(props) {
 
             <Form.TextArea label="Bio" placeholder="Describe yourself and your dog..." name="bio" value={state.bio} />
 
-            <label style={{ "font-weight" : "bold" }}>Check all that apply to your dog</label>
+            <label style={{ "fontWeight" : "bold" }}>Check all that apply to your dog</label>
             <Form.Group>              
               <Form.Field
                 control={Checkbox}

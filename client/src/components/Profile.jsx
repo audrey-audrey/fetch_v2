@@ -30,8 +30,8 @@ export default function Profile(props) {
   const setUser = (user) => setState((prev) => ({ ...prev, user }))
 
   // fetch current user data
+  const requestedUser = window.location.pathname.substring(6)
   useEffect(() => {
-    const requestedUser = window.location.pathname.substring(6)
 
     axios.get(`/api/users/${requestedUser}`)
       .then((res) => {
@@ -50,8 +50,11 @@ export default function Profile(props) {
 
     true || // TODO: remove
 
-    localStorage.getItem('user_id') === user_id
+    localStorage.getItem('user_id') === requestedUser
   )
+
+  // console.log(isProfileOwner)
+  // console.log(localStorage.getItem('user_id') === requestedUser)
 
   const [favourited, setFavourited] = useState(false)
 
@@ -73,7 +76,7 @@ export default function Profile(props) {
         <Header textAlign='center' size='large'>{state.user.name} & {state.user.dog_name}</Header>
         {
           isProfileOwner ?
-            <Link to='/edit-user'><Button center>Edit Profile</Button></Link>
+            <Link to='/edit-user'><Button>Edit Profile</Button></Link>
             :
             null
         }

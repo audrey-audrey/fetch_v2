@@ -89,10 +89,10 @@ function App() {
             <Register />
           </Route>
           <Route path="/user/:id">
-            <Profile user={state.user}/>
+            <Profile />
           </Route>
           <Route path="/edit-user">
-            <EditProfile />
+            <EditProfile user={state.user}/>
           </Route>
           <Route path="/favourites">
             <Favourites />
