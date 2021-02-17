@@ -29,13 +29,13 @@ export default function Conversations(props) {
   }, []);
 
   let filterRecipients = function (arr) {
-    let myId = localStorage.getItem("user_id");
-    return arr.filter((item) => item.id !== myId);
+    const myId = Number(localStorage.getItem("user_id"));
+    return arr.filter((item) => item.recipient_id !== myId);
   };
 
   let filterInitiators = function (arr) {
-    let myId = localStorage.getItem("user_id");
-    return arr.filter((item) => item.id !== myId);
+    const myId = Number(localStorage.getItem("user_id"));
+    return arr.filter((item) => item.initiator_id !== myId);
   };
 
   const displayRecipients = function () {
@@ -44,7 +44,7 @@ export default function Conversations(props) {
       let filteredRecipients = filterRecipients(state.recipients);
       for (const item of filteredRecipients) {
         for (const convo of state.conversations) {
-          if (item.id === convo.recipient_id) {
+          if (item.recipient_id === convo.recipient_id) {
             arr.push(
               <li>
                 <Link to={`/messages/${convo.id}`}>{item.name}</Link>
@@ -63,7 +63,7 @@ export default function Conversations(props) {
       let filteredInitiators = filterInitiators(state.initiators);
       for (const item of filteredInitiators) {
         for (const convo of state.conversations) {
-          if (item.id === convo.initiator_id) {
+          if (item.initiator_id === convo.initiator_id) {
             const path = `/messages/${convo.id}`;
             arr.push(
               <li>
