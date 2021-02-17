@@ -21,8 +21,8 @@ export default function Message(props) {
     axios
       .get(`/api/conversations/${params.conversation_id}/messages`, { params })
       .then((res) => {
+        console.log(res.data);
         setState({
-          messages: res.data.messages,
           user_info: res.data.user_info,
         });
         setLoading(false);
@@ -37,7 +37,7 @@ export default function Message(props) {
       for (const item of state.user_info) {
         arr.push(
           <li key={item.id}>
-            <h4>{item.name}</h4>
+            <h4>{item.user.name}</h4>
             <p>{item.content}</p>
           </li>
         );
@@ -49,7 +49,7 @@ export default function Message(props) {
   const messages = displayMessages();
 
   const handleSubmit = function (event) {
-    const name = state.user_info[1].name;
+    // const name = state.user_info[1].name;
     event.preventDefault();
     const params = {
       content: message,
@@ -59,7 +59,8 @@ export default function Message(props) {
     axios
       .post(`/api/conversations/${conversation_id}/messages/`, params)
       .then((res) => {
-        res.data.name = name;
+        console.log(res);
+        // res.data.name = name;
         setState((state) => ({
           ...state,
           user_info: [res.data, ...state.user_info],
@@ -72,7 +73,7 @@ export default function Message(props) {
     <div>
       Messages
       <div>{loading ? <span>Loading</span> : <ul>{messages}</ul>}</div>
-      <form action="/messages" method="POST" onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="message">New Message:</label>
         <input
           type="text"
