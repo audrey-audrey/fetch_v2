@@ -51,6 +51,13 @@ export default function Profile(props) {
     setUser({...state.user,[name]: value});
   }
 
+  const handleCheck = (event, data) => {
+    const value = data.checked;
+    const name = data.name;
+
+    setUser({...state.user,[name]: value});
+  }
+
   const handleSubmit = () => {
     // const { name, email } = this.state
     // this.setState({ submittedName: name, submittedEmail: email })
@@ -116,10 +123,11 @@ export default function Profile(props) {
             <Form.Group>
               <Form.Field>
                 <Checkbox
+                  type='checkbox'
                   label='Playful'
                   name="playful"
                   checked={state.user.playful}
-                  onChange={handleChange}
+                  onChange={handleCheck}
                 />
               </Form.Field>
               <Form.Field>
@@ -127,7 +135,7 @@ export default function Profile(props) {
                   label='Affectionate'
                   name="affectionate"
                   checked={state.user.affectionate}
-                  onChange={handleChange}
+                  onChange={handleCheck}
                 />
               </Form.Field>
               <Form.Field>
@@ -135,7 +143,7 @@ export default function Profile(props) {
                   label='Shy'
                   name="shy"
                   checked={state.user.shy}
-                  onChange={handleChange}
+                  onChange={handleCheck}
                 />
               </Form.Field>
               <Form.Field>
@@ -143,7 +151,7 @@ export default function Profile(props) {
                   label='High-energy'
                   name="high-energy"
                   checked={state.user.high_energy}
-                  onChange={handleChange}
+                  onChange={handleCheck}
                 />
               </Form.Field>
               <Form.Field>
@@ -151,7 +159,7 @@ export default function Profile(props) {
                   label='Well-trained'
                   name="well-trained"
                   checked={state.user.well_trained}
-                  onChange={handleChange}
+                  onChange={handleCheck}
                 />
               </Form.Field>
               <Form.Field>
@@ -159,7 +167,7 @@ export default function Profile(props) {
                   label='large'
                   name="large"
                   checked={state.user.large}
-                  onChange={handleChange}
+                  onChange={handleCheck}
                 />
               </Form.Field>
             </Form.Group>
