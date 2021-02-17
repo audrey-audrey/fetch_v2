@@ -4,6 +4,7 @@ class Api::ConversationsController < ApplicationController
     conversations = Conversation.select('*').where("initiator_id = ? OR recipient_id = ? ", params[:id], params[:id])
     initiators = conversations.joins("INNER JOIN users ON conversations.initiator_id = users.id")
     recipients = conversations.joins("INNER JOIN users ON conversations.recipient_id = users.id")
+    
     render json: {conversations: conversations, initiators: initiators, recipients: recipients}
   end
 
