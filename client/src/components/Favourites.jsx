@@ -16,9 +16,16 @@ export default function Favourites(props) {
     .then((res) => {
       const user = res.data[0]
       console.log("return user data", user);
+      return user.id
       // state.favourites.push(res.data[0])
       // setState(...state, state.favourites)
-    });
+    }).then((id) => {
+      // either create or find REST endpoint that receives user_id and returns arry of favoritees
+      axios.get(`/api/favorites/4`)
+      .then((res) => {
+        console.log("return favorites data: ", res)
+      })
+    })
 
     setState({
       favourites: [
