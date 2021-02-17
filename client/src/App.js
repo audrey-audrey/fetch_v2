@@ -13,8 +13,6 @@ import Message from "./components/Message";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import Favourites from "./components/Favourites";
-
-import history from "./history";
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
 
@@ -98,6 +96,12 @@ function App() {
           </Route>
           <Route path="/edit-user">
             <EditProfile />
+          </Route>
+          <Route path="/messages/:id">
+            <Message />
+          </Route>
+          <Route path="/conversations">
+            <Conversations />
           </Route>
           <Route path="/favourites">
             <Favourites />
