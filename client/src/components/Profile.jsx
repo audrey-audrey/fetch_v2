@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, useParams } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  useParams,
+  useLocation,
+} from "react-router-dom";
 import { Card, Divider, Icon, Image } from "semantic-ui-react";
 import "./Profile.css";
 import { Label, Button } from "semantic-ui-react";
@@ -18,7 +22,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import CustomDotGroup from "../components/CustomDotGroup";
 
 export default function Profile(props) {
-  const { user_id } = useParams()
+  const user_id = useLocation().pathname.split("/")[2];
 
   const [state, setState] = useState({
     primary_image: null,
@@ -37,21 +41,14 @@ export default function Profile(props) {
     large: null,
   });
 
-  const [isProfileOwner, setIsProfileOwner ] = useState( 
+  const [isProfileOwner, setIsProfileOwner] = useState(false);
 
-    true || // TODO: remove
-
-    localStorage.getItem('user_id') === user_id
-  )
-
-  const [favourited, setFavourited ] = useState(false)
+  const [favourited, setFavourited] = useState(false);
 
   useEffect(() => {
-    // axios.get(`/api/users/${localStorage.get('user_id')}`).then((res) => {
-    //     data = res.data.body[0]
-    //     setState(data)
-    //   })
-
+    if (localStorage.getItem("user_id") === user_id) {
+      setIsProfileOwner(true);
+    }
     setState({
       primary_image: null,
       name: "Rene",
@@ -73,102 +70,100 @@ export default function Profile(props) {
       well_trained: false,
       large: false,
     });
+    // axios.get(`/api/users/${localStorage.get('user_id')}`).then((res) => {
+    //     data = res.data.body[0]
+    //     setState(data)
+    //   })
   }, []);
 
   return (
-      <div className="profile-container">  
+    <div className="profile-container">
+      {!isProfileOwner && !favourited ? (
+        <Button color="yellow">
+          <Icon name="star" /> Favourite
+        </Button>
+      ) : null}
 
-        {
-            !isProfileOwner && !favourited ? 
-            <Button color="yellow">
-            <Icon name="star" /> Favourite
-            </Button>
-            :
-            null
-        }  
+      {isProfileOwner ? (
+        <Link to="/edit-user">
+          <Button>Edit Profile</Button>
+        </Link>
+      ) : null}
 
-        {
-            isProfileOwner ? 
-            <Link to='/edit-user'><Button>Edit Profile</Button></Link>
-            :
-            null
-        }
+      <Card id="user_card">
+        <CarouselProvider
+          naturalSlideWidth={100}
+          naturalSlideHeight={125}
+          totalSlides={1 + state.images.length}
+        >
+          <Slider>
+            <Slide index={0}>
+              <Image
+                src={
+                  state.primary_image ||
+                  "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
+                }
+                wrapped
+                ui={false}
+              />
+            </Slide>
 
-        <Card id="user_card">
-          <CarouselProvider
-            naturalSlideWidth={100}
-            naturalSlideHeight={125}
-            totalSlides={1 + state.images.length}
-          >
-            <Slider>
-              <Slide index={0}>
-                <Image
-                  src={
-                    state.primary_image ||
-                    "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
-                  }
-                  wrapped
-                  ui={false}
-                />
-              </Slide>
+            {state.images.map((img, ind) => {
+              return (
+                <Slide index={1 + ind}>
+                  <Image src={img} wrapped ui={false} />
+                </Slide>
+              );
+            })}
+          </Slider>
 
-              {state.images.map((img, ind) => {
-                return (
-                  <Slide index={1 + ind}>
-                    <Image src={img} wrapped ui={false} />
-                  </Slide>
-                );
-              })}
-            </Slider>
+          <div className="slider">
+            <CustomDotGroup slides={1 + state.images.length} />
+          </div>
+        </CarouselProvider>
 
-            <div className="slider">
-              <CustomDotGroup slides={1 + state.images.length} />
-            </div>
-          </CarouselProvider>
-
-          <Card.Content>
-            <Card.Header>
-              {state.name} and {state.dog_name}
-            </Card.Header>
-            <Card.Meta>
-              <span>{state.location}</span>
-            </Card.Meta>
-            <Card.Description>{state.bio}</Card.Description>
-          </Card.Content>
-          <Card.Content>
-            {state.playful ? (
-              <Label as="a" tag>
-                Playful
-              </Label>
-            ) : null}
-            {state.affectionate ? (
-              <Label as="a" tag>
-                Affectionate
-              </Label>
-            ) : null}
-            {state.shy ? (
-              <Label as="a" tag>
-                Shy
-              </Label>
-            ) : null}
-            {state.high_energy ? (
-              <Label as="a" tag>
-                High-energy
-              </Label>
-            ) : null}
-            {state.well_trained ? (
-              <Label as="a" tag>
-                Well-trained
-              </Label>
-            ) : null}
-            {state.large ? (
-              <Label as="a" tag>
-                Large
-              </Label>
-            ) : null}
-          </Card.Content>
-        </Card>
-    
-      </div>
+        <Card.Content>
+          <Card.Header>
+            {state.name} and {state.dog_name}
+          </Card.Header>
+          <Card.Meta>
+            <span>{state.location}</span>
+          </Card.Meta>
+          <Card.Description>{state.bio}</Card.Description>
+        </Card.Content>
+        <Card.Content>
+          {state.playful ? (
+            <Label as="a" tag>
+              Playful
+            </Label>
+          ) : null}
+          {state.affectionate ? (
+            <Label as="a" tag>
+              Affectionate
+            </Label>
+          ) : null}
+          {state.shy ? (
+            <Label as="a" tag>
+              Shy
+            </Label>
+          ) : null}
+          {state.high_energy ? (
+            <Label as="a" tag>
+              High-energy
+            </Label>
+          ) : null}
+          {state.well_trained ? (
+            <Label as="a" tag>
+              Well-trained
+            </Label>
+          ) : null}
+          {state.large ? (
+            <Label as="a" tag>
+              Large
+            </Label>
+          ) : null}
+        </Card.Content>
+      </Card>
+    </div>
   );
 }
