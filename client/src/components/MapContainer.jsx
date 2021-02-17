@@ -10,7 +10,8 @@ import {
   Button, 
   Icon,
   Card, 
-  Image
+  Image,
+  Container
 } from 'semantic-ui-react'
 
 import "./MapContainer.scss";
@@ -187,19 +188,26 @@ function MapContainer(props) {
                   {/* <div class="map-info-close">
                   x
                 </div> */}
+                <Button animated='vertical' size='small' floated='left' basic color='yellow'>
+                <Button.Content hidden>Fave</Button.Content>
+                <Button.Content visible>
                   <Icon name='favorite' size='big'/>
+                  </Button.Content>
+                </Button>
+                <Container textAlign='center'>
                   <img src={selected.image} />
                   <br />
                   <p>{selected.name} & {selected.dog_name}</p>
                   <br />
                   <p>{selected.bio}</p>
                   <br />
-                  <Button animated color='teal'>
+                  <Button animated color='teal' fluid>
                     <Button.Content visible>Profile</Button.Content>
                     <Button.Content hidden>
                       <Icon name='arrow right' />
                     </Button.Content>
                   </Button>
+                </Container>
                 </div>
               </InfoWindow>
             )
