@@ -17,7 +17,7 @@ export default function Message(props) {
   const conversation_id = useLocation().pathname.split("/")[2];
   const user_id = localStorage.getItem("user_id");
   useEffect(() => {
-    const params = { conversation_id: conversation_id, user_id: 1 }; //useLocation + localStorage
+    const params = { conversation_id: conversation_id, user_id: user_id }; //useLocation + localStorage
     axios
       .get(`/api/conversations/${params.conversation_id}/messages`, { params })
       .then((res) => {
