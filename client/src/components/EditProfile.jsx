@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./EditProfile.css";
-import { Form, Checkbox } from "semantic-ui-react";
+import { Form, Checkbox, TextArea } from "semantic-ui-react";
 
 import {
   CarouselProvider,
@@ -71,7 +71,7 @@ export default function Profile(props) {
     const value = target.type === 'checkbox' ? target.checked : target.value;
     const name = target.name;
 
-    setState(prev => ({...prev, [name]: value}));
+    setState(prev => ({ ...prev, [name]: value }));
   }
 
   const handleSubmit = () => {
@@ -124,51 +124,59 @@ export default function Profile(props) {
               />
             </Form.Field>
 
-            <Form.TextArea label="Bio" placeholder="Describe yourself and your dog..." name="bio" value={state.bio} />
+            <Form.Field>
+              <label>Bio</label>
+              <TextArea 
+                placeholder='Tell us more about you and your dog!' 
+                name="bio"
+                value={state.bio}
+                onChange={handleChange}
+                />
+            </Form.Field>
 
-            <label style={{ "fontWeight" : "bold" }}>Check all that apply to your dog</label>
-            <Form.Group>              
+            <label style={{ "fontWeight": "bold" }}>Check all that apply to your dog</label>
+            <Form.Group>
               <Form.Field
                 control={Checkbox}
                 label="Playful"
                 name="playful"
                 checked={state.playful}
-                onChange={handleChange} 
+                onChange={handleChange}
               />
               <Form.Field
                 control={Checkbox}
                 label="Affectionate"
                 name="affectionate"
                 checked={state.affectionate}
-                onChange={handleChange} 
+                onChange={handleChange}
               />
               <Form.Field
                 control={Checkbox}
                 label="Shy"
                 name="shy"
                 checked={state.shy}
-                onChange={handleChange} 
+                onChange={handleChange}
               />
               <Form.Field
                 control={Checkbox}
                 label="High-energy"
                 name="high_energy"
                 checked={state.high_energy}
-                onChange={handleChange} 
+                onChange={handleChange}
               />
               <Form.Field
                 control={Checkbox}
                 label="Well-trained"
                 name="well_trained"
                 checked={state.well_trained}
-                onChange={handleChange} 
+                onChange={handleChange}
               />
               <Form.Field
                 control={Checkbox}
                 label="Large"
                 name="large"
                 checked={state.large}
-                onChange={handleChange} 
+                onChange={handleChange}
               />
             </Form.Group>
 
