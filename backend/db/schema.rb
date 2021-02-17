@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_14_224222) do
+ActiveRecord::Schema.define(version: 2021_02_17_200436) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(version: 2021_02_14_224222) do
   end
 
   create_table "favorites", force: :cascade do |t|
-    t.integer "favoriter"
-    t.integer "favoritee"
+    t.integer "favoriter_id"
+    t.integer "favoritee_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -25,14 +25,9 @@ export default function Favourites(props) {
     <div className="favourites-container">
       <Card.Group>
         {state.favourites.map((favourite) => {
-          const {
-            user_id,
-            primary_image,
-            name,
-            dog_name,
-          } = favourite.favoritee;
+          const { favoritee_id, primary_image, name, dog_name } = favourite;
           return (
-            <Card key={user_id}>
+            <Card key={favoritee_id}>
               <Card.Content>
                 <Image floated="right" size="mini" src={primary_image} />
                 <Card.Header>
@@ -40,7 +35,7 @@ export default function Favourites(props) {
                 </Card.Header>
               </Card.Content>
               <Card.Content extra>
-                <Button fluid as={Link} to={`/user/${user_id}`}>
+                <Button fluid as={Link} to={`/user/${favoritee_id}`}>
                   View Profile
                 </Button>
               </Card.Content>
