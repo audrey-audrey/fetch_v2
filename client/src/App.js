@@ -92,7 +92,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/edit-user">
-            <EditProfile user={state.user}/>
+            <EditProfile />
           </Route>
           <Route path="/favourites">
             <Favourites />
