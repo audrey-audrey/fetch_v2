@@ -147,13 +147,13 @@ function MapContainer(props) {
     <>
       <div className='filter'>
         <div className='buttonContainer'>
-          {/* <Button buttonClass={state.playful ? "button button--confirm" : "button button--danger"} onClick={togglePlayful}>Playful</Button>
+          <Button buttonClass={state.playful ? "button button--confirm" : "button button--danger"} onClick={togglePlayful}>Playful</Button>
           <Button buttonClass={state.affectionate ? "button button--confirm" : "button button--danger"} onClick={toggleAffectionate}>Affectionate</Button>
           <Button buttonClass={state.high_energy ? "button button--confirm" : "button button--danger"} onClick={toggleHighEnergy}>High-energy</Button>
           <Button buttonClass={state.shy ? "button button--confirm" : "button button--danger"} onClick={toggleShy}>Shy</Button>
           <Button buttonClass={state.well_trained ? "button button--confirm" : "button button--danger"} onClick={toggleWellTrained}>Well-trained</Button>
           <Button buttonClass={state.large ? "button button--confirm" : "button button--danger"} onClick={toggleLarge}>Large</Button>
-          <Button buttonClass={!state.showToggle ? "button button--confirm" : "button button--danger"} onClick={toggleShow}>Show All!</Button> */}
+          <Button buttonClass={!state.showToggle ? "button button--confirm" : "button button--danger"} onClick={toggleShow}>Show All!</Button>
         </div>
         {JSON.stringify(state)}
         <p>{message}</p>
@@ -198,7 +198,7 @@ function MapContainer(props) {
                   <p>{selected.bio}</p>
                   <br />
                     <Link id="profile" className="menu-item" to={`/user/${selected.id}`}>
-                    <Button animated color='teal'>
+                    <Button fluid animated color='teal'>
                       <Button.Content visible>Profile</Button.Content>
                       <Button.Content hidden>
                         <Icon name='arrow right' />
