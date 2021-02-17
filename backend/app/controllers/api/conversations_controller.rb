@@ -8,13 +8,9 @@ class Api::ConversationsController < ApplicationController
   end
 
   def create
-    if Conversation.link(params[:initiator_id], params[:recipient_id]).present?
-      conversation = Conversation.link(params[:initiator_id], params[:recipient_id]).first
-    else
-      conversation = Conversation.create!(conversation_params)
-    end
+    conversation = Conversation.find_or_create_by!(conversation_params)
 
-    render json :conversation
+    render json: conversation
   end
   
 
