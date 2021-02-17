@@ -29,12 +29,12 @@ export default function Conversations(props) {
   }, []);
 
   let filterRecipients = function (arr) {
-    let myId = 1;
+    let myId = localStorage.getItem("user_id");
     return arr.filter((item) => item.id !== myId);
   };
 
   let filterInitiators = function (arr) {
-    let myId = 2;
+    let myId = localStorage.getItem("user_id");
     return arr.filter((item) => item.id !== myId);
   };
 
