@@ -28,8 +28,6 @@ function App() {
     user: {}
   });
 
-  console.log(state.user)
-
   // setStates
   const setUsers = (users) => setState((prev) => ({ ...prev, users }));
   const setUser = (user) => setState((prev) => ({ ...prev, user }))

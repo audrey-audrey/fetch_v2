@@ -1,11 +1,24 @@
 #user_card {
     width: 50%;
 }
-/* 
-img {
-    width: 50px
-} */
 
 .slider {
     margin-bottom: 10px;
+}
+
+.profile-container {
+    .logo {
+        background-color: beige;
+    }
+
+    .profile-section-top {
+        flex-direction: column;
+        display: flex;
+        align-items: center;
+        background-color: beige;
+
+        img {
+            padding-top: 2em;
+        }
+    }
 }
