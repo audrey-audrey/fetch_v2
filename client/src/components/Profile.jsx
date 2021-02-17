@@ -17,27 +17,27 @@ import {
 } from "pure-react-carousel";
 import "pure-react-carousel/dist/react-carousel.es.css";
 import CustomDotGroup from "../components/CustomDotGroup";
+import axios from "axios";
 
 export default function Profile(props) {
-  const { user } = props
-
-  const { user_id } = useParams()
+  const { user_id } = useParams() 
   const [state, setState] = useState({
-    primary_image: null,
-    name: null,
-    email: null,
-    password: null,
-    location: null,
-    dog_name: null,
-    images: [],
-    bio: null,
-    playfull: null,
-    affectionate: null,
-    high_energy: null,
-    shy: null,
-    well_trained: null,
-    large: null,
+    user: {}
   });
+
+  // console.log(user_id)
+
+  const setUser = (user) => setState((prev) => ({ ...prev, user }))
+
+  // fetch current user data
+  useEffect(() => {
+    const requestedUser = window.location.pathname.substring(6)
+
+    axios.get(`/api/users/${requestedUser}`)
+      .then((res) => {
+        setUser(res.data[0])
+      })
+  }, [])
 
   const imageURLs = [
     'https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/',
@@ -68,11 +68,9 @@ export default function Profile(props) {
       }
 
       <div className='profile-section-top'>
-      <div className='logo'>
-        <img class="ui small right floated image" src={appLogo} />
-      </div>
-        <img class="ui centered medium rounded image" src={user.primary_image} />
-        <Header textAlign='center' size='large'>{user.name} & {user.dog_name}</Header>
+        <Image src={appLogo} floated='right' />
+        <img className="ui centered medium rounded image" src={state.user.primary_image} />
+        <Header textAlign='center' size='large'>{state.user.name} & {state.user.dog_name}</Header>
         {
           isProfileOwner ?
             <Link to='/edit-user'><Button center>Edit Profile</Button></Link>
@@ -90,7 +88,7 @@ export default function Profile(props) {
           <Slider>
             <Slide index={0}>
               <Image
-                src={user.primary_image}
+                src={state.user.primary_image}
                 wrapped
                 ui={false}
               />
@@ -114,35 +112,35 @@ export default function Profile(props) {
           <Card.Meta>
             <span>Toronto</span>
           </Card.Meta>
-          <Card.Description>{user.bio}</Card.Description>
+          <Card.Description>{state.user.bio}</Card.Description>
         </Card.Content>
         <Card.Content>
-          {user.playful ? (
+          {state.user.playful ? (
             <Label as="a" tag>
               Playful
             </Label>
           ) : null}
-          {user.affectionate ? (
+          {state.user.affectionate ? (
             <Label as="a" tag>
               Affectionate
             </Label>
           ) : null}
-          {user.shy ? (
+          {state.user.shy ? (
             <Label as="a" tag>
               Shy
             </Label>
           ) : null}
-          {user.high_energy ? (
+          {state.user.high_energy ? (
             <Label as="a" tag>
               High-energy
             </Label>
           ) : null}
-          {user.well_trained ? (
+          {state.user.well_trained ? (
             <Label as="a" tag>
               Well-trained
             </Label>
           ) : null}
-          {user.large ? (
+          {state.user.large ? (
             <Label as="a" tag>
               Large
             </Label>
