@@ -10,6 +10,7 @@ import { Card, Divider, Icon, Image } from "semantic-ui-react";
 import "./Profile.css";
 import { Label, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import history from "../history";
 
 import {
   CarouselProvider,
@@ -22,7 +23,7 @@ import "pure-react-carousel/dist/react-carousel.es.css";
 import CustomDotGroup from "../components/CustomDotGroup";
 
 export default function Profile(props) {
-  const user_id = useLocation().pathname.split("/")[2];
+  const profile_id = useLocation().pathname.split("/")[2];
 
   const [state, setState] = useState({
     primary_image: null,
@@ -46,7 +47,7 @@ export default function Profile(props) {
   const [favourited, setFavourited] = useState(false);
 
   useEffect(() => {
-    if (localStorage.getItem("user_id") === user_id) {
+    if (localStorage.getItem("user_id") === profile_id) {
       setIsProfileOwner(true);
     }
     setState({
@@ -76,6 +77,20 @@ export default function Profile(props) {
     //   })
   }, []);
 
+  const handleChat = function () {
+    const params = {
+      initiator_id: localStorage.getItem("user_id"),
+      recipient_id: profile_id,
+    };
+    axios.post(`/api/conversations`, params).then((res) => {
+      console.log(res);
+      let conversation_id = null;
+      if (res.data.id) {
+        conversation_id = res.data.id;
+      }
+      history.push(`/messages/${conversation_id}`);
+    });
+  };
   return (
     <div className="profile-container">
       {!isProfileOwner && !favourited ? (
@@ -87,6 +102,12 @@ export default function Profile(props) {
       {isProfileOwner ? (
         <Link to="/edit-user">
           <Button>Edit Profile</Button>
+        </Link>
+      ) : null}
+
+      {!isProfileOwner ? (
+        <Link>
+          <Button onClick={handleChat}>Start a Chat!</Button>
         </Link>
       ) : null}
 
