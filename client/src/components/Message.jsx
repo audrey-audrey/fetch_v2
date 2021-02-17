@@ -36,10 +36,12 @@ export default function Message(props) {
     if (!loading) {
       for (const item of state.user_info) {
         arr.push(
-          <li key={item.id}>
-            <h4>{item.user.name}</h4>
+          <div key={item.id}>
+            <h5>
+              {item.user.name} <small>{console.log(item.created_at)}</small>
+            </h5>
             <p>{item.content}</p>
-          </li>
+          </div>
         );
       }
     }
