@@ -6,6 +6,8 @@ import {
   InfoWindow
 } from '@react-google-maps/api';
 
+import { Link } from "react-router-dom";
+
 import { 
   Button, 
   Icon,
@@ -61,6 +63,7 @@ function MapContainer(props) {
 
   props.users.map(user => {
     pins.push({
+      id: user.id,
       name: user.name,
       dog_name: user.dog_name,
       bio: user.bio,
@@ -194,12 +197,14 @@ function MapContainer(props) {
                   <br />
                   <p>{selected.bio}</p>
                   <br />
-                  <Button animated color='teal'>
-                    <Button.Content visible>Profile</Button.Content>
-                    <Button.Content hidden>
-                      <Icon name='arrow right' />
-                    </Button.Content>
-                  </Button>
+                    <Link id="profile" className="menu-item" to={`/user/${selected.id}`}>
+                    <Button animated color='teal'>
+                      <Button.Content visible>Profile</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name='arrow right' />
+                      </Button.Content>
+                    </Button>
+                    </Link>
                 </div>
               </InfoWindow>
             )

@@ -57,7 +57,7 @@ export default function Profile(props) {
         "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
       ],
       bio: "I like dogs.",
-      playful: true,
+      playful: false,
       affectionate: true,
       high_energy: true,
       shy: true,
@@ -72,7 +72,6 @@ export default function Profile(props) {
     const name = target.name;
 
     setState(prev => ({...prev, [name]: value}));
-
   }
 
   const handleSubmit = () => {
