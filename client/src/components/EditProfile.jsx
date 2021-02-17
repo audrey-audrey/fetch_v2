@@ -18,7 +18,19 @@ import CustomDotGroup from "./CustomDotGroup";
 export default function Profile(props) {
 
   const [state, setState] = useState({ 
-    user: {}
+    user: {
+      name: "", 
+      location: "", 
+      dog_name: "", 
+      email: "", 
+      bio: "", 
+      playful: false, 
+      affectionate: false, 
+      shy: false, 
+      high_energy: false, 
+      well_trained: false, 
+      large: false
+    }
   });
 
   const setUser = (user) => setState((prev) => ({ ...prev, user }))
