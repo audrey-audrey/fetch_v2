@@ -56,7 +56,7 @@ export default function Message(props) {
     const params = {
       content: message,
       conversation_id: conversation_id,
-      user_id: 1,
+      user_id: localStorage.getItem("user_id"),
     };
     axios
       .post(`/api/conversations/${conversation_id}/messages/`, params)

@@ -6,10 +6,9 @@ class Api::MessagesController < ApplicationController
 
   def index
     messages = @conversation.messages
-    puts messages.inspect
+    messages.where("user_id != ? AND read = ?", params[:user_id], false).update_all(read: true)
     render json: {user_info: messages}, include: :user
 
-    # messages.where("user_id != ? AND read = ?", params[:user_id], false).update_all(read: true)
 
     # user_info = messages.select("messages.*, users.name as name").joins("INNER JOIN users ON messages.user_id = users.id")
 

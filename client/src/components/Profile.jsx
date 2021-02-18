@@ -6,76 +6,52 @@ import {
   useParams,
   useLocation,
 } from "react-router-dom";
-import { Card, Divider, Icon, Image } from "semantic-ui-react";
-import "./Profile.css";
+import { Card, Divider, Icon, Image, Header } from "semantic-ui-react";
 import { Label, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import history from "../history";
 
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
-import CustomDotGroup from "../components/CustomDotGroup";
+import "./Profile.scss";
+import Carousel from 'nuka-carousel';
+import rupert from "../images/rupert.png"
+import appLogo from "../images/icons/logo.png"
+
+// import CustomDotGroup from "../components/CustomDotGroup";
 
 export default function Profile(props) {
   const profile_id = useLocation().pathname.split("/")[2];
 
+  const { user_id } = useParams() 
   const [state, setState] = useState({
-    primary_image: null,
-    name: null,
-    email: null,
-    password: null,
-    location: null,
-    dog_name: null,
-    images: [],
-    bio: null,
-    playfull: null,
-    affectionate: null,
-    high_energy: null,
-    shy: null,
-    well_trained: null,
-    large: null,
+    user: {}
   });
 
-  const [isProfileOwner, setIsProfileOwner] = useState(false);
+  const [isProfileOwner, setIsProfileOwner] = useState(false)
 
-  const [favourited, setFavourited] = useState(false);
+  const setUser = (user) => setState((prev) => ({ ...prev, user }))
 
+  // fetch current user data
+  const requestedUser = window.location.pathname.substring(6)
   useEffect(() => {
+
     if (localStorage.getItem("user_id") === profile_id) {
       setIsProfileOwner(true);
     }
-    setState({
-      primary_image: null,
-      name: "Rene",
-      email: "rene@gmail.com",
-      password: "hello123",
-      location: "Toronto, ON",
-      dog_name: "Tofu",
-      images: [
-        "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-        "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-        "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-        "https://www.nationalgeographic.com/content/dam/animals/thumbs/rights-exempt/mammals/d/domestic-dog_thumb.jpg",
-      ],
-      bio: "I like dogs.",
-      playful: true,
-      affectionate: true,
-      high_energy: true,
-      shy: true,
-      well_trained: false,
-      large: false,
-    });
-    // axios.get(`/api/users/${localStorage.get('user_id')}`).then((res) => {
-    //     data = res.data.body[0]
-    //     setState(data)
-    //   })
-  }, []);
+
+    axios.get(`/api/users/${requestedUser}`)
+      .then((res) => {
+        setUser(res.data[0])
+      })
+  }, [])
+
+  const imageURLs = [
+    'https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/',
+    'https://www.pexels.com/photo/brown-and-white-short-coated-puppy-1805164/',
+    'https://www.pexels.com/photo/closeup-photography-of-adult-short-coated-tan-and-white-dog-sleeping-on-gray-textile-at-daytime-731022/',
+    'https://www.pexels.com/photo/brown-and-white-american-pit-bull-terrier-with-brown-costume-825949/'
+  ]
+
+  const [favourited, setFavourited] = useState(false)
 
   const handleChat = function () {
     const params = {
@@ -93,98 +69,85 @@ export default function Profile(props) {
   };
   return (
     <div className="profile-container">
-      {!isProfileOwner && !favourited ? (
-        <Button color="yellow">
-          <Icon name="star" /> Favourite
-        </Button>
-      ) : null}
 
-      {isProfileOwner ? (
-        <Link to="/edit-user">
-          <Button>Edit Profile</Button>
-        </Link>
-      ) : null}
+      <div className='profile-section-top'>
+        <Image src={appLogo} />
+        <img className="profile-image" src={state.user.primary_image} />
+        <Header textAlign='center' size='large'>
+          {state.user.name} & {state.user.dog_name}
+          <Header.Subheader>
+            Toronto, ON
+          </Header.Subheader>
+        </Header>
 
-      {!isProfileOwner ? (
-        <Link>
-          <Button onClick={handleChat}>Start a Chat!</Button>
-        </Link>
-      ) : null}
+        {
+          isProfileOwner ?
+            <Link to='/edit-user'><Button>Edit Profile</Button></Link>
+            :
+            null
+        }
 
-      <Card id="user_card">
-        <CarouselProvider
-          naturalSlideWidth={100}
-          naturalSlideHeight={125}
-          totalSlides={1 + state.images.length}
-        >
-          <Slider>
-            <Slide index={0}>
-              <Image
-                src={
-                  state.primary_image ||
-                  "https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
-                }
-                wrapped
-                ui={false}
-              />
-            </Slide>
+        {!isProfileOwner && !favourited ? (
+          <Button color="yellow">
+            <Icon name="star" /> Favourite
+          </Button>
+        ) : null}
 
-            {state.images.map((img, ind) => {
-              return (
-                <Slide index={1 + ind}>
-                  <Image src={img} wrapped ui={false} />
-                </Slide>
-              );
-            })}
-          </Slider>
+        {!isProfileOwner ? (
+          <Link>
+            <Button onClick={handleChat}>Start a Chat!</Button>
+          </Link>
+        ) : null}
 
-          <div className="slider">
-            <CustomDotGroup slides={1 + state.images.length} />
-          </div>
-        </CarouselProvider>
+      </div>
 
+      <Card fluid>
         <Card.Content>
-          <Card.Header>
-            {state.name} and {state.dog_name}
-          </Card.Header>
-          <Card.Meta>
-            <span>{state.location}</span>
-          </Card.Meta>
-          <Card.Description>{state.bio}</Card.Description>
+          <Card.Description>{state.user.bio}</Card.Description>
         </Card.Content>
         <Card.Content>
-          {state.playful ? (
+          {state.user.playful ? (
             <Label as="a" tag>
               Playful
             </Label>
           ) : null}
-          {state.affectionate ? (
+          {state.user.affectionate ? (
             <Label as="a" tag>
               Affectionate
             </Label>
           ) : null}
-          {state.shy ? (
+          {state.user.shy ? (
             <Label as="a" tag>
               Shy
             </Label>
           ) : null}
-          {state.high_energy ? (
+          {state.user.high_energy ? (
             <Label as="a" tag>
               High-energy
             </Label>
           ) : null}
-          {state.well_trained ? (
+          {state.user.well_trained ? (
             <Label as="a" tag>
               Well-trained
             </Label>
           ) : null}
-          {state.large ? (
+          {state.user.large ? (
             <Label as="a" tag>
               Large
             </Label>
           ) : null}
         </Card.Content>
       </Card>
+
+      <div className='carousel'>
+        <Carousel initialSlideHeight={0.4}>
+          <img src={rupert} />
+          <img src={rupert} />
+          <img src={rupert} />
+        </Carousel>
+      </div>
+
+
     </div>
   );
 }
