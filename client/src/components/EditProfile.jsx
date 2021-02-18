@@ -58,15 +58,20 @@ export default function Profile(props) {
     setUser({...state.user,[name]: value});
   }
 
-  const handleSubmit = () => {
-    // const { name, email } = this.state
-    // this.setState({ submittedName: name, submittedEmail: email })
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    return axios
+      .patch(`/api/users/${state.user.id}`, state.user)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        setState({ errorMessage: err.message });
+      });
   };
 
   return (
     <Router>
       <div className="edit-profile-container">
-      {JSON.stringify(state)}
         <div className="form-container">
           <Form onSubmit={handleSubmit}>
             <Form.Field>
@@ -118,7 +123,6 @@ export default function Profile(props) {
                 onChange={handleChange}
                 />
             </Form.Field>
-
             <label style={{ "fontWeight": "bold" }}>Check all that apply to your dog</label>
             <Form.Group>
               <Form.Field>
@@ -149,7 +153,7 @@ export default function Profile(props) {
               <Form.Field>
                 <Checkbox
                   label='High-energy'
-                  name="high-energy"
+                  name="high_energy"
                   checked={state.user.high_energy}
                   onChange={handleCheck}
                 />
@@ -157,7 +161,7 @@ export default function Profile(props) {
               <Form.Field>
                 <Checkbox
                   label='Well-trained'
-                  name="well-trained"
+                  name="well_trained"
                   checked={state.user.well_trained}
                   onChange={handleCheck}
                 />
