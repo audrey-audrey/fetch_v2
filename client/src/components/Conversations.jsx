@@ -18,6 +18,7 @@ export default function Conversations(props) {
   useEffect(() => {
     const params = { id: localStorage.getItem("user_id") };
     axios.get(`/api/conversations`, { params }).then((res) => {
+      console.log(res.data);
       setState({
         conversations: res.data.conversations,
         initiators: res.data.initiators,
