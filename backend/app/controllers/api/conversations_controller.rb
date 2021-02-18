@@ -1,11 +1,11 @@
 class Api::ConversationsController < ApplicationController
 
   def index 
-    conversations = Conversation.select('*').where("initiator_id = ? OR recipient_id = ? ", params[:id], params[:id])
+    conversations = Conversation.select('*').where("initiator_id = ? OR recipient_id = ?", params[:id], params[:id])
     initiators = conversations.joins("INNER JOIN users ON conversations.initiator_id = users.id")
     recipients = conversations.joins("INNER JOIN users ON conversations.recipient_id = users.id")
 
-    unreads = Message.select("COUNT(read)").group(:conversation_id)
+    unreads = Message.select("COUNT(read), conversation_id as id").group(:conversation_id)
 
     render json: {conversations: conversations, initiators: initiators, recipients: recipients, unreads: unreads}
   end
