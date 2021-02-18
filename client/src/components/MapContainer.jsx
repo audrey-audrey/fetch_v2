@@ -184,9 +184,7 @@ function MapContainer(props) {
 
   const styles = require("../styles/map/GoogleMapStyles.json");
 
-  const isFavourited = state.favourites.find(
-    (fave) => fave.id === selected.id
-  );
+  const isFavourited = state.favourites.find((fave) => fave.id === selected.id);
 
   const handleSubmit = function (event) {
     event.preventDefault();
@@ -194,7 +192,7 @@ function MapContainer(props) {
     const user_id = localStorage.getItem("user_id");
     const params = { user_id, favoritee: selected };
 
-    console.log("isfavourited:", isFavourited)
+    console.log("isfavourited:", isFavourited);
 
     if (isFavourited) {
       return axios
@@ -268,7 +266,7 @@ function MapContainer(props) {
                 {/* <div class="map-info-close">
                   x
                 </div> */}
- 
+
                 <Button
                   animated="vertical"
                   size="small"
