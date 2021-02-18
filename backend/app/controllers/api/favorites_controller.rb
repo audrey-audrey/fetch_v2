@@ -19,5 +19,12 @@ class Api::FavoritesController < ApplicationController
       render json: {status: "error"}
     end
   end
+  def destroy
+    puts "........................................"
+    puts params[:user_id]
+    puts params[:id]
+    Favorite.where(favoritee_id: params[:id], favoriter_id: params[:user_id]).destroy_all
+
+  end
 
 end

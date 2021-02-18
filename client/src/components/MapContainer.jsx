@@ -1,4 +1,4 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import {
   GoogleMap,
   LoadScript,
@@ -6,7 +6,6 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import axios from "axios";
-
 
 import { Button, Icon, Card, Image, Container } from "semantic-ui-react";
 
@@ -34,6 +33,16 @@ function MapContainer(props) {
     large: false,
   });
 
+  useEffect(() => {
+    const user_id = localStorage.getItem("user_id");
+    const params = { user_id };
+
+    axios.get(`/api/users/${user_id}/favorites/`, { params }).then((res) => {
+      console.log(res);
+      setState({ favourites: res.data });
+    });
+  }, [])
+  console.log("state.favorites:", state.favourites)
   // button toggles
   const togglePlayful = () =>
     setState((prev) => ({ ...prev, playful: !prev.playful, showToggle: true }));
@@ -177,17 +186,46 @@ function MapContainer(props) {
 
   const handleSubmit = function (event) {
     event.preventDefault();
+
     const user_id = localStorage.getItem("user_id");
     const params = { user_id, favoritee: selected };
+      
+    console.log("selected:", selected)
+    console.log("favourites:", state.favourites)
     console.log("params:", params);
+
+    const isFavourited = state.favourites.find(fave => fave.id === selected.id)
+      // fave => {
+      // Compare fave.id with selected.id
+
+    console.log(isFavourited)
+
+    if (isFavourited) {
+      // Delete stuff here.
+      return axios.delete(`/api/users/${user_id}/favorites/${isFavourited.id}`, params)
+        .then((res) => {
+          console.log("delete res:", res)
+        axios.get(`/api/users/${user_id}/favorites/`)
+
+          .then(res => setState((prev) => ({ ...prev, favourites: res.data })))
+          // console.log("delete res:", res)
+          // setState((prev) => ({...prev, favourites: !prev.selected.id}))
+        }).catch((err) => {
+          throw err;
+        });
+    } else {
     return axios
       .post(`/api/users/${user_id}/favorites/`, params)
       .then((res) => {
-        setState({ favourites: res.data });
+        console.log("post res:", res)
+        axios.get(`/api/users/${user_id}/favorites/`)
+          .then(res => setState((prev) => ({ ...prev, favourites: res.data })))
+            // setState({ favourites: res.data }))
       })
       .catch((err) => {
         throw err;
       });
+  }
   };
 
   return (
@@ -202,7 +240,7 @@ function MapContainer(props) {
           <Button buttonClass={state.large ? "button button--confirm" : "button button--danger"} onClick={toggleLarge}>Large</Button>
           <Button buttonClass={!state.showToggle ? "button button--confirm" : "button button--danger"} onClick={toggleShow}>Show All!</Button> */}
         </div>
-        {JSON.stringify(state)}
+        {/* {JSON.stringify(state)} */}
         <p>{message}</p>
       </div>
       <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
@@ -237,10 +275,8 @@ function MapContainer(props) {
                   animated="vertical"
                   size="small"
                   floated="left"
-                  basic
-                  color="yellow"
+                  basic color="yellow"
                   onClick={handleSubmit}
-                  toggle
                 >
                   <Button.Content hidden>Fave</Button.Content>
                   <Button.Content visible>

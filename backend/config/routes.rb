@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users do
         get 'users/:id', to: 'users#show'
-        resources :favorites, only: [:index, :create]
+        resources :favorites, only: [:index, :create, :destroy]
     end
        
       # resources :conversations, only: [:index, :create] do
