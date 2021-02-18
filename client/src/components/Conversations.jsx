@@ -23,6 +23,7 @@ export default function Conversations(props) {
         conversations: res.data.conversations,
         initiators: res.data.initiators,
         recipients: res.data.recipients,
+        unreads: res.data.unreads,
       });
     });
     setLoading(false);
@@ -42,6 +43,14 @@ export default function Conversations(props) {
     );
   };
 
+  const findUnreads = function (conversation_id) {
+    for (const item of state.unreads) {
+      if (conversation_id === item.conversation_id) {
+        return item.unread;
+      }
+    }
+  };
+
   const displayRecipients = function () {
     const arr = [];
     if (!loading) {
@@ -55,6 +64,7 @@ export default function Conversations(props) {
             arr.push(
               <li>
                 <Link to={`/messages/${convo.id}`}>{item.name}</Link>
+                <small>{findUnreads(convo.id)}</small>
               </li>
             );
           }
@@ -77,6 +87,7 @@ export default function Conversations(props) {
             arr.push(
               <li>
                 <Link to={`/messages/${convo.id}`}>{item.name}</Link>
+                <small>{findUnreads(convo.id)}</small>
               </li>
             );
           }
