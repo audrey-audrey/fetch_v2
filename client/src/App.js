@@ -59,11 +59,13 @@ function App() {
     window.location.reload();
   };
 
-  const currentUserId = localStorage.getItem("user_id");
   // fetch current user data
   useEffect(() => {
-    axios.get(`/api/users/${currentUserId}`).then((res) => setUser(res.data));
-  }, [localStorage]);
+    const currentUserId = localStorage.getItem("user_id");
+    axios.get(`/api/users/${currentUserId}`).then((res) => {
+      setUser(res.data[0]);
+    });
+  }, []);
 
   return (
     <div>
@@ -87,7 +89,12 @@ function App() {
           <Link id="favorites" className="menu-item" to="/favourites">
             Favourties
           </Link>
-          <Link id="logout" className="menu-item" onClick={handleLogout}>
+          <Link
+            id="logout"
+            className="menu-item"
+            onClick={handleLogout}
+            to="/homepage"
+          >
             Logout
           </Link>
         </Menu>
