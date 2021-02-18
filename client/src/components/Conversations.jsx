@@ -16,7 +16,7 @@ export default function Conversations(props) {
   });
 
   useEffect(() => {
-    const params = { id: 1 };
+    const params = { id: localStorage.getItem("user_id") };
     axios.get(`/api/conversations`, { params }).then((res) => {
       console.log(res);
       setState({
@@ -30,12 +30,16 @@ export default function Conversations(props) {
 
   let filterRecipients = function (arr) {
     const myId = Number(localStorage.getItem("user_id"));
-    return arr.filter((item) => item.recipient_id !== myId);
+    return arr.filter(
+      (item) => item.recipient_id !== myId && item.initiator_id === myId
+    );
   };
 
   let filterInitiators = function (arr) {
     const myId = Number(localStorage.getItem("user_id"));
-    return arr.filter((item) => item.initiator_id !== myId);
+    return arr.filter(
+      (item) => item.initiator_id !== myId && item.recipient_id === myId
+    );
   };
 
   const displayRecipients = function () {
@@ -44,7 +48,10 @@ export default function Conversations(props) {
       let filteredRecipients = filterRecipients(state.recipients);
       for (const item of filteredRecipients) {
         for (const convo of state.conversations) {
-          if (item.recipient_id === convo.recipient_id) {
+          if (
+            item.recipient_id === convo.recipient_id &&
+            item.initiator_id === convo.initiator_id
+          ) {
             arr.push(
               <li>
                 <Link to={`/messages/${convo.id}`}>{item.name}</Link>
@@ -63,8 +70,10 @@ export default function Conversations(props) {
       let filteredInitiators = filterInitiators(state.initiators);
       for (const item of filteredInitiators) {
         for (const convo of state.conversations) {
-          if (item.initiator_id === convo.initiator_id) {
-            const path = `/messages/${convo.id}`;
+          if (
+            item.recipient_id === convo.recipient_id &&
+            item.initiator_id === convo.initiator_id
+          ) {
             arr.push(
               <li>
                 <Link to={`/messages/${convo.id}`}>{item.name}</Link>
