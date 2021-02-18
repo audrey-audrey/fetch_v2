@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useLocation } from "react";
 import axios from "axios";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
@@ -28,17 +28,30 @@ function App() {
   const [state, setState] = useState({
     users: [],
     user: {},
+    unreads: 0,
   });
 
   // setStates
   const setUsers = (users) => setState((prev) => ({ ...prev, users }));
   const setUser = (user) => setState((prev) => ({ ...prev, user }));
+  const setUnreads = (unreads) => setState((prev) => ({ ...prev, unreads }));
 
   // fetch users data from backend
   useEffect(() => {
     axios.get("/api/users").then((res) => setUsers(res.data));
   }, []);
-
+  useEffect(() => {
+    const params = { id: localStorage.getItem("user_id") };
+    axios.get(`/api/conversations`, { params }).then((res) => {
+      let unreads = 0;
+      for (const item of res.data.total_unreads) {
+        if (item.read === false) {
+          unreads += 1;
+        }
+      }
+      setUnreads(unreads);
+    });
+  }, []);
   const handleLogout = function (event) {
     localStorage.removeItem("user_id");
 
@@ -69,7 +82,7 @@ function App() {
           </Link>
 
           <Link id="conversations" className="menu-item" to="/conversations">
-            Conversations
+            Conversations <small>{state.unreads}</small>
           </Link>
           <Link id="favorites" className="menu-item" to="/favourites">
             Favourties
