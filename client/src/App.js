@@ -4,8 +4,12 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import "./App.css";
+import history from "./history";
 import Login from "./components/Login";
 import Register from "./components/Register";
+// import Profile from "./components/Profile";
+import Conversations from "./components/Conversations";
+import Message from "./components/Message";
 import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import Favourites from "./components/Favourites";
@@ -25,17 +29,16 @@ function App() {
   // State
   const [state, setState] = useState({
     users: [],
-    user: {}
+    user: {},
   });
 
   // setStates
   const setUsers = (users) => setState((prev) => ({ ...prev, users }));
-  const setUser = (user) => setState((prev) => ({ ...prev, user }))
+  const setUser = (user) => setState((prev) => ({ ...prev, user }));
 
   // fetch users data from backend
   useEffect(() => {
-    axios.get("api/users")
-    .then((res) => setUsers(res.data));
+    axios.get("api/users").then((res) => setUsers(res.data));
   }, []);
 
   const handleLogout = function (event) {
@@ -45,12 +48,11 @@ function App() {
     window.location.reload();
   };
 
-  const currentUserId = localStorage.getItem('user_id');
+  const currentUserId = localStorage.getItem("user_id");
   // fetch current user data
   useEffect(() => {
-    axios.get(`api/users/${currentUserId}`)
-    .then((res) => setUser(res.data))
-  }, [localStorage])
+    axios.get(`api/users/${currentUserId}`).then((res) => setUser(res.data));
+  }, [localStorage]);
 
   return (
     <div>
@@ -60,7 +62,11 @@ function App() {
             id="profile-img"
             src="https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
           />
-          <Link id="profile" className="menu-item" to={`/user/${localStorage.getItem('user_id')}`}>
+          <Link
+            id="profile"
+            className="menu-item"
+            to={`/user/${localStorage.getItem("user_id")}`}
+          >
             Profile
           </Link>
 

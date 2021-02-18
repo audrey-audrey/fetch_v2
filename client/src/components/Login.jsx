@@ -3,7 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
 import history from "../history";
-import rupert from "../images/rupert.png"
+import rupert from "../images/rupert.png";
 
 // import Button from "./Button";
 
@@ -24,7 +24,7 @@ export default function Login(props) {
     return axios
       .post(`/api/login`, params)
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (state.email !== res.data[0].email) {
           return;
         }
@@ -40,9 +40,8 @@ export default function Login(props) {
 
   return (
     <Container>
-      <Image size='medium' src={rupert} circular floated='right'/>
+      <Image size="medium" src={rupert} circular floated="right" />
       <div className="login-container">
-
         <h1>You're Going to Have a Ball! Log In!</h1>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
