@@ -14,7 +14,6 @@ import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import Favourites from "./components/Favourites";
 
-import history from "./history";
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
 
@@ -38,7 +37,8 @@ function App() {
 
   // fetch users data from backend
   useEffect(() => {
-    axios.get("api/users").then((res) => setUsers(res.data));
+    axios.get("/api/users")
+    .then((res) => setUsers(res.data));
   }, []);
 
   const handleLogout = function (event) {
@@ -48,11 +48,13 @@ function App() {
     window.location.reload();
   };
 
-  const currentUserId = localStorage.getItem("user_id");
   // fetch current user data
   useEffect(() => {
-    axios.get(`api/users/${currentUserId}`).then((res) => setUser(res.data));
-  }, [localStorage]);
+    const currentUserId = localStorage.getItem('user_id');
+    axios.get(`/api/users/${currentUserId}`)
+    .then((res) =>{ 
+      setUser(res.data[0]) })
+  }, [])
 
   return (
     <div>
