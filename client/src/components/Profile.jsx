@@ -10,7 +10,7 @@ import appLogo from "../images/icons/logo.png";
 import Carousel from 'nuka-carousel';
 import rupert from "../images/rupert.png"
 
-import CustomDotGroup from "../components/CustomDotGroup";
+// import CustomDotGroup from "../components/CustomDotGroup";
 import axios from "axios";
 
 export default function Profile(props) {
@@ -70,7 +70,7 @@ export default function Profile(props) {
         <Header textAlign='center' size='large'>
           {state.user.name} & {state.user.dog_name}
           <Header.Subheader>
-            Location: Toronto
+            Toronto, ON
           </Header.Subheader>
         </Header>
         {
@@ -81,15 +81,7 @@ export default function Profile(props) {
         }
       </div>
 
-      <div className='carousel'>
-        <Carousel initialSlideHeight={0.4}>
-          <img src={rupert} />
-          <img src={rupert} />
-          <img src={rupert} />
-        </Carousel>
-      </div>
-
-      <Card id="user_card">
+      <Card fluid>
         <Card.Content>
           <Card.Description>{state.user.bio}</Card.Description>
         </Card.Content>
@@ -126,6 +118,15 @@ export default function Profile(props) {
           ) : null}
         </Card.Content>
       </Card>
+
+      <div className='carousel'>
+        <Carousel initialSlideHeight={0.4}>
+          <img src={rupert} />
+          <img src={rupert} />
+          <img src={rupert} />
+        </Carousel>
+      </div>
+
 
     </div>
   );
