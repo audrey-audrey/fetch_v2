@@ -20,5 +20,22 @@
         img {
             padding-top: 2em;
         }
+
+        .profile-image {
+            object-fit: cover;
+            width: 30rem;
+            height: 30rem;
+        }
+    }
+
+    .carousel {
+        display: flex;
+
+        img {
+            margin: auto;
+            object-fit: cover;
+            width: 30rem;
+            height: 30rem;
+        }
     }
 }

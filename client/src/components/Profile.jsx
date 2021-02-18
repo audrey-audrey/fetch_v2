@@ -7,15 +7,9 @@ import "./Profile.scss";
 import { Label, Button } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 import appLogo from "../images/icons/logo.png";
+import Carousel from 'nuka-carousel';
+import rupert from "../images/rupert.png"
 
-import {
-  CarouselProvider,
-  Slider,
-  Slide,
-  ButtonBack,
-  ButtonNext,
-} from "pure-react-carousel";
-import "pure-react-carousel/dist/react-carousel.es.css";
 import CustomDotGroup from "../components/CustomDotGroup";
 import axios from "axios";
 
@@ -71,9 +65,14 @@ export default function Profile(props) {
       }
 
       <div className='profile-section-top'>
-        <Image src={appLogo} floated='right' />
-        <img className="ui centered medium rounded image" src={state.user.primary_image} />
-        <Header textAlign='center' size='large'>{state.user.name} & {state.user.dog_name}</Header>
+        <Image src={appLogo} />
+        <img className="profile-image" src={state.user.primary_image} />
+        <Header textAlign='center' size='large'>
+          {state.user.name} & {state.user.dog_name}
+          <Header.Subheader>
+            Location: Toronto
+          </Header.Subheader>
+        </Header>
         {
           isProfileOwner ?
             <Link to='/edit-user'><Button>Edit Profile</Button></Link>
@@ -82,39 +81,16 @@ export default function Profile(props) {
         }
       </div>
 
+      <div className='carousel'>
+        <Carousel initialSlideHeight={0.4}>
+          <img src={rupert} />
+          <img src={rupert} />
+          <img src={rupert} />
+        </Carousel>
+      </div>
+
       <Card id="user_card">
-        <CarouselProvider
-          naturalSlideWidth={100}
-          naturalSlideHeight={125}
-        // totalSlides={1 + state.images.length}
-        >
-          <Slider>
-            <Slide index={0}>
-              <Image
-                src={state.user.primary_image}
-                wrapped
-                ui={false}
-              />
-            </Slide>
-
-            {/* {state.images.map((img, ind) => {
-                return (
-                  <Slide index={1 + ind}>
-                    <Image src={img} wrapped ui={false} />
-                  </Slide>
-                );
-              })} */}
-          </Slider>
-
-          {/* <div className="slider">
-              <CustomDotGroup slides={1 + state.images.length} />
-            </div> */}
-        </CarouselProvider>
-
         <Card.Content>
-          <Card.Meta>
-            <span>Toronto</span>
-          </Card.Meta>
           <Card.Description>{state.user.bio}</Card.Description>
         </Card.Content>
         <Card.Content>
