@@ -36,7 +36,7 @@ function App() {
 
   // fetch users data from backend
   useEffect(() => {
-    axios.get("api/users").then((res) => setUsers(res.data));
+    axios.get("/api/users").then((res) => setUsers(res.data));
   }, []);
 
   const handleLogout = function (event) {
@@ -49,7 +49,7 @@ function App() {
   const currentUserId = localStorage.getItem("user_id");
   // fetch current user data
   useEffect(() => {
-    axios.get(`api/users/${currentUserId}`).then((res) => setUser(res.data));
+    axios.get(`/api/users/${currentUserId}`).then((res) => setUser(res.data));
   }, [localStorage]);
 
   return (
@@ -68,8 +68,8 @@ function App() {
             Profile
           </Link>
 
-          <Link id="messages" className="menu-item" to="/messages">
-            Messages
+          <Link id="conversations" className="menu-item" to="/conversations">
+            Conversations
           </Link>
           <Link id="favorites" className="menu-item" to="/favourites">
             Favourties
