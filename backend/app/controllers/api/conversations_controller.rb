@@ -5,7 +5,8 @@ class Api::ConversationsController < ApplicationController
     initiators = conversations.joins("INNER JOIN users ON conversations.initiator_id = users.id")
     recipients = conversations.joins("INNER JOIN users ON conversations.recipient_id = users.id")
 
-    unreads = Message.select("COUNT(read), conversation_id as id").group(:conversation_id)
+    # unreads = Message.select("COUNT(messages.read), conversation_id as id").group(:conversation_id).having("messages.read = false")
+    unreads = Message.select('conversation_id, COUNT(read) filter (where not "read") as unread').group(:conversation_id, :read)
 
     render json: {conversations: conversations, initiators: initiators, recipients: recipients, unreads: unreads}
   end
