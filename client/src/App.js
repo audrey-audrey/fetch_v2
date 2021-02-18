@@ -14,7 +14,7 @@ import Profile from "./components/Profile";
 import EditProfile from "./components/EditProfile";
 import Favourites from "./components/Favourites";
 
-import history from "./history";
+
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
 
