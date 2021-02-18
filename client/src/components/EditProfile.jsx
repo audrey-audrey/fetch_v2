@@ -4,6 +4,7 @@ import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
 import "./EditProfile.css";
 import { Form, Checkbox, TextArea } from "semantic-ui-react";
+import history from "../history";
 
 import {
   CarouselProvider,
@@ -63,7 +64,11 @@ export default function Profile(props) {
 
     return axios
       .patch(`/api/users/${state.user.id}`, state.user)
-      .then((res) => console.log(res))
+      .then((res) => {
+        if (res.status === 200) {
+          history.push(`/user/${state.user.id}`);
+        }
+      })
       .catch((err) => {
         setState({ errorMessage: err.message });
       });

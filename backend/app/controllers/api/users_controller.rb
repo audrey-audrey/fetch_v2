@@ -17,9 +17,9 @@ class Api::UsersController < ApplicationController
   def update
     user = User.find_by(id: params[:id])
     if user.update(user_params)
-      puts 'update successful'
+      render json: user
     else
-      puts 'failed to update'
+      render json: {error: 'Failed to update user'}
     end
   end
 
