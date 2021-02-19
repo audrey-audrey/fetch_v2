@@ -19,6 +19,8 @@ import Homepage from "./components/Homepage";
 
 import { slide as Menu } from "react-burger-menu";
 
+import appLogo from "./images/icons/logo.png"
+
 import "./BurgerMenu.css";
 
 import "semantic-ui-css/semantic.min.css";
@@ -134,7 +136,7 @@ function App() {
             </Route>
             <Route path="/">
               Homepage!
-            <MapContainer users={state.users} />
+            <MapContainer users={state.users} user={state.user} />
             </Route>
           </Switch>
         </div>

@@ -41,8 +41,8 @@ function MapContainer(props) {
     large: false,
   });
 
+  const user_id = localStorage.getItem("user_id");
   useEffect(() => {
-    const user_id = localStorage.getItem("user_id");
     const params = { user_id };
 
     axios.get(`/api/users/${user_id}/favorites/`, { params }).then((res) => {
@@ -100,7 +100,7 @@ function MapContainer(props) {
       bio: user.bio,
       image: user.primary_image,
       icon: {
-        url: "http://audrey.lol/img/pinorange.png",
+        url: Number(user.id)===Number(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png" ,
         origin: { x: 0, y: 0 },
         // define pop-up
         anchor: { x: 13.5, y: 0 },
@@ -179,8 +179,8 @@ function MapContainer(props) {
   };
 
   const defaultCenter = {
-    lat: 43.6532,
-    lng: -79.3832,
+    lat: props.user.lat,
+    lng: props.user.lng,
   };
 
   const message =
