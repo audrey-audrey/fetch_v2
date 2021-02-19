@@ -8,6 +8,7 @@ import {
 import axios from "axios";
 
 import { Button, Icon, Card, Image, Container } from "semantic-ui-react";
+import { Link } from "react-router-dom";
 
 import "./MapContainer.scss";
 
@@ -289,7 +290,11 @@ function MapContainer(props) {
                   <br />
                   <p>{selected.bio}</p>
                   <br />
-                  <Button animated color="teal" fluid>
+                  <Button 
+                  animated color="teal" 
+                  fluid 
+                  as={Link} to={`/user/${selected.id}`}
+                  >
                     <Button.Content visible>Profile</Button.Content>
                     <Button.Content hidden>
                       <Icon name="arrow right" />
