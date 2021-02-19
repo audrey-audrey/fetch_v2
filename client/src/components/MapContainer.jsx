@@ -22,7 +22,7 @@ import {
 import Carousel from 'nuka-carousel';
 
 import "./MapContainer.scss";
-import rupert from "../images/rupert.png"
+import appLogo from "../images/icons/logo.png"
 import no_photo from "../images/placeholder-headshot.png"
 
 function MapContainer(props) {
@@ -235,6 +235,10 @@ function MapContainer(props) {
 
   return (
     <>
+      <div className='map-container'>
+        <div className='profile-section-top'>
+          <Link to='/'><img src={appLogo} /></Link>
+        </div>
       <div className='filter'>
         <div className='buttonContainer'>
           <Button toggle active={state.playful} onClick={togglePlayful}>Playful</Button>
@@ -339,18 +343,15 @@ function MapContainer(props) {
                   src={item.image} 
                   />
                 <Card.Content>
-                  <Card.Header>{item.name} & {item.dog_name}</Card.Header>
-                  <Card.Meta>
-                    <span className='date'>Distance</span>
-                  </Card.Meta>
-                  <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
-                    <Button animated color='teal'>
-                      <Button.Content visible>Profile</Button.Content>
-                      <Button.Content hidden>
-                        <Icon name='arrow right' />
-                      </Button.Content>
-                    </Button>
+                  <Header>{item.name} & {item.dog_name}</Header>
+                  <div className='distance-button'>
+                    <Card.Meta>
+                      <span className='date'>Distance</span>
+                    </Card.Meta>
+                    <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
+                        <Icon name='arrow alternate circle right' color='teal' size='large'/>
                     </Link>
+                  </div>
                 </Card.Content>
               </Card>
             );
@@ -359,6 +360,7 @@ function MapContainer(props) {
       </div>
       </>
       }
+      </div>
     </>
   );
 }

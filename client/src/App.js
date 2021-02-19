@@ -135,8 +135,7 @@ function App() {
               <Favourites />
             </Route>
             <Route path="/">
-              Homepage!
-            <MapContainer users={state.users} user={state.user} />
+              <MapContainer users={state.users} user={state.user} />
             </Route>
           </Switch>
         </div>
