@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Button, Card, Image, Icon } from "semantic-ui-react";
+import { Button, Card, Image, Icon, CardContent, CardDescription, Header } from "semantic-ui-react";
 import { Link } from "react-router-dom";
+import "./Favourites.scss"
 
 export default function Favourites(props) {
   const [state, setState] = useState({
@@ -41,26 +42,37 @@ export default function Favourites(props) {
   // }
 
   return (
+    
     <div className="favourites-container">
-      <Card.Group>
+      <Header size="huge" textAlign="center" >Good Dogs</Header>
+      <Card.Group >
         {state.favourites.map((favourite) => {
-          const { favoritee_id, primary_image, name, dog_name } = favourite;
+          const { favoritee_id, primary_image, name, dog_name, bio } = favourite;
           return (
             <Card key={favoritee_id}>
+              <Image fluid src={primary_image} />
               <Card.Content>
-                <Image floated="right" size="mini" src={primary_image} />
                 <Card.Header>
                   {name} and {dog_name}
                 </Card.Header>
               </Card.Content>
+              <CardDescription>
+                {bio}
+              </CardDescription>
               <Card.Content extra>
-                <Button fluid as={Link} to={`/user/${favoritee_id}`}>
-                  View Profile
+                <Button 
+                animated
+                color="teal"
+                as={Link} to={`/user/${favoritee_id}`}>
+                 <Button.Content visible>View Profile</Button.Content>
+                    <Button.Content hidden></Button.Content>
                 </Button>
                 <Button 
                 icon 
-                size="mini" 
+                size="mini"
+                basic
                 color="red"
+                floated="right"
                 // onClick={handleDelete}
                 >
                   <Icon name="delete"/>

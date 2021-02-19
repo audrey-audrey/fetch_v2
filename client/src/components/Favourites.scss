@@ -1,0 +1,32 @@
+// .main-component {
+//   margin-top: 6em;
+//   display: flex;
+
+
+
+// }
+
+.favourites-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin: 4em;
+
+
+}
+.ui.cards {
+
+
+  // flex-wrap: wrap;
+
+
+}
+
+.ui.card>.image, .ui.cards>.card>.image {
+
+    margin: auto;
+    object-fit: cover;
+    width: 20rem;
+    height: 20rem;
+
+}
