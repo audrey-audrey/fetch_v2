@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Button, Card, Image } from "semantic-ui-react";
+import { Button, Card, Image, Icon } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
 export default function Favourites(props) {
@@ -19,6 +19,27 @@ export default function Favourites(props) {
     });
   }, []);
 
+  // const handleDelete = function (event) {
+  //   event.preventDefault();
+  //   const user_id = localStorage.getItem("user_id");
+  //   // const params = { user_id, favoritee: favoritee_id };
+  //   console.log("favourites", state.favourites.favoritee_id)
+
+  //   // return axios
+  //   // .delete(`/api/users/${user_id}/favorites/${favoritee_id}`, params)
+  //   // .then((res) => {
+  //   //   axios
+  //   //     .get(`/api/users/${user_id}/favorites/`)
+  //   //     .then((res) =>
+  //   //       setState((prev) => ({ ...prev, favourites: res.data}))
+  //   //     );
+  //   // })
+  //   // .catch((err) => {
+  //   //   throw err;
+  //   // });
+
+  // }
+
   return (
     <div className="favourites-container">
       <Card.Group>
@@ -35,6 +56,14 @@ export default function Favourites(props) {
               <Card.Content extra>
                 <Button fluid as={Link} to={`/user/${favoritee_id}`}>
                   View Profile
+                </Button>
+                <Button 
+                icon 
+                size="mini" 
+                color="red"
+                // onClick={handleDelete}
+                >
+                  <Icon name="delete"/>
                 </Button>
               </Card.Content>
             </Card>
