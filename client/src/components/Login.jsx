@@ -67,7 +67,7 @@ export default function Login(props) {
           <div className="password-credential">
             <label htmlFor="password">Password: </label>
             <Input
-              type="text"
+              type="password"
               id="password"
               required
               name="password"
