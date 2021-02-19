@@ -2,6 +2,7 @@ import { React, useState, useEffect, useLocation } from "react";
 import axios from "axios";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Image, Icon } from "semantic-ui-react";
 
 import "./App.css";
 import history from "./history";
@@ -68,26 +69,29 @@ function App() {
   }, []);
 
   return (
-    <div>
+    <div id="outer-container">
       {localStorage.getItem("user_id") ? (
-        <Menu noOverlay>
-          <img
+        <Menu reveal pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
+          <Image
             id="profile-img"
-            src="https://cdn2.iconfinder.com/data/icons/4web-3/139/header-account-image-line-512.png"
+            src={state.user.primary_image}
+            avatar
           />
           <Link
             id="profile"
             className="menu-item"
             to={`/user/${localStorage.getItem("user_id")}`}
           >
+            <Icon name='user' />
             Profile
           </Link>
-
           <Link id="conversations" className="menu-item" to="/conversations">
+            <Icon name='mail outline' />
             Conversations <small>{state.unreads}</small>
           </Link>
           <Link id="favorites" className="menu-item" to="/favourites">
-            Favourties
+            <Icon name='favorite' />
+            Favourites
           </Link>
           <Link
             id="logout"
@@ -95,44 +99,47 @@ function App() {
             onClick={handleLogout}
             to="/homepage"
           >
+            <Icon name='log out' />
             Logout
           </Link>
         </Menu>
       ) : null}
-      {/* <Router> */}
-      <div className="main-component">
-        <Switch>
-          <Route path="/homepage">
-            <Homepage />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/register">
-            <Register />
-          </Route>
-          <Route path="/user/:id">
-            <Profile />
-          </Route>
-          <Route path="/edit-user">
-            <EditProfile />
-          </Route>
-          <Route path="/messages/:id">
-            <Message />
-          </Route>
-          <Route path="/conversations">
-            <Conversations />
-          </Route>
-          <Route path="/favourites">
-            <Favourites />
-          </Route>
-          <Route path="/">
-            Homepage!
+      <main id="page-wrap">
+        {/* <Router> */}
+        <div className="main-component">
+          <Switch>
+            <Route path="/homepage">
+              <Homepage />
+            </Route>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/user/:id">
+              <Profile />
+            </Route>
+            <Route path="/edit-user">
+              <EditProfile />
+            </Route>
+            <Route path="/messages/:id">
+              <Message />
+            </Route>
+            <Route path="/conversations">
+              <Conversations />
+            </Route>
+            <Route path="/favourites">
+              <Favourites />
+            </Route>
+            <Route path="/">
+              Homepage!
             <MapContainer users={state.users} />
-          </Route>
-        </Switch>
-      </div>
-      {/* </Router> */}
+            </Route>
+          </Switch>
+        </div>
+        {/* </Router> */}
+      </main>
     </div>
   );
 }
