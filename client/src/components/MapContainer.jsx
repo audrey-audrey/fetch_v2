@@ -272,9 +272,9 @@ function MapContainer(props) {
                   options={{
                     destinations: [{ lat: Number(selected.location.lat), lng: Number(selected.location.lng) }],
                     origins: [{ lng: Number(props.user.lng), lat: Number(props.user.lat) }],
-                    travelMode: "DRIVING",
+                    travelMode: "WALKING",
                   }}
-                  callback={(response) => { console.log(response) }}
+                  callback={(response) => { console.log(response.rows[0].elements[0].distance, response.rows[0].elements[0].duration) }}
                 />
                 <Button
                   animated="vertical"
