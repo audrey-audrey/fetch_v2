@@ -234,10 +234,10 @@ function MapContainer(props) {
           <Button toggle active={state.playful} onClick={togglePlayful}>Playful</Button>
           <Button toggle active={state.affectionate} onClick={toggleAffectionate}>Affectionate</Button>
           <Button toggle active={state.high_energy} onClick={toggleHighEnergy}>High-energy</Button>
-          <Button toggle active={state.showToggle} onClick={toggleShy}>Shy</Button>
+          <Button toggle active={state.shy} onClick={toggleShy}>Shy</Button>
           <Button toggle active={state.well_trained} onClick={toggleWellTrained}>Well-trained</Button>
           <Button toggle active={state.large} onClick={toggleLarge}>Large</Button>
-          <Button toggle active={state.showToggle} onClick={toggleShow}>Show All!</Button>
+          <Button toggle active={!state.showToggle} onClick={toggleShow}>Show All!</Button>
         </div>
         {/* {JSON.stringify(state)} */}
         <p>{message}</p>
