@@ -74,6 +74,7 @@ function App() {
     <div id="outer-container">
       {localStorage.getItem("user_id") ? (
         <Menu
+        // className="menu"
           reveal
           pageWrapId={"page-wrap"}
           outerContainerId={"outer-container"}
