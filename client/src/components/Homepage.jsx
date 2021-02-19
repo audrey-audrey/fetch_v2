@@ -13,12 +13,12 @@ export default function Homepage(props) {
     <Container textAlign="center">
       <Image src={logo} centered/>
       <Image src={ella} circular centered />
-      <Button.Group color="orange">
-        <Button size="huge" as={Link} to="/login">
+      <Button.Group color="orange" size="massive">
+        <Button as={Link} to="/login">
           Log In
         </Button>
         <Button.Or />
-        <Button size="huge" as={Link} to="/register">
+        <Button as={Link} to="/register">
           Sign Up
         </Button>
       </Button.Group>
