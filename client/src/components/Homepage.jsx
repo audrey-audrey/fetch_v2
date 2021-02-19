@@ -2,16 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Image, Button } from "semantic-ui-react";
 import ella from "../images/ella.png";
-import logo from "../images/icons/logo.png"
+import logo from "../images/icons/logo.png";
 
-import "./Homepage.scss"
+import "./Homepage.scss";
 
 // import Button from "./Button";
 
 export default function Homepage(props) {
   return (
     <Container textAlign="center">
-      <Image src={logo} centered/>
+      <Image src={logo} centered />
       <Image src={ella} circular centered />
       <Button.Group color="orange" size="massive">
         <Button as={Link} to="/login">
