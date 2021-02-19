@@ -42,9 +42,8 @@ export default function Register(props) {
 
   return (
     <Container>
-      <Image size='medium' src={ dogpile } circular floated='right'/>
-        <div className="login-container">
-
+      <Image size="medium" src={dogpile} circular floated="right" />
+      <div className="login-container">
         <h1>Join the Fun! Sign Up Now!</h1>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
@@ -52,7 +51,7 @@ export default function Register(props) {
               Oops! That email already exists. Try again.
             </h3>
           )}
-          <br/>
+          <br />
           <div className="email-credential">
             <label htmlFor="email">Email: </label>
             <Input
@@ -66,11 +65,11 @@ export default function Register(props) {
               }}
             />
           </div>
-          <br/>
+          <br />
           <div className="password-credential">
             <label htmlFor="password">Password: </label>
             <Input
-              type="text"
+              type="password"
               id="password"
               required
               name="password"
@@ -80,11 +79,11 @@ export default function Register(props) {
               }}
             />
           </div>
-          <br/>
+          <br />
           <div className="password-credential">
             <label htmlFor="password-confirm">Confirm Password: </label>
             <Input
-              type="text"
+              type="password"
               id="password-confirm"
               required
               name="password-confirm"
@@ -94,12 +93,12 @@ export default function Register(props) {
               }}
             />
           </div>
-          <br/>
+          <br />
           <Button type="submit" icon>
             <Icon name="paw"></Icon> Sign Up
           </Button>
         </form>
       </div>
-      </Container>
+    </Container>
   );
 }
