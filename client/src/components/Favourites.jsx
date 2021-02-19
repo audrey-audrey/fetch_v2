@@ -87,6 +87,7 @@ export default function Favourites(props) {
                 <Button
                   animated
                   basic
+                  color="teal"
                   floated="right"
                   // onClick={handleDelete}
                 >
