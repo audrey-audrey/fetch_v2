@@ -52,11 +52,11 @@ export default function Favourites(props) {
             <Card key={favoritee_id}>
               <Image fluid src={primary_image} />
               <Card.Content>
-                <Card.Header>
+                <Card.Header textAlign="center">
                   {name} and {dog_name}
                 </Card.Header>
               </Card.Content>
-              <CardDescription>
+              <CardDescription textAlign="center">
                 {bio}
               </CardDescription>
               <Card.Content extra>
@@ -64,7 +64,7 @@ export default function Favourites(props) {
                 animated
                 color="teal"
                 as={Link} to={`/user/${favoritee_id}`}>
-                 <Button.Content visible>View Profile</Button.Content>
+                 <Button.Content visible>Profile</Button.Content>
                     <Button.Content hidden></Button.Content>
                 </Button>
                 <Button 

@@ -8,7 +8,6 @@
 
 .favourites-container {
   display: flex;
-  justify-content: center;
   flex-direction: column;
   margin: 4em;
 
@@ -16,10 +15,14 @@
 }
 .ui.cards {
 
-
+  justify-content: center;
+ 
   // flex-wrap: wrap;
 
 
+}
+.ui.cards>.card {
+  margin: 3em 3em;
 }
 
 .ui.card>.image, .ui.cards>.card>.image {
