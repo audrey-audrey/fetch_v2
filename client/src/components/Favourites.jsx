@@ -1,9 +1,17 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Button, Card, Image, Icon, CardContent, CardDescription, Header } from "semantic-ui-react";
+import {
+  Button,
+  Card,
+  Image,
+  Icon,
+  CardContent,
+  CardDescription,
+  Header,
+} from "semantic-ui-react";
 import { Link } from "react-router-dom";
-import "./Favourites.scss"
+import "./Favourites.scss";
 
 export default function Favourites(props) {
   const [state, setState] = useState({
@@ -42,12 +50,19 @@ export default function Favourites(props) {
   // }
 
   return (
-    
     <div className="favourites-container">
-      <Header size="huge" textAlign="center" >Good Dogs</Header>
-      <Card.Group >
+      <Header size="huge" textAlign="center">
+        Good Dogs
+      </Header>
+      <Card.Group>
         {state.favourites.map((favourite) => {
-          const { favoritee_id, primary_image, name, dog_name, bio } = favourite;
+          const {
+            favoritee_id,
+            primary_image,
+            name,
+            dog_name,
+            bio,
+          } = favourite;
           return (
             <Card key={favoritee_id}>
               <Image fluid src={primary_image} />
@@ -56,26 +71,29 @@ export default function Favourites(props) {
                   {name} and {dog_name}
                 </Card.Header>
               </Card.Content>
-              <CardDescription textAlign="center">
-                {bio}
-              </CardDescription>
+              <CardDescription textAlign="center">{bio}</CardDescription>
               <Card.Content extra>
-                <Button 
-                animated
-                color="teal"
-                as={Link} to={`/user/${favoritee_id}`}>
-                 <Button.Content visible>Profile</Button.Content>
-                    <Button.Content hidden></Button.Content>
-                </Button>
-                <Button 
-                icon 
-                size="mini"
-                basic
-                color="red"
-                floated="right"
-                // onClick={handleDelete}
+                <Button
+                  animated
+                  color="teal"
+                  as={Link}
+                  to={`/user/${favoritee_id}`}
                 >
-                  <Icon name="delete"/>
+                  <Button.Content visible>Profile</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="paw" />
+                  </Button.Content>
+                </Button>
+                <Button
+                  animated
+                  basic
+                  floated="right"
+                  // onClick={handleDelete}
+                >
+                  <Button.Content visible>Delete</Button.Content>
+                  <Button.Content hidden>
+                    <Icon name="delete" />
+                  </Button.Content>
                 </Button>
               </Card.Content>
             </Card>
