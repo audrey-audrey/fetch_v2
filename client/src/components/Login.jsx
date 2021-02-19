@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
+import { Input, Button, Icon, Container, Image, Header } from "semantic-ui-react";
 import history from "../history";
 import rupert from "../images/rupert.png";
 
@@ -42,12 +42,14 @@ export default function Login(props) {
     <Container>
       <Image size="medium" src={rupert} circular floated="right" />
       <div className="login-container">
-        <h1>You're Going to Have a Ball! Log In!</h1>
+        <Header as='h1'>You're Going to Have a Ball!</Header>
+        <Header as='h3'>Log In Here: </Header>
         <form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
-            <h3 className="error">
-              Oops! We haven't met you yet. Sign up or Try again!
-            </h3>
+            <Header as="h4" className="error">Oops! We haven't met you yet. Sign up or Try again!</Header>
+            // <h3 className="error">
+            //   Oops! We haven't met you yet. Sign up or Try again!
+            // </h3>
           )}
           <br />
           <div className="login-credential">
