@@ -18,7 +18,11 @@ import {
   Container
 } from 'semantic-ui-react'
 
+import Carousel from 'nuka-carousel';
+
 import "./MapContainer.scss";
+import rupert from "../images/rupert.png"
+import no_photo from "../images/placeholder-headshot.png"
 
 function MapContainer(props) {
   // State
@@ -99,7 +103,7 @@ function MapContainer(props) {
       name: user.name,
       dog_name: user.dog_name,
       bio: user.bio,
-      image: user.primary_image,
+      image: user.primary_image || no_photo,
       icon: {
         url: Number(user.id)===Number(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png" ,
         origin: { x: 0, y: 0 },
@@ -315,6 +319,42 @@ function MapContainer(props) {
           }
         </GoogleMap>
       </LoadScript>
+
+      {filteredPins.length && 
+      <div className='carousel'>
+        <Carousel 
+          slidesToShow={3} 
+          initialSlideHeight={0.4}
+        >
+          {filteredPins.map((item) => {
+            return (
+              <Card 
+                key={item.id}
+                >
+                <Image 
+                  className='card-image'
+                  src={item.image} 
+                  />
+                <Card.Content>
+                  <Card.Header>{item.name} & {item.dog_name}</Card.Header>
+                  <Card.Meta>
+                    <span className='date'>Distance</span>
+                  </Card.Meta>
+                  <Link id="profile" className="menu-item" to={`/user/${selected.id}`}>
+                    <Button fluid animated color='teal'>
+                      <Button.Content visible>Profile</Button.Content>
+                      <Button.Content hidden>
+                        <Icon name='arrow right' />
+                      </Button.Content>
+                    </Button>
+                    </Link>
+                </Card.Content>
+              </Card>
+            );
+          })}
+        </Carousel>
+      </div>
+      }
     </>
   );
 }

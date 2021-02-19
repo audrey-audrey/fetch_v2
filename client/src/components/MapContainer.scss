@@ -26,3 +26,18 @@
     margin: auto;
   }
 }
+
+.carousel {
+  display: flex;
+  
+  .ui.card{
+    margin: auto;
+
+    .card-image {
+      height: 15em;
+      width: 15em;
+      margin: auto;
+      border-radius: 50%;
+    }
+  }
+}
