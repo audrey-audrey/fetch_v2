@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./EditProfile.css";
-import { Form, Checkbox, TextArea } from "semantic-ui-react";
+import "./EditProfile.scss";
+import { Form, Checkbox, TextArea, Button } from "semantic-ui-react";
 import history from "../history";
 
 import {
@@ -73,6 +73,10 @@ export default function Profile(props) {
         setState({ errorMessage: err.message });
       });
   };
+
+  const onClick = () => {
+    history.push(`/user/${state.user.id}`)
+  }
 
   return (
     <Router>
@@ -181,7 +185,10 @@ export default function Profile(props) {
               </Form.Field>
             </Form.Group>
 
-            <Form.Button content="Submit" />
+            <div className='submit-cancel'>
+              <Button content="Submit" color='teal'/>
+              <Button content="Cancel" color='red' onClick={onClick} />
+            </div>
           </Form>
         </div>
       </div>

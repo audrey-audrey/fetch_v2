@@ -1,4 +1,5 @@
 class Api::UsersController < ApplicationController
+  require 'geocoder'
 
   def index 
     users = User.all
@@ -16,6 +17,8 @@ class Api::UsersController < ApplicationController
 
   def update
     user = User.find_by(id: params[:id])
+    user.lat = Geocoder.search(params[:location]).first.coordinates[0]
+    user.lng = Geocoder.search(params[:location]).first.coordinates[1]
     if user.update(user_params)
       render json: user
     else

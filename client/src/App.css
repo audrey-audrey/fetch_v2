@@ -39,7 +39,12 @@
 
 
 #profile-img {
-  width: 50px;
+  margin: auto;
+  object-fit: cover;
+  width: 15rem;
+  height: 15rem;
+  outline: none;
+  margin-bottom: 2em;
 }
 
 .main-component {
