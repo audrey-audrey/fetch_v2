@@ -134,7 +134,6 @@ function App() {
               <Favourites />
             </Route>
             <Route path="/">
-              Homepage!
               {localStorage.getItem("user_id") ? (
                 <MapContainer users={state.users} user={state.user} />
               ) : (
