@@ -46,7 +46,6 @@ function MapContainer(props) {
     const params = { user_id };
 
     axios.get(`/api/users/${user_id}/favorites/`, { params }).then((res) => {
-      console.log(res);
       setState({ favourites: res.data });
     });
   }, []);
@@ -94,7 +93,6 @@ function MapContainer(props) {
   let pins = [];
 
   props.users.map((user) => {
-    console.log("user:", user);
     pins.push({
       id: user.id,
       name: user.name,
@@ -176,7 +174,7 @@ function MapContainer(props) {
       });
 
   const mapStyles = {
-    height: "100vh",
+    height: "60vh",
     width: "100%",
   };
 
@@ -199,8 +197,6 @@ function MapContainer(props) {
 
     const user_id = localStorage.getItem("user_id");
     const params = { user_id, favoritee: selected };
-
-    console.log("isfavourited:", isFavourited);
 
     if (isFavourited) {
       return axios
@@ -235,13 +231,13 @@ function MapContainer(props) {
     <>
       <div className='filter'>
         <div className='buttonContainer'>
-          <Button buttonClass={state.playful ? "button button--confirm" : "button button--danger"} onClick={togglePlayful}>Playful</Button>
-          <Button buttonClass={state.affectionate ? "button button--confirm" : "button button--danger"} onClick={toggleAffectionate}>Affectionate</Button>
-          <Button buttonClass={state.high_energy ? "button button--confirm" : "button button--danger"} onClick={toggleHighEnergy}>High-energy</Button>
-          <Button buttonClass={state.shy ? "button button--confirm" : "button button--danger"} onClick={toggleShy}>Shy</Button>
-          <Button buttonClass={state.well_trained ? "button button--confirm" : "button button--danger"} onClick={toggleWellTrained}>Well-trained</Button>
-          <Button buttonClass={state.large ? "button button--confirm" : "button button--danger"} onClick={toggleLarge}>Large</Button>
-          <Button buttonClass={!state.showToggle ? "button button--confirm" : "button button--danger"} onClick={toggleShow}>Show All!</Button>
+          <Button toggle active={state.playful} onClick={togglePlayful}>Playful</Button>
+          <Button toggle active={state.affectionate} onClick={toggleAffectionate}>Affectionate</Button>
+          <Button toggle active={state.high_energy} onClick={toggleHighEnergy}>High-energy</Button>
+          <Button toggle active={state.showToggle} onClick={toggleShy}>Shy</Button>
+          <Button toggle active={state.well_trained} onClick={toggleWellTrained}>Well-trained</Button>
+          <Button toggle active={state.large} onClick={toggleLarge}>Large</Button>
+          <Button toggle active={state.showToggle} onClick={toggleShow}>Show All!</Button>
         </div>
         {/* {JSON.stringify(state)} */}
         <p>{message}</p>
@@ -249,7 +245,7 @@ function MapContainer(props) {
       <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}
-          zoom={13}
+          zoom={15}
           center={defaultCenter}
           options={{ styles: styles }}
         >
