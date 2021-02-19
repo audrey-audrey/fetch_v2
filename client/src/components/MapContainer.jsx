@@ -134,7 +134,7 @@ function MapContainer(props) {
   filteredPins = !state.playful
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.playful === true) {
+        if (pin.playful === true || (Number(pin.id) === Number(user_id)) ) {
           return true;
         }
       });
@@ -142,7 +142,7 @@ function MapContainer(props) {
   filteredPins = !state.affectionate
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.affectionate === true) {
+        if (pin.affectionate === true || (Number(pin.id) === Number(user_id)) ) {
           return true;
         }
       });
@@ -150,7 +150,7 @@ function MapContainer(props) {
   filteredPins = !state.high_energy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.high_energy === true) {
+        if (pin.high_energy === true || (Number(pin.id) === Number(user_id)) ) {
           return true;
         }
       });
@@ -158,7 +158,7 @@ function MapContainer(props) {
   filteredPins = !state.shy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.shy === true) {
+        if (pin.shy === true || (Number(pin.id) === Number(user_id)) ) {
           return true;
         }
       });
@@ -166,7 +166,7 @@ function MapContainer(props) {
   filteredPins = !state.well_trained
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.well_trained === true) {
+        if (pin.well_trained === true || (Number(pin.id) === Number(user_id)) ) {
           return true;
         }
       });
@@ -174,7 +174,7 @@ function MapContainer(props) {
   filteredPins = !state.large
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.large === true) {
+        if (pin.large === true || (Number(pin.id) === Number(user_id)) ) {
           return true;
         }
       });
@@ -189,10 +189,10 @@ function MapContainer(props) {
     lng: Number(props.user.lng),
   };
 
-  const message =
-    filteredPins.length > 0
-      ? `There are ${filteredPins.length} dogs matching your criteria`
-      : "There are no dogs matching all your criteria!";
+  // const message =
+  //   filteredPins.length > 0
+  //     ? `There are ${filteredPins.length} dogs matching your criteria`
+  //     : "There are no dogs matching all your criteria!";
 
   const styles = require("../styles/map/GoogleMapStyles.json");
 
@@ -249,8 +249,7 @@ function MapContainer(props) {
           <Button toggle active={state.large} onClick={toggleLarge}>Large</Button>
           <Button toggle active={!state.showToggle} onClick={toggleShow}>Show All!</Button>
         </div>
-        {/* {JSON.stringify(state)} */}
-        <p>{message}</p>
+        {/* <p>{message}</p> */}
       </div>
       <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
         <GoogleMap
@@ -334,27 +333,29 @@ function MapContainer(props) {
           initialSlideHeight={0.4}
         >
           {filteredPins.map((item) => {
-            return (
-              <Card 
-                key={item.id}
-                >
-                <Image 
-                  className='card-image'
-                  src={item.image} 
-                  />
-                <Card.Content>
-                  <Header>{item.name} & {item.dog_name}</Header>
-                  <div className='distance-button'>
-                    <Card.Meta>
-                      <span className='date'>Distance</span>
-                    </Card.Meta>
-                    <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
-                        <Icon name='arrow alternate circle right' color='teal' size='large'/>
-                    </Link>
-                  </div>
-                </Card.Content>
-              </Card>
-            );
+            if (Number(item.id) !== Number(user_id)) {
+              return (
+                <Card 
+                  key={item.id}
+                  >
+                  <Image 
+                    className='card-image'
+                    src={item.image} 
+                    />
+                  <Card.Content>
+                    <Header>{item.name} & {item.dog_name}</Header>
+                    <div className='distance-button'>
+                      <Card.Meta>
+                        <span className='date'>Distance</span>
+                      </Card.Meta>
+                      <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
+                          <Icon name='arrow alternate circle right' color='teal' size='large'/>
+                      </Link>
+                    </div>
+                  </Card.Content>
+                </Card>
+              );
+            }
           })}
         </Carousel>
       </div>
