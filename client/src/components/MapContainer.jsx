@@ -4,6 +4,7 @@ import {
   LoadScript,
   Marker,
   InfoWindow,
+  DistanceMatrixService
 } from "@react-google-maps/api";
 import axios from "axios";
 
@@ -179,8 +180,8 @@ function MapContainer(props) {
   };
 
   const defaultCenter = {
-    lat: props.user.lat,
-    lng: props.user.lng,
+    lat: Number(props.user.lat),
+    lng: Number(props.user.lng),
   };
 
   const message =
@@ -267,10 +268,14 @@ function MapContainer(props) {
               onCloseClick={() => setSelected({})}
             >
               <div className="map-info-window">
-                {/* <div class="map-info-close">
-                  x
-                </div> */}
-
+                <DistanceMatrixService
+                  options={{
+                    destinations: [{ lat: Number(selected.location.lat), lng: Number(selected.location.lng) }],
+                    origins: [{ lng: Number(props.user.lng), lat: Number(props.user.lat) }],
+                    travelMode: "DRIVING",
+                  }}
+                  callback={(response) => { console.log(response) }}
+                />
                 <Button
                   animated="vertical"
                   size="small"
