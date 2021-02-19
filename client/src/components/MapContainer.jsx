@@ -15,7 +15,8 @@ import {
   Icon,
   Card, 
   Image,
-  Container
+  Container,
+  Header
 } from 'semantic-ui-react'
 
 import Carousel from 'nuka-carousel';
@@ -321,6 +322,8 @@ function MapContainer(props) {
       </LoadScript>
 
       {filteredPins.length && 
+      <>
+      <Header as='h1'>Nearby</Header>
       <div className='carousel'>
         <Carousel 
           slidesToShow={3} 
@@ -340,8 +343,8 @@ function MapContainer(props) {
                   <Card.Meta>
                     <span className='date'>Distance</span>
                   </Card.Meta>
-                  <Link id="profile" className="menu-item" to={`/user/${selected.id}`}>
-                    <Button fluid animated color='teal'>
+                  <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
+                    <Button animated color='teal'>
                       <Button.Content visible>Profile</Button.Content>
                       <Button.Content hidden>
                         <Icon name='arrow right' />
@@ -354,6 +357,7 @@ function MapContainer(props) {
           })}
         </Carousel>
       </div>
+      </>
       }
     </>
   );

@@ -29,13 +29,17 @@
 
 .carousel {
   display: flex;
+  padding-top: 1em;
+  padding-bottom: 1em;
   
   .ui.card{
     margin: auto;
+    margin-top: 1em;
 
     .card-image {
-      height: 15em;
-      width: 15em;
+      object-fit: cover;
+      height: 10em;
+      width: 10em;
       margin: auto;
       border-radius: 50%;
     }
