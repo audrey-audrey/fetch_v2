@@ -28,10 +28,16 @@ import no_photo from "../images/placeholder-headshot.png"
 function MapContainer(props) {
   // State
   const [selected, setSelected] = useState({});
-
+  
   const onSelect = (item) => {
     setSelected(item);
   };
+
+  const [distance, setDistance] = useState(0)
+
+  const changeDistance = (item) => {
+    setDistance(item)
+  }
 
   // state for showing markers
   const [state, setState] = useState({
@@ -106,7 +112,7 @@ function MapContainer(props) {
       bio: user.bio,
       image: user.primary_image || no_photo,
       icon: {
-        url: Number(user.id)===Number(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png" ,
+        url: parseFloat(user.id)===parseFloat(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png" ,
         origin: { x: 0, y: 0 },
         // define pop-up
         anchor: { x: 13.5, y: 0 },
@@ -116,8 +122,8 @@ function MapContainer(props) {
         },
       },
       location: {
-        lat: Number(user.lat),
-        lng: Number(user.lng)
+        lat: parseFloat(user.lat),
+        lng: parseFloat(user.lng)
       },
       playful: user.playful,
       affectionate: user.affectionate,
@@ -134,7 +140,7 @@ function MapContainer(props) {
   filteredPins = !state.playful
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.playful === true || (Number(pin.id) === Number(user_id)) ) {
+        if (pin.playful === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -142,7 +148,7 @@ function MapContainer(props) {
   filteredPins = !state.affectionate
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.affectionate === true || (Number(pin.id) === Number(user_id)) ) {
+        if (pin.affectionate === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -150,7 +156,7 @@ function MapContainer(props) {
   filteredPins = !state.high_energy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.high_energy === true || (Number(pin.id) === Number(user_id)) ) {
+        if (pin.high_energy === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -158,7 +164,7 @@ function MapContainer(props) {
   filteredPins = !state.shy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.shy === true || (Number(pin.id) === Number(user_id)) ) {
+        if (pin.shy === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -166,7 +172,7 @@ function MapContainer(props) {
   filteredPins = !state.well_trained
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.well_trained === true || (Number(pin.id) === Number(user_id)) ) {
+        if (pin.well_trained === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -174,7 +180,7 @@ function MapContainer(props) {
   filteredPins = !state.large
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.large === true || (Number(pin.id) === Number(user_id)) ) {
+        if (pin.large === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -185,8 +191,8 @@ function MapContainer(props) {
   };
 
   const defaultCenter = {
-    lat: Number(props.user.lat),
-    lng: Number(props.user.lng),
+    lat: parseFloat(props.user.lat),
+    lng: parseFloat(props.user.lng),
   };
 
   // const message =
@@ -278,11 +284,16 @@ function MapContainer(props) {
               <div className="map-info-window">
                 <DistanceMatrixService
                   options={{
-                    destinations: [{ lat: Number(selected.location.lat), lng: Number(selected.location.lng) }],
-                    origins: [{ lng: Number(props.user.lng), lat: Number(props.user.lat) }],
+                    destinations: [{ lat: parseFloat(selected.location.lat), lng: parseFloat(selected.location.lng) }],
+                    origins: [{ lng: parseFloat(props.user.lng), lat: parseFloat(props.user.lat) }],
                     travelMode: "WALKING",
                   }}
-                  callback={(response) => { console.log(response.rows[0].elements[0].distance, response.rows[0].elements[0].duration) }}
+                  callback={(response) => { 
+                    const distance = response.rows[0].elements[0].distance.text;
+                    console.log(distance)
+                    changeDistance(distance)
+                    console.log(distance)
+                  }}
                 />
                 <Button
                   animated="vertical"
@@ -303,6 +314,9 @@ function MapContainer(props) {
                   <br />
                   <p>
                     {selected.name} & {selected.dog_name}
+                  </p>
+                  <p>
+                    Distance: {distance}
                   </p>
                   <br />
                   <p>{selected.bio}</p>
@@ -333,7 +347,7 @@ function MapContainer(props) {
           initialSlideHeight={0.4}
         >
           {filteredPins.map((item) => {
-            if (Number(item.id) !== Number(user_id)) {
+            if (parseFloat(item.id) !== parseFloat(user_id)) {
               return (
                 <Card 
                   key={item.id}
