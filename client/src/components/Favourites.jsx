@@ -9,8 +9,6 @@ export default function Favourites(props) {
     favourites: [],
   });
 
-  console.log("here");
-
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     const params = { user_id };

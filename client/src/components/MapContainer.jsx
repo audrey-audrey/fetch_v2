@@ -7,15 +7,7 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 
-import { Link } from "react-router-dom";
-
-import { 
-  Button, 
-  Icon,
-  Card, 
-  Image,
-  Container
-} from 'semantic-ui-react'
+import { Button, Icon, Card, Image, Container } from "semantic-ui-react";
 
 import "./MapContainer.scss";
 
@@ -112,8 +104,8 @@ function MapContainer(props) {
         },
       },
       location: {
-        lat: Number(user.lat),
-        lng: Number(user.lng)
+        lat: user.lat,
+        lng: user.lng,
       },
       playful: user.playful,
       affectionate: user.affectionate,
@@ -233,15 +225,15 @@ function MapContainer(props) {
 
   return (
     <>
-      <div className='filter'>
-        <div className='buttonContainer'>
-          <Button buttonClass={state.playful ? "button button--confirm" : "button button--danger"} onClick={togglePlayful}>Playful</Button>
+      <div className="filter">
+        <div className="buttonContainer">
+          {/* <Button buttonClass={state.playful ? "button button--confirm" : "button button--danger"} onClick={togglePlayful}>Playful</Button>
           <Button buttonClass={state.affectionate ? "button button--confirm" : "button button--danger"} onClick={toggleAffectionate}>Affectionate</Button>
           <Button buttonClass={state.high_energy ? "button button--confirm" : "button button--danger"} onClick={toggleHighEnergy}>High-energy</Button>
           <Button buttonClass={state.shy ? "button button--confirm" : "button button--danger"} onClick={toggleShy}>Shy</Button>
           <Button buttonClass={state.well_trained ? "button button--confirm" : "button button--danger"} onClick={toggleWellTrained}>Well-trained</Button>
           <Button buttonClass={state.large ? "button button--confirm" : "button button--danger"} onClick={toggleLarge}>Large</Button>
-          <Button buttonClass={!state.showToggle ? "button button--confirm" : "button button--danger"} onClick={toggleShow}>Show All!</Button>
+          <Button buttonClass={!state.showToggle ? "button button--confirm" : "button button--danger"} onClick={toggleShow}>Show All!</Button> */}
         </div>
         {/* {JSON.stringify(state)} */}
         <p>{message}</p>
@@ -265,7 +257,7 @@ function MapContainer(props) {
               );
             })}
           {selected.location && (
-            <InfoWindow 
+            <InfoWindow
               position={selected.location}
               clickable={true}
               onCloseClick={() => setSelected({})}
@@ -288,7 +280,6 @@ function MapContainer(props) {
                     <Icon name="favorite" size="big" />
                   </Button.Content>
                 </Button>
-
                 <Container textAlign="center">
                   <img src={selected.image} />
                   <br />
@@ -298,20 +289,16 @@ function MapContainer(props) {
                   <br />
                   <p>{selected.bio}</p>
                   <br />
-                    <Link id="profile" className="menu-item" to={`/user/${selected.id}`}>
-                    <Button fluid animated color='teal'>
-                      <Button.Content visible>Profile</Button.Content>
-                      <Button.Content hidden>
-                        <Icon name='arrow right' />
-                      </Button.Content>
-                    </Button>
-                    </Link>
-                  </Container>
-                </div>
-
-              </InfoWindow>
-            )
-          }
+                  <Button animated color="teal" fluid>
+                    <Button.Content visible>Profile</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="arrow right" />
+                    </Button.Content>
+                  </Button>
+                </Container>
+              </div>
+            </InfoWindow>
+          )}
         </GoogleMap>
       </LoadScript>
     </>
