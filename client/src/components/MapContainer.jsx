@@ -191,8 +191,8 @@ function MapContainer(props) {
   };
 
   const defaultCenter = {
-    lat: parseFloat(props.user.lat),
-    lng: parseFloat(props.user.lng),
+    lat: parseFloat(props.user.lat) || parseFloat('43.651070'),
+    lng: parseFloat(props.user.lng) || parseFloat('-79.347015'),
   };
 
   // const message =
@@ -290,9 +290,7 @@ function MapContainer(props) {
                   }}
                   callback={(response) => { 
                     const distance = response.rows[0].elements[0].distance.text;
-                    console.log(distance)
                     changeDistance(distance)
-                    console.log(distance)
                   }}
                 />
                 <Button
@@ -315,9 +313,7 @@ function MapContainer(props) {
                   <p>
                     {selected.name} & {selected.dog_name}
                   </p>
-                  <p>
-                    Distance: {distance}
-                  </p>
+                  <p>Distance: {distance}</p>
                   <br />
                   <p>{selected.bio}</p>
                   <br />
