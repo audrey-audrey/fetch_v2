@@ -6,8 +6,6 @@ import logo from "../images/icons/logo.png";
 
 import "./Homepage.scss";
 
-// import Button from "./Button";
-
 export default function Homepage(props) {
   return (
     <Container textAlign="center">

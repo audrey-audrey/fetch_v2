@@ -5,8 +5,6 @@ import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
 import history from "../history";
 import dogpile from "../images/dogpile.png";
 
-// import Button from "./Button";
-
 export default function Register(props) {
   const [state, setState] = useState({
     email: "",

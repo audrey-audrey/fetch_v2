@@ -14,8 +14,6 @@ import history from "../history";
 import rupert from "../images/rupert.png";
 import logo from "../images/icons/logo.png";
 
-// import Button from "./Button";
-
 import "./Login.css";
 
 export default function Login(props) {

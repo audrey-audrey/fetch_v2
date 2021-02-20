@@ -17,10 +17,9 @@ import Favourites from "./components/Favourites";
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
 
-import { slide as Menu } from "react-burger-menu";
-
 import appLogo from "./images/icons/logo.png";
 
+import Sidebar from "./components/Sidebar";
 import "./BurgerMenu.css";
 
 import "semantic-ui-css/semantic.min.css";
@@ -71,8 +70,9 @@ function App() {
   }, []);
 
   return (
-    <div id="outer-container">
-      {localStorage.getItem("user_id") ? (
+    <div id="App">
+      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
+      {/* {localStorage.getItem("user_id") ? (
         <Menu
         // className="menu"
           reveal
@@ -106,44 +106,42 @@ function App() {
             Logout
           </Link>
         </Menu>
-      ) : null}
-      <main id="page-wrap">
-        <div className="main-component">
-          <Switch>
-            <Route path="/homepage">
-              <Homepage />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/user/:id">
-              <Profile />
-            </Route>
-            <Route path="/edit-user">
-              <EditProfile />
-            </Route>
-            <Route path="/messages/:id">
-              <Message />
-            </Route>
-            <Route path="/conversations">
-              <Conversations />
-            </Route>
-            <Route path="/favourites">
-              <Favourites />
-            </Route>
-            <Route path="/">
-              {localStorage.getItem("user_id") ? (
-                <MapContainer users={state.users} user={state.user} />
-              ) : (
+      ) : null} */}
+      <div id="page-wrap">
+        <Switch>
+          <Route path="/homepage">
+            <Homepage />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/user/:id">
+            <Profile />
+          </Route>
+          <Route path="/edit-user">
+            <EditProfile />
+          </Route>
+          <Route path="/messages/:id">
+            <Message />
+          </Route>
+          <Route path="/conversations">
+            <Conversations />
+          </Route>
+          <Route path="/favourites">
+            <Favourites />
+          </Route>
+          <Route path="/">
+            {localStorage.getItem("user_id") ? (
+              <MapContainer users={state.users} user={state.user} />
+            ) : (
                 <Homepage />
               )}
-            </Route>
-          </Switch>
-        </div>
-      </main>
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }
