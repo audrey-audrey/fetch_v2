@@ -7,6 +7,8 @@
 }
 
 .profile-container {
+    padding-top: 7em;
+    
     .profile-section-logo {
         img {
           position: absolute;
@@ -19,7 +21,6 @@
       }
 
     .profile-section-top {
-        padding-top: 7em;
         flex-direction: column;
         display: flex;
         align-items: center;

@@ -1,7 +1,11 @@
-.form-container {
-    width: 50%;
+.edit-container {
+    padding-top: 7em;
 
-    .submit-cancel {
-        display:flex;
+    .form-container {
+        padding: 0 1em 0;
+
+        .submit-cancel {
+            display:flex;
+        }
     }
 }
