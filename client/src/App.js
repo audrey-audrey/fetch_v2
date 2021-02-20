@@ -19,7 +19,7 @@ import Homepage from "./components/Homepage";
 
 import appLogo from "./images/icons/logo.png";
 
-import Sidebar from "./components/Sidebar";
+import { slide as Menu } from "react-burger-menu";
 import "./BurgerMenu.css";
 
 import "semantic-ui-css/semantic.min.css";
@@ -71,13 +71,10 @@ function App() {
 
   return (
     <div id="App">
-      <Sidebar pageWrapId={"page-wrap"} outerContainerId={"App"} />
-      {/* {localStorage.getItem("user_id") ? (
+      {localStorage.getItem("user_id") ? (
         <Menu
-        // className="menu"
-          reveal
           pageWrapId={"page-wrap"}
-          outerContainerId={"outer-container"}
+          outerContainerId={"App"}
         >
           <Image id="profile-img" src={state.user.primary_image} avatar />
           <Link
@@ -106,7 +103,7 @@ function App() {
             Logout
           </Link>
         </Menu>
-      ) : null} */}
+      ) : null}
       <div id="page-wrap">
         <Switch>
           <Route path="/homepage">
