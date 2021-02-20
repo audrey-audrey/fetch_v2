@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Input, Button, Icon, Container, Image, Header } from "semantic-ui-react";
+import { Input, Button, Icon, Container, Image, Header, Form } from "semantic-ui-react";
 import history from "../history";
 import rupert from "../images/rupert.png";
+import logo from "../images/icons/logo.png"
 
 // import Button from "./Button";
 
@@ -40,16 +41,14 @@ export default function Login(props) {
 
   return (
     <Container>
+      <Image src={logo} size="medium" className="logo"/>
       <Image size="medium" src={rupert} circular floated="right" />
       <div className="login-container">
         <Header as='h1'>You're Going to Have a Ball!</Header>
         <Header as='h3'>Log In Here: </Header>
-        <form action="/login" method="POST" onSubmit={handleSubmit}>
+        <Form action="/login" method="POST" onSubmit={handleSubmit}>
           {state.errorMessage && (
             <Header as="h4" className="error">Oops! We haven't met you yet. Sign up or Try again!</Header>
-            // <h3 className="error">
-            //   Oops! We haven't met you yet. Sign up or Try again!
-            // </h3>
           )}
           <br />
           <div className="login-credential">
@@ -80,10 +79,10 @@ export default function Login(props) {
             />
           </div>
           <br />
-          <Button type="submit" icon>
+          <Button type="submit" icon color="orange">
             <Icon name="paw"></Icon> Login
           </Button>
-        </form>
+        </Form>
       </div>
     </Container>
   );
