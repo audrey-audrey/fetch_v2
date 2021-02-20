@@ -276,7 +276,7 @@ function MapContainer(props) {
               );
             })}
           {selected.location && (
-            <InfoWindow 
+            <InfoWindow
               position={selected.location}
               clickable={true}
               onCloseClick={() => setSelected({})}
@@ -306,7 +306,6 @@ function MapContainer(props) {
                     <Icon name="favorite" size="big" />
                   </Button.Content>
                 </Button>
-
                 <Container textAlign="center">
                   <img src={selected.image} />
                   <br />
@@ -317,20 +316,20 @@ function MapContainer(props) {
                   <br />
                   <p>{selected.bio}</p>
                   <br />
-                    <Link id="profile" className="menu-item" to={`/user/${selected.id}`}>
-                    <Button fluid animated color='teal'>
-                      <Button.Content visible>Profile</Button.Content>
-                      <Button.Content hidden>
-                        <Icon name='arrow right' />
-                      </Button.Content>
-                    </Button>
-                    </Link>
-                  </Container>
-                </div>
-
-              </InfoWindow>
-            )
-          }
+                  <Button 
+                  animated color="teal" 
+                  fluid 
+                  as={Link} to={`/user/${selected.id}`}
+                  >
+                    <Button.Content visible>Profile</Button.Content>
+                    <Button.Content hidden>
+                      <Icon name="arrow right" />
+                    </Button.Content>
+                  </Button>
+                </Container>
+              </div>
+            </InfoWindow>
+          )}
         </GoogleMap>
       </LoadScript>
 

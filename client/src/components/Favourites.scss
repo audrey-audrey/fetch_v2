@@ -1,0 +1,25 @@
+
+.favourites-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 4em;
+
+
+}
+.ui.cards {
+
+  justify-content: center;
+
+}
+.ui.cards>.card {
+  margin: 1em 1em;
+}
+
+.ui.card>.image, .ui.cards>.card>.image {
+
+  margin: auto;
+  object-fit: cover;
+  width: 20rem;
+  height: 20rem;
+
+}

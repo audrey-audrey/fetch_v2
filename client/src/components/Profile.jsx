@@ -12,46 +12,57 @@ import { Link } from "react-router-dom";
 import history from "../history";
 
 import "./Profile.scss";
-import Carousel from 'nuka-carousel';
-import rupert from "../images/rupert.png"
-import appLogo from "../images/icons/logo.png"
+import Carousel from "nuka-carousel";
+import rupert from "../images/rupert.png";
+import appLogo from "../images/icons/logo.png";
 
 // import CustomDotGroup from "../components/CustomDotGroup";
 
 export default function Profile(props) {
   const profile_id = useLocation().pathname.split("/")[2];
 
-  const { user_id } = useParams() 
+  const { user_id } = useParams();
   const [state, setState] = useState({
-    user: {}
+    user: {},
+    favourites: []
   });
 
-  const [isProfileOwner, setIsProfileOwner] = useState(false)
+  const [isProfileOwner, setIsProfileOwner] = useState(false);
 
-  const setUser = (user) => setState((prev) => ({ ...prev, user }))
+  const setUser = (user) => setState((prev) => ({ ...prev, user }));
+
+  const [favourited, setFavourited] = useState(false);
 
   // fetch current user data
-  const requestedUser = window.location.pathname.substring(6)
+  const requestedUser = window.location.pathname.substring(6);
+  
   useEffect(() => {
+    const user_id = localStorage.getItem("user_id");
+    const params = { user_id };
 
-    if (localStorage.getItem("user_id") === profile_id) {
+    if (user_id === profile_id) {
       setIsProfileOwner(true);
     }
-
-    axios.get(`/api/users/${requestedUser}`)
-      .then((res) => {
-        setUser(res.data[0])
-      })
-  }, [])
+    Promise.all([
+      axios.get(`/api/users/${requestedUser}`),
+      axios.get(`/api/users/${user_id}/favorites/`, { params }),
+    ]).then((all) => {
+      setState((prev) => ({
+        ...prev,
+        user: all[0].data[0],
+        favourites: all[1].data,
+      }));
+    });
+  }, []);
 
   const imageURLs = [
-    'https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/',
-    'https://www.pexels.com/photo/brown-and-white-short-coated-puppy-1805164/',
-    'https://www.pexels.com/photo/closeup-photography-of-adult-short-coated-tan-and-white-dog-sleeping-on-gray-textile-at-daytime-731022/',
-    'https://www.pexels.com/photo/brown-and-white-american-pit-bull-terrier-with-brown-costume-825949/'
-  ]
+    "https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/",
+    "https://www.pexels.com/photo/brown-and-white-short-coated-puppy-1805164/",
+    "https://www.pexels.com/photo/closeup-photography-of-adult-short-coated-tan-and-white-dog-sleeping-on-gray-textile-at-daytime-731022/",
+    "https://www.pexels.com/photo/brown-and-white-american-pit-bull-terrier-with-brown-costume-825949/",
+  ];
 
-  const [favourited, setFavourited] = useState(false)
+
 
   const handleChat = function () {
     const params = {
@@ -67,6 +78,45 @@ export default function Profile(props) {
       history.push(`/messages/${conversation_id}`);
     });
   };
+
+  const isFavourited = state.favourites.find((fave) => fave.id === state.user.id);
+
+  const handleFavourite = function (event) {
+    event.preventDefault();
+
+    const user_id = localStorage.getItem("user_id");
+    const params = { user_id, favoritee: state.user };
+    
+    if (isFavourited) {
+      return axios
+        .delete(`/api/users/${user_id}/favorites/${requestedUser}`, params)
+        .then((res) => {
+          axios
+            .get(`/api/users/${user_id}/favorites/`)
+            .then((res) =>
+              setState((prev) => ({ ...prev, favourites: res.data, favorited: false }))
+            );
+        })
+        .catch((err) => {
+          throw err;
+        });
+    } else {
+      return axios
+        .post(`/api/users/${user_id}/favorites/`, params)
+        .then((res) => {
+          axios
+            .get(`/api/users/${user_id}/favorites/`)
+            .then((res) =>
+              setState((prev) => ({ ...prev, favourites: res.data, favorited: true }))
+            );
+        })
+        .catch((err) => {
+          throw err;
+        });
+    }
+  
+  };
+
   return (
     <div className="profile-container">
       <div className='profile-section-logo'>
@@ -74,22 +124,19 @@ export default function Profile(props) {
       </div>
       <div className='profile-section-top'>
         <img className="profile-image" src={state.user.primary_image} />
-        <Header textAlign='center' size='large'>
+        <Header textAlign="center" size="large">
           {state.user.name} & {state.user.dog_name}
-          <Header.Subheader>
-            Toronto, ON
-          </Header.Subheader>
+          <Header.Subheader>Toronto, ON</Header.Subheader>
         </Header>
 
-        {
-          isProfileOwner ?
-            <Link to='/edit-user'><Button>Edit Profile</Button></Link>
-            :
-            null
-        }
+        {isProfileOwner ? (
+          <Link to="/edit-user">
+            <Button>Edit Profile</Button>
+          </Link>
+        ) : null}
 
         {!isProfileOwner && !favourited ? (
-          <Button color="yellow">
+          <Button color="yellow" basic={!isFavourited} onClick={handleFavourite}>
             <Icon name="star" /> Favourite
           </Button>
         ) : null}
@@ -99,7 +146,6 @@ export default function Profile(props) {
             <Button onClick={handleChat}>Start a Chat!</Button>
           </Link>
         ) : null}
-
       </div>
 
       <Card fluid>
@@ -140,15 +186,13 @@ export default function Profile(props) {
         </Card.Content>
       </Card>
 
-      <div className='carousel'>
+      <div className="carousel">
         <Carousel initialSlideHeight={0.4}>
           <img src={rupert} />
           <img src={rupert} />
           <img src={rupert} />
         </Carousel>
       </div>
-
-
     </div>
   );
 }

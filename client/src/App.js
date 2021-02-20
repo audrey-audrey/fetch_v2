@@ -19,7 +19,7 @@ import Homepage from "./components/Homepage";
 
 import { slide as Menu } from "react-burger-menu";
 
-import appLogo from "./images/icons/logo.png"
+import appLogo from "./images/icons/logo.png";
 
 import "./BurgerMenu.css";
 
@@ -73,26 +73,27 @@ function App() {
   return (
     <div id="outer-container">
       {localStorage.getItem("user_id") ? (
-        <Menu reveal pageWrapId={"page-wrap"} outerContainerId={"outer-container"}>
-          <Image
-            id="profile-img"
-            src={state.user.primary_image}
-            avatar
-          />
+        <Menu
+        // className="menu"
+          reveal
+          pageWrapId={"page-wrap"}
+          outerContainerId={"outer-container"}
+        >
+          <Image id="profile-img" src={state.user.primary_image} avatar />
           <Link
             id="profile"
             className="menu-item"
             to={`/user/${localStorage.getItem("user_id")}`}
           >
-            <Icon name='user' />
+            <Icon name="user" />
             Profile
           </Link>
           <Link id="conversations" className="menu-item" to="/conversations">
-            <Icon name='mail outline' />
+            <Icon name="mail outline" />
             Conversations <small>{state.unreads}</small>
           </Link>
           <Link id="favorites" className="menu-item" to="/favourites">
-            <Icon name='favorite' />
+            <Icon name="favorite" />
             Favourites
           </Link>
           <Link
@@ -101,13 +102,12 @@ function App() {
             onClick={handleLogout}
             to="/homepage"
           >
-            <Icon name='log out' />
+            <Icon name="log out" />
             Logout
           </Link>
         </Menu>
       ) : null}
       <main id="page-wrap">
-        {/* <Router> */}
         <div className="main-component">
           <Switch>
             <Route path="/homepage">
@@ -135,11 +135,14 @@ function App() {
               <Favourites />
             </Route>
             <Route path="/">
-              <MapContainer users={state.users} user={state.user} />
+              {localStorage.getItem("user_id") ? (
+                <MapContainer users={state.users} user={state.user} />
+              ) : (
+                <Homepage />
+              )}
             </Route>
           </Switch>
         </div>
-        {/* </Router> */}
       </main>
     </div>
   );

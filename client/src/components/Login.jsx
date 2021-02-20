@@ -1,9 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
+import { Input, Button, Icon, Container, Image, Header, Form } from "semantic-ui-react";
 import history from "../history";
 import rupert from "../images/rupert.png";
+import logo from "../images/icons/logo.png"
 
 // import Button from "./Button";
 
@@ -40,49 +41,61 @@ export default function Login(props) {
 
   return (
     <Container>
+      <Image src={logo} size="medium" className="logo"/>
+      <Container>
       <Image size="medium" src={rupert} circular floated="right" />
+      </Container>
+       <Container floated="left">
       <div className="login-container">
-        <h1>You're Going to Have a Ball! Log In!</h1>
-        <form action="/login" method="POST" onSubmit={handleSubmit}>
+        <Header as='h1'>You're Going to Have a Ball!</Header>
+        <Header as='h3'>Log In Here: </Header>
+       
+        <Form action="/login" method="POST" onSubmit={handleSubmit} floated="left">
           {state.errorMessage && (
-            <h3 className="error">
-              Oops! We haven't met you yet. Sign up or Try again!
-            </h3>
+            <Header as="h4" className="error">Oops! We haven't met you yet. Sign up or Try again!</Header>
           )}
           <br />
           <div className="login-credential">
+            <Form.Field>
             <label htmlFor="email">Email: </label>
-            <Input
+            <Form.Input
               type="text"
               id="email"
               name="email"
               required
               placeholder="Please enter email"
+              width="7"
               onChange={(event) => {
                 setState({ ...state, email: event.target.value });
               }}
             />
+            </Form.Field>
           </div>
           <br />
           <div className="password-credential">
+            <Form.Field>
             <label htmlFor="password">Password: </label>
-            <Input
-              type="text"
+            <Form.Input
+              type="password"
               id="password"
               required
               name="password"
               placeholder="Please enter password"
+              width="7"
               onChange={(event) => {
                 setState({ ...state, password: event.target.value });
               }}
             />
+            </Form.Field>
           </div>
           <br />
-          <Button type="submit" icon>
+          <Button type="submit" icon color="orange">
             <Icon name="paw"></Icon> Login
           </Button>
-        </form>
+        </Form>
+
       </div>
+      </Container>
     </Container>
   );
 }
