@@ -1,5 +1,16 @@
 .App {
-  text-align: center;
+  position: relative;
+
+  .logo-top {
+    img {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding-top: 2em;
+      padding-bottom: 1em;
+      padding-right: 2em;
+    }
+  }
 }
 
 .App-logo {
@@ -47,6 +58,6 @@
   margin-bottom: 2em;
 }
 
-#outer-container > div ~ #page-wrap {
-  margin-left: 100px;
-}
+// #outer-container > div ~ #page-wrap {
+//   margin-left: 100px;
+// }

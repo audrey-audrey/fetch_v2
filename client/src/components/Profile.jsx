@@ -119,9 +119,6 @@ export default function Profile(props) {
 
   return (
     <div className="profile-container">
-      <div className='profile-section-logo'>
-        <Link to='/'><img src={appLogo} /></Link>
-      </div>
       <div className='profile-section-top'>
         <img className="profile-image" src={state.user.primary_image} />
         <Header textAlign="center" size="large">

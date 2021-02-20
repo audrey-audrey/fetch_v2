@@ -4,6 +4,7 @@
 
   .buttonContainer{
     display: flex;
+    justify-content: space-around;
   }
 }
 
@@ -29,18 +30,6 @@
 
 
 .map-container {
-
-  .profile-section-top {
-    img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding-top: 2em;
-      padding-bottom: 1em;
-      padding-right: 2em;
-    }
-  }
-
   .filter {
     padding-top: 7em;
   }

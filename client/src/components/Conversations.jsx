@@ -5,8 +5,6 @@ import history from "../history";
 
 import "./Login.css";
 
-import Button from "./Button";
-
 export default function Conversations(props) {
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState({

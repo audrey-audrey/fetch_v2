@@ -242,9 +242,9 @@ function MapContainer(props) {
   return (
     <>
       <div className='map-container'>
-        <div className='profile-section-top'>
+        {/* <div className='profile-section-top'>
           <Link to='/'><img src={appLogo} /></Link>
-        </div>
+        </div> */}
       <div className='filter'>
         <div className='buttonContainer'>
           <Button toggle active={state.playful} onClick={togglePlayful}>Playful</Button>

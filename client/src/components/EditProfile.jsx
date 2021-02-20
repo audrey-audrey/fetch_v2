@@ -79,6 +79,7 @@ export default function Profile(props) {
   }
 
   return (
+    <>
     <Router>
       <div className="edit-profile-container">
         <div className="form-container">
@@ -193,5 +194,6 @@ export default function Profile(props) {
         </div>
       </div>
     </Router>
+    </>
   );
 }
