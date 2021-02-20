@@ -1,18 +1,10 @@
-/* .login-container {
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-
-} */
-
 .ui.container {
   margin-top: 4em;
-
 }
-
+.image.logo {
+  margin-left: 1.5em;
+}
 .login-container {
   padding-top: 5em;
-
+  position: absolute;
 }
