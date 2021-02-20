@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { BrowserRouter as Router } from "react-router-dom";
-import "./EditProfile.scss";
+// import "./EditProfile.scss";
 import { Form, Checkbox, TextArea, Button } from "semantic-ui-react";
 import history from "../history";
 
@@ -79,6 +79,7 @@ export default function Profile(props) {
   }
 
   return (
+    <>
     <Router>
       <div className="edit-profile-container">
         <div className="form-container">
@@ -193,5 +194,6 @@ export default function Profile(props) {
         </div>
       </div>
     </Router>
+    </>
   );
 }

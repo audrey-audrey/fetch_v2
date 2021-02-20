@@ -1,18 +1,25 @@
-/* .login-container {
-  display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    flex-direction: column;
-
-} */
-
 .ui.container {
   margin-top: 4em;
-
+}
+.ui.header {
+  margin: calc 0 0.5em;
 }
 
-.login-container {
-  padding-top: 5em;
+.ui.icon.button {
+  margin-top: 0.5em;
+}
 
+.image.logo {
+  margin-left: 1.5em;
+}
+.login-container {
+  padding-top: 3em;
+}
+
+.email-credential {
+  padding: 0.25em;
+}
+
+.password-credential {
+  padding: 0.25em;
 }

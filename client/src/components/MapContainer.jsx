@@ -8,18 +8,36 @@ import {
 } from "@react-google-maps/api";
 import axios from "axios";
 
-import { Button, Icon, Card, Image, Container } from "semantic-ui-react";
 import { Link } from "react-router-dom";
 
+import { 
+  Button, 
+  Icon,
+  Card, 
+  Image,
+  Container,
+  Header
+} from 'semantic-ui-react'
+
+import Carousel from 'nuka-carousel';
+
 import "./MapContainer.scss";
+import appLogo from "../images/icons/logo.png"
+import no_photo from "../images/placeholder-headshot.png"
 
 function MapContainer(props) {
   // State
   const [selected, setSelected] = useState({});
-
+  
   const onSelect = (item) => {
     setSelected(item);
   };
+
+  const [distance, setDistance] = useState(0)
+
+  const changeDistance = (item) => {
+    setDistance(item)
+  }
 
   // state for showing markers
   const [state, setState] = useState({
@@ -92,9 +110,9 @@ function MapContainer(props) {
       name: user.name,
       dog_name: user.dog_name,
       bio: user.bio,
-      image: user.primary_image,
+      image: user.primary_image || no_photo,
       icon: {
-        url: Number(user.id)===Number(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png" ,
+        url: parseFloat(user.id)===parseFloat(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png" ,
         origin: { x: 0, y: 0 },
         // define pop-up
         anchor: { x: 13.5, y: 0 },
@@ -104,8 +122,8 @@ function MapContainer(props) {
         },
       },
       location: {
-        lat: user.lat,
-        lng: user.lng,
+        lat: parseFloat(user.lat),
+        lng: parseFloat(user.lng)
       },
       playful: user.playful,
       affectionate: user.affectionate,
@@ -122,7 +140,7 @@ function MapContainer(props) {
   filteredPins = !state.playful
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.playful === true) {
+        if (pin.playful === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -130,7 +148,7 @@ function MapContainer(props) {
   filteredPins = !state.affectionate
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.affectionate === true) {
+        if (pin.affectionate === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -138,7 +156,7 @@ function MapContainer(props) {
   filteredPins = !state.high_energy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.high_energy === true) {
+        if (pin.high_energy === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -146,7 +164,7 @@ function MapContainer(props) {
   filteredPins = !state.shy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.shy === true) {
+        if (pin.shy === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -154,7 +172,7 @@ function MapContainer(props) {
   filteredPins = !state.well_trained
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.well_trained === true) {
+        if (pin.well_trained === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -162,7 +180,7 @@ function MapContainer(props) {
   filteredPins = !state.large
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.large === true) {
+        if (pin.large === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
           return true;
         }
       });
@@ -173,14 +191,14 @@ function MapContainer(props) {
   };
 
   const defaultCenter = {
-    lat: Number(props.user.lat),
-    lng: Number(props.user.lng),
+    lat: parseFloat(props.user.lat) || parseFloat('43.651070'),
+    lng: parseFloat(props.user.lng) || parseFloat('-79.347015'),
   };
 
-  const message =
-    filteredPins.length > 0
-      ? `There are ${filteredPins.length} dogs matching your criteria`
-      : "There are no dogs matching all your criteria!";
+  // const message =
+  //   filteredPins.length > 0
+  //     ? `There are ${filteredPins.length} dogs matching your criteria`
+  //     : "There are no dogs matching all your criteria!";
 
   const styles = require("../styles/map/GoogleMapStyles.json");
 
@@ -223,6 +241,10 @@ function MapContainer(props) {
 
   return (
     <>
+      <div className='map-container'>
+        {/* <div className='profile-section-top'>
+          <Link to='/'><img src={appLogo} /></Link>
+        </div> */}
       <div className='filter'>
         <div className='buttonContainer'>
           <Button toggle active={state.playful} onClick={togglePlayful}>Playful</Button>
@@ -233,8 +255,7 @@ function MapContainer(props) {
           <Button toggle active={state.large} onClick={toggleLarge}>Large</Button>
           <Button toggle active={!state.showToggle} onClick={toggleShow}>Show All!</Button>
         </div>
-        {/* {JSON.stringify(state)} */}
-        <p>{message}</p>
+        {/* <p>{message}</p> */}
       </div>
       <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
         <GoogleMap
@@ -263,11 +284,14 @@ function MapContainer(props) {
               <div className="map-info-window">
                 <DistanceMatrixService
                   options={{
-                    destinations: [{ lat: Number(selected.location.lat), lng: Number(selected.location.lng) }],
-                    origins: [{ lng: Number(props.user.lng), lat: Number(props.user.lat) }],
+                    destinations: [{ lat: parseFloat(selected.location.lat), lng: parseFloat(selected.location.lng) }],
+                    origins: [{ lng: parseFloat(props.user.lng), lat: parseFloat(props.user.lat) }],
                     travelMode: "WALKING",
                   }}
-                  callback={(response) => { console.log(response.rows[0].elements[0].distance, response.rows[0].elements[0].duration) }}
+                  callback={(response) => { 
+                    const distance = response.rows[0].elements[0].distance.text;
+                    changeDistance(distance)
+                  }}
                 />
                 <Button
                   animated="vertical"
@@ -288,6 +312,7 @@ function MapContainer(props) {
                   <p>
                     {selected.name} & {selected.dog_name}
                   </p>
+                  <p>Distance: {distance}</p>
                   <br />
                   <p>{selected.bio}</p>
                   <br />
@@ -307,6 +332,45 @@ function MapContainer(props) {
           )}
         </GoogleMap>
       </LoadScript>
+
+      {filteredPins.length && 
+      <>
+      <Header as='h1'>Nearby</Header>
+      <div className='carousel'>
+        <Carousel 
+          slidesToShow={3} 
+          initialSlideHeight={0.4}
+        >
+          {filteredPins.map((item) => {
+            if (parseFloat(item.id) !== parseFloat(user_id)) {
+              return (
+                <Card 
+                  key={item.id}
+                  >
+                  <Image 
+                    className='card-image'
+                    src={item.image} 
+                    />
+                  <Card.Content>
+                    <Header>{item.name} & {item.dog_name}</Header>
+                    <div className='distance-button'>
+                      <Card.Meta>
+                        <span className='date'>Distance</span>
+                      </Card.Meta>
+                      <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
+                          <Icon name='arrow alternate circle right' color='teal' size='large'/>
+                      </Link>
+                    </div>
+                  </Card.Content>
+                </Card>
+              );
+            }
+          })}
+        </Carousel>
+      </div>
+      </>
+      }
+      </div>
     </>
   );
 }

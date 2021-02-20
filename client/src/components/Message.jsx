@@ -7,8 +7,6 @@ import Moment from "react-moment";
 
 import "./Message.scss";
 
-import Button from "./Button";
-
 export default function Message(props) {
   const [loading, setLoading] = useState(true);
   const [state, setState] = useState({

@@ -7,19 +7,23 @@
 }
 
 .profile-container {
-    .logo {
-        background-color: beige;
-    }
+    .profile-section-logo {
+        img {
+          position: absolute;
+          top: 0;
+          right: 0;
+          padding-top: 2em;
+          padding-bottom: 1em;
+          padding-right: 2em;
+        }
+      }
 
     .profile-section-top {
+        padding-top: 7em;
         flex-direction: column;
         display: flex;
         align-items: center;
         background-color: beige;
-
-        img {
-            padding-top: 2em;
-        }
 
         .profile-image {
             object-fit: cover;

@@ -4,7 +4,7 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Image, Icon } from "semantic-ui-react";
 
-import "./App.css";
+import "./App.scss";
 import history from "./history";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -17,10 +17,9 @@ import Favourites from "./components/Favourites";
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
 
-import { slide as Menu } from "react-burger-menu";
-
 import appLogo from "./images/icons/logo.png";
 
+import { slide as Menu } from "react-burger-menu";
 import "./BurgerMenu.css";
 
 import "semantic-ui-css/semantic.min.css";
@@ -71,12 +70,15 @@ function App() {
   }, []);
 
   return (
-    <div id="outer-container">
+    <div className="App">
       {localStorage.getItem("user_id") ? (
+        <>
+        <div className='logo-top'>
+          <Link to='/'><img src={appLogo} /></Link>
+        </div>
         <Menu
-          reveal
           pageWrapId={"page-wrap"}
-          outerContainerId={"outer-container"}
+          outerContainerId={"App"}
         >
           <Image id="profile-img" src={state.user.primary_image} avatar />
           <Link
@@ -105,45 +107,43 @@ function App() {
             Logout
           </Link>
         </Menu>
+        </>
       ) : null}
-      <main id="page-wrap">
-        <div className="main-component">
-          <Switch>
-            <Route path="/homepage">
-              <Homepage />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/register">
-              <Register />
-            </Route>
-            <Route path="/user/:id">
-              <Profile />
-            </Route>
-            <Route path="/edit-user">
-              <EditProfile />
-            </Route>
-            <Route path="/messages/:id">
-              <Message />
-            </Route>
-            <Route path="/conversations">
-              <Conversations />
-            </Route>
-            <Route path="/favourites">
-              <Favourites />
-            </Route>
-            <Route path="/">
-              Homepage!
-              {localStorage.getItem("user_id") ? (
-                <MapContainer users={state.users} user={state.user} />
-              ) : (
+      <div id="page-wrap">
+        <Switch>
+          <Route path="/homepage">
+            <Homepage />
+          </Route>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/register">
+            <Register />
+          </Route>
+          <Route path="/user/:id">
+            <Profile />
+          </Route>
+          <Route path="/edit-user">
+            <EditProfile />
+          </Route>
+          <Route path="/messages/:id">
+            <Message />
+          </Route>
+          <Route path="/conversations">
+            <Conversations />
+          </Route>
+          <Route path="/favourites">
+            <Favourites />
+          </Route>
+          <Route path="/">
+            {localStorage.getItem("user_id") ? (
+              <MapContainer users={state.users} user={state.user} />
+            ) : (
                 <Homepage />
               )}
-            </Route>
-          </Switch>
-        </div>
-      </main>
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }

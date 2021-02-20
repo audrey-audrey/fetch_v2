@@ -1,11 +1,19 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Input, Button, Icon, Container, Image } from "semantic-ui-react";
+import {
+  Input,
+  Button,
+  Icon,
+  Container,
+  Image,
+  Header,
+  Form,
+} from "semantic-ui-react";
 import history from "../history";
 import dogpile from "../images/dogpile.png";
-
-// import Button from "./Button";
+import logo from "../images/icons/logo.png";
+import "./Register.css";
 
 export default function Register(props) {
   const [state, setState] = useState({
@@ -32,8 +40,7 @@ export default function Register(props) {
         if (res.status !== 200) {
           return;
         }
-
-        history.push("/");
+        history.push("/profile");
       })
       .catch((err) => {
         setState({ errorMessage: err.message });
@@ -42,62 +49,73 @@ export default function Register(props) {
 
   return (
     <Container>
+      <Image src={logo} size="medium" className="logo" />
       <Image size="medium" src={dogpile} circular floated="right" />
       <div className="login-container">
-        <h1>Join the Fun! Sign Up Now!</h1>
-        <form action="/login" method="POST" onSubmit={handleSubmit}>
+        <Header as="h1">
+          Join the Pack!&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{" "}
+        </Header>
+        <Header as="h3">Sign Up Here: </Header>
+        <Form
+          action="/login"
+          method="POST"
+          onSubmit={handleSubmit}
+          widths="equal"
+        >
           {state.errorMessage && (
-            <h3 className="error">
+            <Header as="h4" className="error">
               Oops! That email already exists. Try again.
-            </h3>
+            </Header>
           )}
-          <br />
           <div className="email-credential">
-            <label htmlFor="email">Email: </label>
-            <Input
-              type="text"
-              id="email"
-              required
-              name="email"
-              placeholder="Please enter email"
-              onChange={(event) => {
-                setState({ ...state, email: event.target.value });
-              }}
-            />
+            <Form.Field>
+              <label htmlFor="email">Email: </label>
+              <Form.Input
+                type="text"
+                id="email"
+                name="email"
+                required
+                placeholder="Please enter email"
+                onChange={(event) => {
+                  setState({ ...state, email: event.target.value });
+                }}
+              />
+            </Form.Field>
           </div>
-          <br />
           <div className="password-credential">
-            <label htmlFor="password">Password: </label>
-            <Input
-              type="password"
-              id="password"
-              required
-              name="password"
-              placeholder="Please enter password"
-              onChange={(event) => {
-                setState({ ...state, password: event.target.value });
-              }}
-            />
+            <Form.Field>
+              <label htmlFor="password">Password: </label>
+              <Form.Input
+                type="password"
+                id="password"
+                required
+                name="password"
+                placeholder="Please enter password"
+                onChange={(event) => {
+                  setState({ ...state, password: event.target.value });
+                }}
+              />
+            </Form.Field>
           </div>
-          <br />
           <div className="password-credential">
-            <label htmlFor="password-confirm">Confirm Password: </label>
-            <Input
-              type="password"
-              id="password-confirm"
-              required
-              name="password-confirm"
-              placeholder="Please enter password again"
-              onChange={(event) => {
-                setState({ ...state, passwordConfirm: event.target.value });
-              }}
-            />
+            <Form.Field>
+              <label htmlFor="password-confirm">Confirm Password: </label>
+              <Form.Input
+                type="password"
+                id="password-confirm"
+                required
+                name="password-confirm"
+                placeholder="Please enter password again"
+                onChange={(event) => {
+                  setState({ ...state, passwordConfirm: event.target.value });
+                }}
+              />
+            </Form.Field>
           </div>
-          <br />
-          <Button type="submit" icon>
+          <Button type="submit" icon icon color="orange">
             <Icon name="paw"></Icon> Sign Up
           </Button>
-        </form>
+        </Form>
       </div>
     </Container>
   );
