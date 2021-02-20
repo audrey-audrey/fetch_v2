@@ -69,7 +69,7 @@ export default function Login(props) {
                 name="email"
                 required
                 placeholder="Please enter email"
-                // width="7"
+                width="10"
                 onChange={(event) => {
                   setState({ ...state, email: event.target.value });
                 }}
@@ -86,7 +86,7 @@ export default function Login(props) {
                 required
                 name="password"
                 placeholder="Please enter password"
-                // width="7"
+                width="10"
                 onChange={(event) => {
                   setState({ ...state, password: event.target.value });
                 }}
