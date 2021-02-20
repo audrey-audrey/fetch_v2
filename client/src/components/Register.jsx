@@ -40,8 +40,7 @@ export default function Register(props) {
         if (res.status !== 200) {
           return;
         }
-
-        history.push("/");
+        history.push("/profile");
       })
       .catch((err) => {
         setState({ errorMessage: err.message });
