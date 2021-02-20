@@ -2,8 +2,9 @@ import React, { useState, useEffect, forceUpdate } from "react";
 import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 import history from "../history";
+import { Comment, Icon } from "semantic-ui-react";
 
-import "./Login.css";
+import "./Conversations.scss";
 
 import Button from "./Button";
 
@@ -62,10 +63,12 @@ export default function Conversations(props) {
             item.initiator_id === convo.initiator_id
           ) {
             arr.push(
-              <li>
-                <Link to={`/messages/${convo.id}`}>{item.name}</Link>
-                <small>{findUnreads(convo.id)}</small>
-              </li>
+              <tr>
+                <td>
+                  <Link to={`/messages/${convo.id}`}>{item.name}</Link>
+                </td>
+                <td>{findUnreads(convo.id)}</td>
+              </tr>
             );
           }
         }
@@ -85,10 +88,12 @@ export default function Conversations(props) {
             item.initiator_id === convo.initiator_id
           ) {
             arr.push(
-              <li>
-                <Link to={`/messages/${convo.id}`}>{item.name}</Link>
-                <small>{findUnreads(convo.id)}</small>
-              </li>
+              <tr>
+                <td>
+                  <Link to={`/messages/${convo.id}`}>{item.name}</Link>
+                </td>
+                <td>{findUnreads(convo.id)}</td>
+              </tr>
             );
           }
         }
@@ -100,18 +105,24 @@ export default function Conversations(props) {
   let recipients = displayRecipients();
   let initiators = displayInitiators();
   return (
-    <div>
-      Conversations
-      <div>
-        {loading ? (
-          <span>Loading</span>
-        ) : (
-          <ul>
+    <div className="conversation-container">
+      <h1>Conversations</h1>
+      {loading ? (
+        <span>Loading</span>
+      ) : (
+        <table classname="conversations">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Unread</th>
+            </tr>
+          </thead>
+          <tbody>
             {recipients}
             {initiators}
-          </ul>
-        )}
-      </div>
+          </tbody>
+        </table>
+      )}
     </div>
   );
 }
