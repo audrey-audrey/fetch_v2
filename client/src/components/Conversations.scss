@@ -1,8 +1,27 @@
 .conversation-container {
   padding-left: 3em;
   padding-top: 2em;
+  padding-right: 8em;
+}
+
+.conversation {
+  padding-top: 2em;
 }
 
 .conversations {
   padding-top: 2em;
+  display: flex;
+}
+
+.unreads {
+  float: right;
+}
+
+.conversation-item {
+  margin-bottom: 2em;
+}
+
+.conversation-name {
+  color: red;
+  float: left;
 }
