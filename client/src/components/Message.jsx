@@ -51,7 +51,7 @@ export default function Message(props) {
           <Comment.Group>
             <Comment>
               <Comment.Avatar
-                src={`https://ui-avatars.com/api/?name=${
+                src={`https://ui-avatars.com/api/?background=random&rounded=true&name=${
                   item.user.name.split(" ")[0]
                 }+${item.user.name.split(" ")[1]}`}
               />
