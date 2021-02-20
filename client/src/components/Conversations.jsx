@@ -2,11 +2,9 @@ import React, { useState, useEffect, forceUpdate } from "react";
 import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 import history from "../history";
-import { Comment, Icon } from "semantic-ui-react";
+import { Comment, Icon, Message, Button } from "semantic-ui-react";
 
 import "./Conversations.scss";
-
-import Button from "./Button";
 
 export default function Conversations(props) {
   const [loading, setLoading] = useState(true);
@@ -52,6 +50,10 @@ export default function Conversations(props) {
     }
   };
 
+  const handleClick = function (conversation_id) {
+    history.push(`/messages/${conversation_id}`);
+  };
+
   const displayRecipients = function () {
     const arr = [];
     if (!loading) {
@@ -63,12 +65,16 @@ export default function Conversations(props) {
             item.initiator_id === convo.initiator_id
           ) {
             arr.push(
-              <tr>
-                <td>
-                  <Link to={`/messages/${convo.id}`}>{item.name}</Link>
-                </td>
-                <td>{findUnreads(convo.id)}</td>
-              </tr>
+              <Button
+                fluid
+                className="conversation-item"
+                onClick={() => handleClick(convo.id)}
+              >
+                <span className="conversation-name">{item.name}</span>
+                <span className="unreads">
+                  {findUnreads(convo.id) ? findUnreads(convo.id) : 0}
+                </span>
+              </Button>
             );
           }
         }
@@ -88,12 +94,16 @@ export default function Conversations(props) {
             item.initiator_id === convo.initiator_id
           ) {
             arr.push(
-              <tr>
-                <td>
-                  <Link to={`/messages/${convo.id}`}>{item.name}</Link>
-                </td>
-                <td>{findUnreads(convo.id)}</td>
-              </tr>
+              <Button
+                fluid
+                className="conversation-item"
+                onClick={() => handleClick(convo.id)}
+              >
+                <span className="conversation-name">{item.name}</span>
+                <span className="unreads">
+                  {findUnreads(convo.id) ? findUnreads(convo.id) : 0}
+                </span>
+              </Button>
             );
           }
         }
@@ -110,18 +120,10 @@ export default function Conversations(props) {
       {loading ? (
         <span>Loading</span>
       ) : (
-        <table classname="conversations">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Unread</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recipients}
-            {initiators}
-          </tbody>
-        </table>
+        <div>
+          {recipients}
+          {initiators}
+        </div>
       )}
     </div>
   );
