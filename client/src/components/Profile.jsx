@@ -14,9 +14,7 @@ import history from "../history";
 import "./Profile.scss";
 import Carousel from "nuka-carousel";
 import rupert from "../images/rupert.png";
-import appLogo from "../images/icons/logo.png";
 
-// import CustomDotGroup from "../components/CustomDotGroup";
 
 export default function Profile(props) {
   const profile_id = useLocation().pathname.split("/")[2];
@@ -35,7 +33,7 @@ export default function Profile(props) {
 
   // fetch current user data
   const requestedUser = window.location.pathname.substring(6);
-  
+
   useEffect(() => {
     const user_id = localStorage.getItem("user_id");
     const params = { user_id };
@@ -77,7 +75,7 @@ export default function Profile(props) {
 
     const user_id = localStorage.getItem("user_id");
     const params = { user_id, favoritee: state.user };
-    
+
     if (isFavourited) {
       return axios
         .delete(`/api/users/${user_id}/favorites/${requestedUser}`, params)
@@ -105,13 +103,21 @@ export default function Profile(props) {
           throw err;
         });
     }
-  
+
   };
 
   return (
     <div className="profile-container">
-      <div className='profile-section-top'>
-        <img className="profile-image" src={state.user.primary_image} />
+      <div className="carousel">
+        <Carousel initialSlideHeight={0.4}>
+          <img className="profile-image" src={state.user.primary_image} />
+          <img src={rupert} />
+          <img src={rupert} />
+          <img src={rupert} />
+        </Carousel>
+      </div>
+
+      <div className='header-button'>
         <Header textAlign="center" size="large">
           {state.user.name} & {state.user.dog_name}
           <Header.Subheader>Toronto, ON</Header.Subheader>
@@ -123,17 +129,19 @@ export default function Profile(props) {
           </Link>
         ) : null}
 
-        {!isProfileOwner && !favourited ? (
-          <Button color="yellow" basic={!isFavourited} onClick={handleFavourite}>
-            <Icon name="star" /> Favourite
-          </Button>
-        ) : null}
+        <div className='buttons-non-user'>
+          {!isProfileOwner && !favourited ? (
+            <Button color="yellow" basic={!isFavourited} onClick={handleFavourite}>
+              <Icon name="star" /> Favourite
+            </Button>
+          ) : null}
 
-        {!isProfileOwner ? (
-          <Link>
-            <Button onClick={handleChat}>Start a Chat!</Button>
-          </Link>
-        ) : null}
+          {!isProfileOwner ? (
+            <Link>
+              <Button onClick={handleChat}>Start a Chat!</Button>
+            </Link>
+          ) : null}
+        </div>
       </div>
 
       <Card fluid>
@@ -173,14 +181,6 @@ export default function Profile(props) {
           ) : null}
         </Card.Content>
       </Card>
-
-      <div className="carousel">
-        <Carousel initialSlideHeight={0.4}>
-          <img src={rupert} />
-          <img src={rupert} />
-          <img src={rupert} />
-        </Carousel>
-      </div>
     </div>
   );
 }
