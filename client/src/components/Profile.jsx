@@ -55,15 +55,6 @@ export default function Profile(props) {
     });
   }, []);
 
-  const imageURLs = [
-    "https://www.pexels.com/photo/two-yellow-labrador-retriever-puppies-1108099/",
-    "https://www.pexels.com/photo/brown-and-white-short-coated-puppy-1805164/",
-    "https://www.pexels.com/photo/closeup-photography-of-adult-short-coated-tan-and-white-dog-sleeping-on-gray-textile-at-daytime-731022/",
-    "https://www.pexels.com/photo/brown-and-white-american-pit-bull-terrier-with-brown-costume-825949/",
-  ];
-
-
-
   const handleChat = function () {
     const params = {
       initiator_id: localStorage.getItem("user_id"),

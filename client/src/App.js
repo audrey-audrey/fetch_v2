@@ -8,7 +8,6 @@ import "./App.scss";
 import history from "./history";
 import Login from "./components/Login";
 import Register from "./components/Register";
-// import Profile from "./components/Profile";
 import Conversations from "./components/Conversations";
 import Message from "./components/Message";
 import Profile from "./components/Profile";
@@ -124,7 +123,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/edit-user">
-            <EditProfile />
+            <EditProfile user={state.user}/>
           </Route>
           <Route path="/messages/:id">
             <Message />
