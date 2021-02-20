@@ -64,16 +64,14 @@ export default function Conversations(props) {
             item.initiator_id === convo.initiator_id
           ) {
             arr.push(
-              <Button
-                fluid
-                className="conversation-item"
-                onClick={() => handleClick(convo.id)}
-              >
-                <span className="conversation-name">{item.name}</span>
-                <span className="unreads">
-                  {findUnreads(convo.id) ? findUnreads(convo.id) : 0}
-                </span>
-              </Button>
+              <div className="conversation-item">
+                <Button fluid onClick={() => handleClick(convo.id)}>
+                  <span className="conversation-name">{item.name}</span>
+                  <span className="unreads">
+                    {findUnreads(convo.id) ? findUnreads(convo.id) : 0}
+                  </span>
+                </Button>
+              </div>
             );
           }
         }
@@ -119,7 +117,7 @@ export default function Conversations(props) {
       {loading ? (
         <span>Loading</span>
       ) : (
-        <div>
+        <div className="conversation">
           {recipients}
           {initiators}
         </div>

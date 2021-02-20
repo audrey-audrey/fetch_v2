@@ -2,7 +2,7 @@ import React, { useState, useEffect, forceUpdate } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import history from "../history";
-import { Comment, Icon } from "semantic-ui-react";
+import { Comment, Icon, Segment } from "semantic-ui-react";
 import Moment from "react-moment";
 
 import "./Message.scss";
@@ -96,13 +96,9 @@ export default function Message(props) {
   return (
     <div className="container">
       <h1>Messages</h1>
-      <div>
-        {loading ? (
-          <span>Loading</span>
-        ) : (
-          <ul className="message-container">{messages}</ul>
-        )}
-      </div>
+      <Segment className="message-container">
+        {loading ? <span>Loading</span> : <div>{messages}</div>}
+      </Segment>
       <form className="new-message" onSubmit={handleSubmit}>
         <label htmlFor="message">New Message:</label>
         <textarea
