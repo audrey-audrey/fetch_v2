@@ -71,10 +71,11 @@ function App() {
 
   return (
     <div className="App">
-      <div className='logo-top'>
-        <Link to='/'><img src={appLogo} /></Link>
-      </div>
       {localStorage.getItem("user_id") ? (
+        <>
+        <div className='logo-top'>
+          <Link to='/'><img src={appLogo} /></Link>
+        </div>
         <Menu
           pageWrapId={"page-wrap"}
           outerContainerId={"App"}
@@ -106,6 +107,7 @@ function App() {
             Logout
           </Link>
         </Menu>
+        </>
       ) : null}
       <div id="page-wrap">
         <Switch>
