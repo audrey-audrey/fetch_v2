@@ -5,11 +5,21 @@
 
 .message-container {
   padding-top: 2em;
+  width: 80%;
+  height: 600px;
+  overflow: scroll;
+  margin-bottom: 1em;
 }
 
 .input-group-text {
   width: 80%;
-  height: 8em;
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+}
+
+#message {
+  padding-left: 1em;
+  text-align: left;
 }
 
 .message-date {
