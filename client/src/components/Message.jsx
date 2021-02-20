@@ -2,8 +2,10 @@ import React, { useState, useEffect, forceUpdate } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import history from "../history";
+import { Comment, Icon } from "semantic-ui-react";
+import { moment } from "moment";
 
-import "./Login.css";
+import "./Message.scss";
 
 import Button from "./Button";
 
@@ -36,12 +38,32 @@ export default function Message(props) {
     if (!loading) {
       for (const item of state.user_info) {
         arr.push(
-          <div key={item.id}>
-            <h5>
-              {item.user.name} <small>{console.log(item.created_at)}</small>
-            </h5>
-            <p>{item.content}</p>
-          </div>
+          // <div key={item.id}>
+          //   <h5>
+          //     {item.user.name}
+          //     {"                         "}
+          //     <small className="message-date">
+          //       {new Date(item.created_at).toDateString()}
+          //     </small>
+          //   </h5>
+          //   <p>{item.content}</p>
+          // </div>
+          <Comment.Group>
+            <Comment>
+              <Comment.Avatar
+                src={`https://ui-avatars.com/api/?name=${
+                  item.user.name.split(" ")[0]
+                }+${item.user.name.split(" ")[1]}`}
+              />
+              <Comment.Content>
+                <Comment.Author>{item.user.name}</Comment.Author>
+                <Comment.Metadata>
+                  <div>{new Date(item.created_at).toDateString()}</div>
+                </Comment.Metadata>
+                <Comment.Text>{item.content}</Comment.Text>
+              </Comment.Content>
+            </Comment>
+          </Comment.Group>
         );
       }
     }
@@ -71,13 +93,22 @@ export default function Message(props) {
       .catch((e) => console.log(e));
   };
 
+  const timeSince = function (time) {};
+
   return (
-    <div>
-      Messages
-      <div>{loading ? <span>Loading</span> : <ul>{messages}</ul>}</div>
-      <form onSubmit={handleSubmit}>
+    <div className="container">
+      <h1>Messages</h1>
+      <div>
+        {loading ? (
+          <span>Loading</span>
+        ) : (
+          <ul className="message-container">{messages}</ul>
+        )}
+      </div>
+      <form className="new-message" onSubmit={handleSubmit}>
         <label htmlFor="message">New Message:</label>
-        <input
+        <textarea
+          className="input-group-text"
           type="text"
           id="message"
           name="message"
@@ -85,7 +116,9 @@ export default function Message(props) {
             setMessage(event.target.value);
           }}
         />
-        <button type="submit">Send Message</button>
+        <button className="btn btn-primary" type="submit">
+          Send Message
+        </button>
       </form>
     </div>
   );
