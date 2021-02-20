@@ -101,7 +101,10 @@ export default function Message(props) {
       </Segment>
       <form className="new-message" onSubmit={handleSubmit}>
         <label htmlFor="message">New Message:</label>
-        <textarea
+        <input
+          rows="1"
+          columns="50"
+          wrap="physical"
           className="input-group-text"
           type="text"
           id="message"
