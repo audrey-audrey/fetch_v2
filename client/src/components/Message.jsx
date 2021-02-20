@@ -3,7 +3,7 @@ import axios from "axios";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import history from "../history";
 import { Comment, Icon } from "semantic-ui-react";
-import { moment } from "moment";
+import Moment from "react-moment";
 
 import "./Message.scss";
 
@@ -58,7 +58,7 @@ export default function Message(props) {
               <Comment.Content>
                 <Comment.Author>{item.user.name}</Comment.Author>
                 <Comment.Metadata>
-                  <div>{new Date(item.created_at).toDateString()}</div>
+                  <Moment fromNow>{new Date(item.created_at)}</Moment>
                 </Comment.Metadata>
                 <Comment.Text>{item.content}</Comment.Text>
               </Comment.Content>
@@ -67,7 +67,7 @@ export default function Message(props) {
         );
       }
     }
-    return arr.reverse();
+    return arr;
   };
 
   const messages = displayMessages();
@@ -83,11 +83,9 @@ export default function Message(props) {
     axios
       .post(`/api/conversations/${conversation_id}/messages/`, params)
       .then((res) => {
-        console.log(res);
-        // res.data.name = name;
         setState((state) => ({
           ...state,
-          user_info: [res.data, ...state.user_info],
+          user_info: [...state.user_info, res.data],
         }));
       })
       .catch((e) => console.log(e));
