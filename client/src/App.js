@@ -4,7 +4,7 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { Image, Icon } from "semantic-ui-react";
 
-import "./App.css";
+import "./App.scss";
 import history from "./history";
 import Login from "./components/Login";
 import Register from "./components/Register";
@@ -70,7 +70,10 @@ function App() {
   }, []);
 
   return (
-    <div id="App">
+    <div className="App">
+      <div className='logo-top'>
+        <Link to='/'><img src={appLogo} /></Link>
+      </div>
       {localStorage.getItem("user_id") ? (
         <Menu
           pageWrapId={"page-wrap"}
