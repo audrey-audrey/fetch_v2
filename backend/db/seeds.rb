@@ -1,6 +1,8 @@
 require 'open-uri'
 require 'geocoder'
 User.destroy_all
+
+
 user_list = [
   [ "60 Queen St W, Toronto", Geocoder.search("60 Queen St W, Toronto").first.coordinates[0], Geocoder.search("60 Queen St W, Toronto").first.coordinates[1]],
   [ "111 Lombard St, Toronto", Geocoder.search("111 Lombard St, Toronto").first.coordinates[0], Geocoder.search("111 Lombard St, Toronto").first.coordinates[1] ],
@@ -8,9 +10,29 @@ user_list = [
   [ "600 University Ave, Toronto", Geocoder.search("600 University Ave, Toronto").first.coordinates[0], Geocoder.search("600 University Ave, Toronto").first.coordinates[1] ],
   [ "66 Nassau St, Toronto", Geocoder.search("66 Nassau St, Toronto").first.coordinates[0], Geocoder.search("66 Nassau St, Toronto").first.coordinates[1] ]
 ]
-# puts "hello"
-user = User.create!(
-  name: 'hello'
+
+user_list2[
+  ["124 Ossignton Ave, Toronto", Geocoder.search("124 Ossignton Ave, Toronto").first.coordinates[0], Geocoder.search("124 Ossignton Ave, Toronto").first.coordinates[1]],
+  ["1030 King Street W, Toronto", Geocoder.search("1030 King Street W, Toronto").first.coordinates[0], Geocoder.search("1030 King Street W, Toronto").first.coordinates[1]]
+]
+
+user1 = User.create!(
+  name: 'Alison',
+  email: 'dog_lover@gmail.com',
+  password: "password",
+  location: "",
+  lat: "",
+  lng: "",
+  dog_name: "Rupert",
+  primary_image: ,
+  bio: ,
+  playful: ,
+  affectionate: ,
+  high_energy: ,
+  shy: ,
+  well_trained: ,
+  large: 
+
 )
 # user2 = User.create!(
 #   name: 'world'
