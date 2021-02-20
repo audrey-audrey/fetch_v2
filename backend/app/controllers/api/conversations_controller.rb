@@ -4,7 +4,6 @@ class Api::ConversationsController < ApplicationController
     conversations = Conversation.select('*').where("initiator_id = ? OR recipient_id = ?", params[:id], params[:id])
     initiators = conversations.joins("INNER JOIN users ON conversations.initiator_id = users.id")
     recipients = conversations.joins("INNER JOIN users ON conversations.recipient_id = users.id")
-
     # unreads = Message.select("COUNT(messages.read), conversation_id as id").group(:conversation_id).having("messages.read = false")
     unreads = Message.select('conversation_id, COUNT(read) filter (where not "read") as unread').where("user_id <> ?", params[:id]).group(:conversation_id, :read)
     t1 = Message.select("*").joins("INNER JOIN conversations ON conversation_id = conversations.id").where("(initiator_id = ? OR recipient_id = ?) AND user_id <> ?", params[:id], params[:id], params[:id])
