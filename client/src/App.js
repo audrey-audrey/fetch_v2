@@ -110,6 +110,10 @@ function App() {
             <Icon name="favorite" />
             Favourites
           </Link>
+          <Link id="map" className="menu-item" to="/" onClick={closeMenu}>
+            <Icon name="globe" />
+            Back to Map
+          </Link>
           <Link
             id="logout"
             className="menu-item"
