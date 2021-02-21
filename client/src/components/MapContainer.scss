@@ -10,7 +10,7 @@
   .map-info-window {
     display: flex;
     flex-direction: column;
-    width: 18em;
+    width: 17em;
     align-items: center;
 
     .fave-button {
@@ -20,19 +20,24 @@
     }
   
     img {
+      margin-top: 1em;
+      margin-bottom: 1em;
       object-fit: cover;
       height: 15em;
       width: 15em;
       border-radius: 50%;
     }
   
-    p {
+    .info-name {
       margin:auto;
+      font-size:medium;
+      font-weight:600;
     }
-  
-    // .button {
-    //   margin: auto;
-    // }
+
+    .info-distance {
+      margin:auto;
+      padding-bottom:0.25em;
+    }
   }
 
   .carousel {

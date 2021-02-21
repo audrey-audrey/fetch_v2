@@ -14,7 +14,7 @@
 
 /* Color/shape of burger icon bars on hover*/
 .bm-burger-bars-hover {
-  background: #a90000;
+  background: #F36b07;
 }
 
 /* Position and sizing of clickable cross button */
@@ -39,7 +39,7 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #F9F9F9;
+  background: #A44200;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
 }
@@ -51,18 +51,23 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* Wrapper for item list */
 .bm-item-list {
-  color: #b8b7ad;
+  color: #FFEECF;
   padding: 0.8em;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
 }
 
 /* Individual item */
 .bm-item {
   display: inline-block;
-  color: black;
+  color: white;
   margin-top: 0.25em;
   margin-bottom: 0.25em;
   text-decoration: none;
   outline: none;
+  font-size: large;
+  /* font-weight: 600; */
 }
 
 /* Styling of overlay */

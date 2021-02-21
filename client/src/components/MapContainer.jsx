@@ -252,6 +252,7 @@ function MapContainer(props) {
           <Button toggle active={state.large} onClick={toggleLarge}>Large</Button>
         </div>
         {/* <p>{message}</p> */}
+        <div className='map'>
         <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
           <GoogleMap
             mapContainerStyle={mapStyles}
@@ -298,10 +299,10 @@ function MapContainer(props) {
                     color={isFavourited ? 'yellow' : 'grey'}
                     onClick={handleSubmit}
                   />
-                  <p>
+                  <p className='info-name'>
                     {selected.name} & {selected.dog_name}
                   </p>
-                  <p>{distance} away from you!</p>
+                  <p className='info-distance'>{distance} away from you!</p>
                   <Button
                     animated color="orange"
                     fluid
@@ -317,9 +318,10 @@ function MapContainer(props) {
             )}
           </GoogleMap>
         </LoadScript>
+        </div>
 
         {filteredPins.length &&
-          <>
+          <div className='map-section-bottom'>
             <Header as='h1'>Nearby</Header>
             <div className='carousel'>
               <Carousel
@@ -353,7 +355,7 @@ function MapContainer(props) {
                 })}
               </Carousel>
             </div>
-          </>
+          </div>
         }
       </div>
     </>

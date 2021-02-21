@@ -53,14 +53,22 @@
   }
 }
 
+.menu-profile{
+  #profile-img {
+    display: flex;
+    margin: auto;
+    object-fit: cover;
+    width: 10rem;
+    height: 10rem;
+    outline: none;
+  }
 
-#profile-img {
-  margin: auto;
-  object-fit: cover;
-  width: 15rem;
-  height: 15rem;
-  outline: none;
-  margin-bottom: 2em;
+  #profile-name {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    font-size: x-large;
+  }
 }
 
 // #outer-container > div ~ #page-wrap {
