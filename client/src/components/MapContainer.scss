@@ -1,9 +1,10 @@
 .map-container {
-  padding-top: 7em;
+  padding: 7em 2em 0 2em;
 
   .buttonContainer{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-bottom: 0.75em;
   }
 
   .map-info-window {
