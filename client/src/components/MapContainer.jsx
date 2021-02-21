@@ -303,7 +303,7 @@ function MapContainer(props) {
                   </p>
                   <p>{distance} away from you!</p>
                   <Button
-                    animated color="teal"
+                    animated color="orange"
                     fluid
                     as={Link} to={`/user/${selected.id}`}
                   >
