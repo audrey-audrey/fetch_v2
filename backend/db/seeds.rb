@@ -11,7 +11,7 @@ user_list = [
 
 user = User.create!(
   name: 'Alison',
-  email: 'dog_lover@gmail.com',
+  email: 'rupert@gmail.com',
   password: "password",
   location: "124 Ossington Ave, Toronto",
   lat: Geocoder.search("124 Ossington Ave, Toronto").first.coordinates[0],
