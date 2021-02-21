@@ -1,8 +1,6 @@
 require 'open-uri'
 require 'geocoder'
 User.destroy_all
-
-
 user_list = [
   [ "60 Queen St W, Toronto", Geocoder.search("60 Queen St W, Toronto").first.coordinates[0], Geocoder.search("60 Queen St W, Toronto").first.coordinates[1]],
   [ "111 Lombard St, Toronto", Geocoder.search("111 Lombard St, Toronto").first.coordinates[0], Geocoder.search("111 Lombard St, Toronto").first.coordinates[1] ],
@@ -11,32 +9,28 @@ user_list = [
   [ "66 Nassau St, Toronto", Geocoder.search("66 Nassau St, Toronto").first.coordinates[0], Geocoder.search("66 Nassau St, Toronto").first.coordinates[1] ]
 ]
 
-user_list2[
-  ["124 Ossignton Ave, Toronto", Geocoder.search("124 Ossignton Ave, Toronto").first.coordinates[0], Geocoder.search("124 Ossignton Ave, Toronto").first.coordinates[1]],
-  ["1030 King Street W, Toronto", Geocoder.search("1030 King Street W, Toronto").first.coordinates[0], Geocoder.search("1030 King Street W, Toronto").first.coordinates[1]]
-]
-
-user1 = User.create!(
+user = User.create!(
   name: 'Alison',
   email: 'dog_lover@gmail.com',
   password: "password",
-  location: "",
-  lat: "",
-  lng: "",
+  location: "124 Ossignton Ave, Toronto",
+  lat: 43.740952,
+  lng: -79.417806,
   dog_name: "Rupert",
-  primary_image: ,
-  bio: ,
-  playful: ,
-  affectionate: ,
-  high_energy: ,
-  shy: ,
-  well_trained: ,
-  large: 
-
+  primary_image: 'https://i.imgur.com/NpoVbey.jpg',
+  image_2: 'https://i.imgur.com/wjrjuwC.jpg',
+  image_3: 'https://i.imgur.com/UJvbNyT.jpg',
+  image_4: 'https://i.imgur.com/B8cdnDE.jpg',
+  image_5: 'https://i.imgur.com/yNqaPoI.jpg',
+  bio: "Hello!",
+  playful: true,
+  affectionate: true,
+  high_energy: true,
+  shy: false,
+  well_trained: true,
+  large: true 
 )
-# user2 = User.create!(
-#   name: 'world'
-# )
+
 Conversation.destroy_all
 user_list.each do |location, lat, lng|
   newUser = User.create!(

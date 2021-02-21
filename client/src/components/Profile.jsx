@@ -185,9 +185,10 @@ export default function Profile(props) {
 
       <div className="carousel">
         <Carousel initialSlideHeight={0.4}>
-          <img src={rupert} />
-          <img src={rupert} />
-          <img src={rupert} />
+          <img src={state.user.image_2} />
+          <img src={state.user.image_3} />
+          <img src={state.user.image_4} />
+          <img src={state.user.image_5} />
         </Carousel>
       </div>
     </div>
