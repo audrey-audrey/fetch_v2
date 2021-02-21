@@ -8,13 +8,15 @@
   }
 
   .map-info-window {
-    // display: flex;
-    // flex-direction: column;
-     width: 22em;
+    display: flex;
+    flex-direction: column;
+    width: 18em;
+    height: 20em;
+    align-items: center;
   
     img {
-      height: 20em;
-      width: 20em;
+      height: 10em;
+      width: 10em;
       border-radius: 50%;
     }
   
@@ -22,9 +24,9 @@
       margin:auto;
     }
   
-    .button {
-      margin: auto;
-    }
+    // .button {
+    //   margin: auto;
+    // }
   }
 
   .carousel {

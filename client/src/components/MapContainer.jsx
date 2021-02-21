@@ -10,10 +10,10 @@ import axios from "axios";
 
 import { Link } from "react-router-dom";
 
-import { 
-  Button, 
+import {
+  Button,
   Icon,
-  Card, 
+  Card,
   Image,
   Container,
   Header
@@ -28,7 +28,7 @@ import no_photo from "../images/placeholder-headshot.png"
 function MapContainer(props) {
   // State
   const [selected, setSelected] = useState({});
-  
+
   const onSelect = (item) => {
     setSelected(item);
   };
@@ -112,7 +112,7 @@ function MapContainer(props) {
       bio: user.bio,
       image: user.primary_image || no_photo,
       icon: {
-        url: parseFloat(user.id)===parseFloat(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png" ,
+        url: parseFloat(user.id) === parseFloat(user_id) ? "http://audrey.lol/img/pinyellow.png" : "http://audrey.lol/img/pinorange.png",
         origin: { x: 0, y: 0 },
         // define pop-up
         anchor: { x: 13.5, y: 0 },
@@ -140,50 +140,50 @@ function MapContainer(props) {
   filteredPins = !state.playful
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.playful === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
-          return true;
-        }
-      });
+      if (pin.playful === true || (parseFloat(pin.id) === parseFloat(user_id))) {
+        return true;
+      }
+    });
 
   filteredPins = !state.affectionate
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.affectionate === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
-          return true;
-        }
-      });
+      if (pin.affectionate === true || (parseFloat(pin.id) === parseFloat(user_id))) {
+        return true;
+      }
+    });
 
   filteredPins = !state.high_energy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.high_energy === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
-          return true;
-        }
-      });
+      if (pin.high_energy === true || (parseFloat(pin.id) === parseFloat(user_id))) {
+        return true;
+      }
+    });
 
   filteredPins = !state.shy
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.shy === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
-          return true;
-        }
-      });
+      if (pin.shy === true || (parseFloat(pin.id) === parseFloat(user_id))) {
+        return true;
+      }
+    });
 
   filteredPins = !state.well_trained
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.well_trained === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
-          return true;
-        }
-      });
+      if (pin.well_trained === true || (parseFloat(pin.id) === parseFloat(user_id))) {
+        return true;
+      }
+    });
 
   filteredPins = !state.large
     ? filteredPins
     : filteredPins.filter((pin) => {
-        if (pin.large === true || (parseFloat(pin.id) === parseFloat(user_id)) ) {
-          return true;
-        }
-      });
+      if (pin.large === true || (parseFloat(pin.id) === parseFloat(user_id))) {
+        return true;
+      }
+    });
 
   const mapStyles = {
     height: "60vh",
@@ -242,10 +242,6 @@ function MapContainer(props) {
   return (
     <>
       <div className='map-container'>
-        {/* <div className='profile-section-top'>
-          <Link to='/'><img src={appLogo} /></Link>
-        </div> */}
-
         <div className='buttonContainer'>
           <Button toggle active={!state.showToggle} onClick={toggleShow}>Show All!</Button>
           <Button toggle active={state.playful} onClick={togglePlayful}>Playful</Button>
@@ -256,120 +252,116 @@ function MapContainer(props) {
           <Button toggle active={state.large} onClick={toggleLarge}>Large</Button>
         </div>
         {/* <p>{message}</p> */}
-
-      <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
-        <GoogleMap
-          mapContainerStyle={mapStyles}
-          zoom={15}
-          center={defaultCenter}
-          options={{ styles: styles }}
-        >
-          {filteredPins.length &&
-            filteredPins.map((item) => {
-              return (
-                <Marker
-                  key={item.name}
-                  position={item.location}
-                  icon={item.icon}
-                  onClick={() => onSelect(item)}
-                />
-              );
-            })}
-          {selected.location && (
-            <InfoWindow
-              position={selected.location}
-              clickable={true}
-              onCloseClick={() => setSelected({})}
-            >
-              <div className="map-info-window">
-                <DistanceMatrixService
-                  options={{
-                    destinations: [{ lat: parseFloat(selected.location.lat), lng: parseFloat(selected.location.lng) }],
-                    origins: [{ lng: parseFloat(props.user.lng), lat: parseFloat(props.user.lat) }],
-                    travelMode: "WALKING",
-                  }}
-                  callback={(response) => { 
-                    const distance = response.rows[0].elements[0].distance.text;
-                    changeDistance(distance)
-                  }}
-                />
-                <Button
-                  animated="vertical"
-                  size="small"
-                  floated="left"
-                  color="yellow"
-                  basic={!isFavourited}
-                  onClick={handleSubmit}
-                >
-                  <Button.Content hidden>Fave</Button.Content>
-                  <Button.Content visible>
-                    <Icon name="favorite" size="big" />
-                  </Button.Content>
-                </Button>
-                <Container textAlign="center">
-                  <img src={selected.image} />
-                  <br />
+        <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
+          <GoogleMap
+            mapContainerStyle={mapStyles}
+            zoom={15}
+            center={defaultCenter}
+            options={{ styles: styles }}
+          >
+            {filteredPins.length &&
+              filteredPins.map((item) => {
+                return (
+                  <Marker
+                    key={item.name}
+                    position={item.location}
+                    icon={item.icon}
+                    onClick={() => onSelect(item)}
+                  />
+                );
+              })}
+            {selected.location && (
+              <InfoWindow
+                position={selected.location}
+                clickable={true}
+                onCloseClick={() => setSelected({})}
+              >
+                <div className="map-info-window">
+                  <DistanceMatrixService
+                    options={{
+                      destinations: [{ lat: parseFloat(selected.location.lat), lng: parseFloat(selected.location.lng) }],
+                      origins: [{ lng: parseFloat(props.user.lng), lat: parseFloat(props.user.lat) }],
+                      travelMode: "WALKING",
+                    }}
+                    callback={(response) => {
+                      const distance = response.rows[0].elements[0].distance.text;
+                      changeDistance(distance)
+                    }}
+                  />
+                  <Icon.Group size='large'>
+                    <img src={selected.image} />
+                    <Icon corner name='add' />
+                  </Icon.Group>
+                  {/* <Button
+                      animated="vertical"
+                      size="small"
+                      floated="left"
+                      color="yellow"
+                      basic={!isFavourited}
+                      onClick={handleSubmit}
+                    >
+                      <Button.Content hidden>Fave</Button.Content>
+                      <Button.Content visible>
+                        <Icon name="favorite" size="big" />
+                      </Button.Content>
+                    </Button> */}
                   <p>
                     {selected.name} & {selected.dog_name}
                   </p>
-                  <p>Distance: {distance}</p>
-                  <br />
-                  <p>{selected.bio}</p>
-                  <br />
-                  <Button 
-                  animated color="teal" 
-                  fluid 
-                  as={Link} to={`/user/${selected.id}`}
+                  <p>{distance} away from you!</p>
+                  <Button
+                    animated color="teal"
+                    fluid
+                    as={Link} to={`/user/${selected.id}`}
                   >
                     <Button.Content visible>Profile</Button.Content>
                     <Button.Content hidden>
                       <Icon name="arrow right" />
                     </Button.Content>
                   </Button>
-                </Container>
-              </div>
-            </InfoWindow>
-          )}
-        </GoogleMap>
-      </LoadScript>
+                </div>
+              </InfoWindow>
+            )}
+          </GoogleMap>
+        </LoadScript>
 
-      {filteredPins.length && 
-      <>
-      <Header as='h1'>Nearby</Header>
-      <div className='carousel'>
-        <Carousel 
-          slidesToShow={3} 
-          initialSlideHeight={0.4}
-        >
-          {filteredPins.map((item) => {
-            if (parseFloat(item.id) !== parseFloat(user_id)) {
-              return (
-                <Card 
-                  key={item.id}
-                  >
-                  <Image 
-                    className='card-image'
-                    src={item.image} 
-                    />
-                  <Card.Content>
-                    <Header>{item.name} & {item.dog_name}</Header>
-                    <div className='distance-button'>
-                      <Card.Meta>
-                        <span className='date'>Distance</span>
-                      </Card.Meta>
-                      <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
-                          <Icon name='arrow alternate circle right' color='teal' size='large'/>
-                      </Link>
-                    </div>
-                  </Card.Content>
-                </Card>
-              );
-            }
-          })}
-        </Carousel>
-      </div>
-      </>
-      }
+        {filteredPins.length &&
+          <>
+            <Header as='h1'>Nearby</Header>
+            <div className='carousel'>
+              <Carousel
+                slidesToShow={3}
+                initialSlideHeight={0.4}
+              >
+                {filteredPins.map((item) => {
+                  if (parseFloat(item.id) !== parseFloat(user_id)) {
+                    return (
+                      <Card
+                        key={item.id}
+                      >
+                        <Image
+                          className='card-image'
+                          src={item.image}
+                        />
+                        <Card.Content>
+                          <Header>{item.name} & {item.dog_name}</Header>
+                          <div className='distance-button'>
+                            <Card.Meta>
+                              <span className='date'>Distance</span>
+                            </Card.Meta>
+                            <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
+                              <Icon name='arrow alternate circle right' color='teal' size='large' />
+                            </Link>
+                          </div>
+                        </Card.Content>
+                      </Card>
+                    );
+                  }
+                })}
+              </Carousel>
+            </div>
+          </>
+        }
       </div>
     </>
   );
