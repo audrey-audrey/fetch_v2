@@ -13,9 +13,9 @@ user = User.create!(
   name: 'Alison',
   email: 'dog_lover@gmail.com',
   password: "password",
-  location: "124 Ossignton Ave, Toronto",
-  lat: 43.740952,
-  lng: -79.417806,
+  location: "124 Ossington Ave, Toronto",
+  lat: 43.647115,
+  lng: -79.419895,
   dog_name: "Rupert",
   primary_image: 'https://i.imgur.com/NpoVbey.jpg',
   image_2: 'https://i.imgur.com/wjrjuwC.jpg',
@@ -30,6 +30,28 @@ user = User.create!(
   well_trained: true,
   large: true 
 )
+
+user2 = User.create!(
+    name: 'Trysh',
+    email: 'benny@gmail.com',
+    password: "password",
+    location: "1030 King St W, Toronto",
+    lat: 43.641306,
+    lng: -79.41565,
+    dog_name: "Benny",
+    primary_image: 'https://i.imgur.com/sl6pWhU.jpg',
+    image_2: 'https://i.imgur.com/dZxPM6P.jpg',
+    image_3: 'https://i.imgur.com/VxDBJuO.jpg',
+    image_4: 'https://i.imgur.com/EaOwpQu.jpg',
+    image_5: 'https://i.imgur.com/VhtVUU5.jpg',
+    bio: "Hi!",
+    playful: true,
+    affectionate: true,
+    high_energy: true,
+    shy: false,
+    well_trained: false,
+    large: false
+  )
 
 Conversation.destroy_all
 user_list.each do |location, lat, lng|
