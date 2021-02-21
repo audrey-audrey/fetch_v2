@@ -273,6 +273,7 @@ function MapContainer(props) {
             {selected.location && (
               <InfoWindow
                 position={selected.location}
+                options={{disableAutoPan: true}}
                 clickable={true}
                 onCloseClick={() => setSelected({})}
               >
@@ -288,23 +289,15 @@ function MapContainer(props) {
                       changeDistance(distance)
                     }}
                   />
-                  <Icon.Group size='large'>
-                    <img src={selected.image} />
-                    <Icon corner name='add' />
-                  </Icon.Group>
-                  {/* <Button
-                      animated="vertical"
-                      size="small"
-                      floated="left"
-                      color="yellow"
-                      basic={!isFavourited}
-                      onClick={handleSubmit}
-                    >
-                      <Button.Content hidden>Fave</Button.Content>
-                      <Button.Content visible>
-                        <Icon name="favorite" size="big" />
-                      </Button.Content>
-                    </Button> */}
+                  <img src={selected.image} />
+                  <Button
+                    className='fave-button'
+                    circular
+                    icon='favorite'
+                    size='big'
+                    color={isFavourited ? 'yellow' : 'grey'}
+                    onClick={handleSubmit}
+                  />
                   <p>
                     {selected.name} & {selected.dog_name}
                   </p>
@@ -334,7 +327,7 @@ function MapContainer(props) {
                 initialSlideHeight={0.4}
               >
                 {filteredPins.map((item) => {
-                  if (parseFloat(item.id) !== parseFloat(user_id)) {
+                  if (Number(item.id) !== Number(user_id)) {
                     return (
                       <Card
                         key={item.id}
