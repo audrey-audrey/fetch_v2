@@ -326,7 +326,8 @@ function MapContainer(props) {
             <div className='carousel'>
               <Carousel
                 slidesToShow={3}
-                initialSlideHeight={0.4}
+                initialSlideHeight={120}
+                renderBottomCenterControls={false}
               >
                 {filteredPins.map((item) => {
                   if (Number(item.id) !== Number(user_id)) {
@@ -339,13 +340,10 @@ function MapContainer(props) {
                           src={item.image}
                         />
                         <Card.Content>
-                          <Header>{item.name} & {item.dog_name}</Header>
-                          <div className='distance-button'>
-                            <Card.Meta>
-                              <span className='date'>Distance</span>
-                            </Card.Meta>
+                          <div className='card-section-bottom'>
+                            <Header>{item.name} & {item.dog_name}</Header>
                             <Link id="profile" className="menu-item" to={`/user/${item.id}`}>
-                              <Icon name='arrow alternate circle right' color='teal' size='large' />
+                              <Icon name='arrow alternate circle right' color='orange' size='large' />
                             </Link>
                           </div>
                         </Card.Content>
