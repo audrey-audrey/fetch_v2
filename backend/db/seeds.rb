@@ -22,7 +22,7 @@ user = User.create!(
   image_3: 'https://i.imgur.com/UJvbNyT.jpg',
   image_4: 'https://i.imgur.com/B8cdnDE.jpg',
   image_5: 'https://i.imgur.com/yNqaPoI.jpg',
-  bio: "Hello!",
+  bio: "Hello! I'm really excited to meet new friends, human and canine alike! Message me to set up a playdate!",
   playful: true,
   affectionate: true,
   high_energy: true,
@@ -44,13 +44,122 @@ user2 = User.create!(
     image_3: 'https://i.imgur.com/VxDBJuO.jpg',
     image_4: 'https://i.imgur.com/EaOwpQu.jpg',
     image_5: 'https://i.imgur.com/VhtVUU5.jpg',
-    bio: "Hi!",
+    bio: "Hi! We're looking forward to meeting other dogs in the neghbour",
     playful: true,
     affectionate: true,
     high_energy: true,
     shy: false,
     well_trained: false,
     large: false
+  )
+ 
+  user3 = User.create!(
+    name: 'Ashley',
+    email: 'inga@gmail.com',
+    password: "password",
+    location: "164 McCaul St, Toronto",
+    lat: Geocoder.search("164 McCaul St, Toronto").first.coordinates[0],
+    lng: Geocoder.search("164 McCaul St, Toronto").first.coordinates[1],
+    dog_name: "Inga",
+    primary_image: 'https://i.imgur.com/dSZiEIX.jpg',
+    image_2: 'https://i.imgur.com/4Ba8H9y.jpg',
+    image_3: 'https://i.imgur.com/nmUUPCH.jpg',
+    image_4: 'https://i.imgur.com/iA1rtWM.jpg',
+    image_5: 'https://i.imgur.com/CoGqvta.jpg',
+    bio: "We're Ashley and Inga and we love to go for long walks on the beach. Message if you want to join us!",
+    playful: false,
+    affectionate: true,
+    high_energy: false,
+    shy: true,
+    well_trained: true,
+    large: false
+  )  
+
+  user4 = User.create!(
+    name: 'Barbara',
+    email: 'buster@gmail.com',
+    password: "password",
+    location: "93 Front St E, Toronto",
+    lat: Geocoder.search("93 Front St E, Toronto").first.coordinates[0],
+    lng: Geocoder.search("93 Front St E, Toronto").first.coordinates[1],
+    dog_name: "Buster",
+    primary_image: 'https://i.imgur.com/JHVYZBg.jpg',
+    image_2: 'https://i.imgur.com/2YTWCN1.jpg',
+    image_3: 'https://i.imgur.com/9azUI5L.jpg',
+    image_4: 'https://i.imgur.com/AJh4bLO.jpg',
+    image_5: 'https://i.imgur.com/CUDT4pb.jpg',
+    bio: "Barbara and Buster here, we like to wander far and wide, sometimes for hours on end. HMU if you want to go wandering around too!",
+    playful: false,
+    affectionate: false,
+    high_energy: true,
+    shy: true,
+    well_trained: false,
+    large: true
+  ) 
+
+  user5 = User.create!(
+    name: 'Zoe',
+    email: 'ella@gmail.com',
+    password: "password",
+    location: "916 Dundas St W, Toronto",
+    lat: Geocoder.search("916 Dundas St W, Toronto").first.coordinates[0],
+    lng: Geocoder.search("916 Dundas St W, Toronto").first.coordinates[1],
+    dog_name: "Ella",
+    primary_image: 'https://i.imgur.com/3PyEgvZ.jpg',
+    image_2: 'https://i.imgur.com/2bKWEt8.jpg',
+    image_3: 'https://i.imgur.com/RE6jF3D.jpg',
+    image_4: 'https://i.imgur.com/vJNXmDj.jpg',
+    image_5: 'https://i.imgur.com/1IdBXXI.jpg',
+    bio: "Zoe and Ella here, we enjoy taking solo walks, eating carrots, and chilling out. Message if you want to eat some carrots with us!",
+    playful: false,
+    affectionate: true,
+    high_energy: false,
+    shy: true,
+    well_trained: true,
+    large: true
+  ) 
+  user6 = User.create!(
+    name: 'Joey',
+    email: 'pugly@gmail.com',
+    password: "password",
+    location: "777 Bay St, Toronto",
+    lat: Geocoder.search("777 Bay St, Toronto").first.coordinates[0],
+    lng: Geocoder.search("777 Bay St, Toronto").first.coordinates[1],
+    dog_name: "Pugly",
+    primary_image: 'https://i.imgur.com/vazHfhf.jpg',
+    image_2: 'https://i.imgur.com/P4RJnAk.jpg',
+    image_3: 'https://i.imgur.com/9ZeFCCe.jpg',
+    image_4: 'https://i.imgur.com/H1hAaJP.jpg',
+    image_5: 'https://i.imgur.com/57CRxNT.jpg',
+    bio: "Welcome to Joey and Pugly's page! Pugly's an old guy who still loves getting lots of exercise",
+    playful: true,
+    affectionate: true,
+    high_energy: false,
+    shy: false,
+    well_trained: true,
+    large: false
+  )
+
+  user7 = User.create!(
+    name: 'Suzanne',
+    email: 'finley@gmail.com',
+    password: "password",
+    location: "218 Adelaide St W, Toronto",
+    lat: Geocoder.search("218 Adelaide St W, Toronto").first.coordinates[0],
+    lng: Geocoder.search("218 Adelaide St W, Toronto").first.coordinates[1],
+    dog_name: "Finley",
+    primary_image: 'https://i.imgur.com/Tx9x2Db.jpg',
+    image_2: 'https://i.imgur.com/np7uNmS.jpg',
+    image_3: 'https://i.imgur.com/3MF6Em9.jpg',
+    image_4: 'https://i.imgur.com/RAwD7p9.jpg',
+    image_5: 'https://i.imgur.com/yu2NDRk.jpg',
+    bio: "Hello, from Suzanne and Finley. We like to go on long walks in the afternoon, and take long naps afterwards. Message if you want to walk with us!",
+    playful: true,
+    affectionate: true,
+    high_energy: false,
+    shy: false,
+    well_trained: false,
+    large: true
   )
 
 Conversation.destroy_all
@@ -91,19 +200,3 @@ user_list.each do |location, lat, lng|
   user = newUser
 
 end
-# # Conversations
-# # Messages
-# Message.destroy_all
-# 5.times do
-#   Message.create!(
-#     content: Faker::Lorem.paragraph(sentence_count: 2),
-#     user_id: 4,
-#     conversation_id: 1
-#   )
-# end
-# # Favorites
-# Favorite.destroy_all
-# Favorite.create!(
-#   favoriter: 1,
-#   favoritee: 2
-# )
