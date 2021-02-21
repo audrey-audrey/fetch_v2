@@ -4,8 +4,13 @@
   flex-direction: column;
 }
 
+.ui.header:first-child {
+  margin-bottom: 1em;
+}
+
 .ui.cards {
   justify-content: center;
+  margin-top: 1em;
 }
 
 .ui.cards>.card {

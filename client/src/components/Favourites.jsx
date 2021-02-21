@@ -52,7 +52,7 @@ export default function Favourites(props) {
   return (
     <div className="favourites-container">
       <Header size="huge" textAlign="center">
-        Good Dogs
+        Good Dogs.
       </Header>
       <Card.Group>
         {state.favourites.map((favourite) => {
@@ -75,7 +75,7 @@ export default function Favourites(props) {
               <Card.Content extra>
                 <Button
                   animated
-                  color="teal"
+                  color="orange"
                   as={Link}
                   to={`/user/${favoritee_id}`}
                 >
@@ -87,7 +87,7 @@ export default function Favourites(props) {
                 <Button
                   animated
                   basic
-                  color="teal"
+                  color="orange"
                   floated="right"
                   // onClick={handleDelete}
                 >
