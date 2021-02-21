@@ -30,7 +30,7 @@ function App() {
     users: [],
     user: {},
     unreads: 1,
-    menuOpen: false
+    menuOpen: false,
   });
 
   // setStates
@@ -38,7 +38,8 @@ function App() {
   const setUser = (user) => setState((prev) => ({ ...prev, user }));
   const setUnreads = (unreads) => setState((prev) => ({ ...prev, unreads }));
   const closeMenu = () => setState((prev) => ({ ...prev, menuOpen: false }));
-  const handleStateChange = () => setState((prev) => ({...prev, menuOpen: state.isOpen}))
+  const handleStateChange = () =>
+    setState((prev) => ({ ...prev, menuOpen: state.isOpen }));
 
   // fetch users data from backend
   useEffect(() => {
@@ -75,55 +76,66 @@ function App() {
     <div className="App">
       {localStorage.getItem("user_id") ? (
         <>
-        <div className='logo-top'>
-          <Link to='/'>
-            <img 
-            src={appLogo}
-            // onClick={closeMenu} 
-            />
+          <div className="logo-top">
+            <Link to="/">
+              <img
+                src={appLogo}
+                // onClick={closeMenu}
+              />
             </Link>
-        </div>
-        <Menu
-          pageWrapId={"page-wrap"}
-          outerContainerId={"App"}
-          isOpen={state.menuOpen}
-          onStateChange={handleStateChange}
-        > 
-          <div className='menu-profile'>
-            <Image id="profile-img" src={state.user.primary_image} avatar />
-            <p id='profile-name'>{state.user.name}</p>
           </div>
-          <Link
-            id="profile"
-            className="menu-item"
-            to={`/user/${localStorage.getItem("user_id")}`}
-            onClick={closeMenu}
+          <Menu
+            pageWrapId={"page-wrap"}
+            outerContainerId={"App"}
+            isOpen={state.menuOpen}
+            onStateChange={handleStateChange}
           >
-            <Icon name="user" />
-            Profile
-          </Link>
-          <Link id="conversations" className="menu-item" to="/conversations" onClick={closeMenu}>
-            <Icon name="mail" />
-            Conversations {state.unreads > 0 && <Label>{state.unreads}</Label>}
-          </Link>
-          <Link id="favorites" className="menu-item" to="/favourites" onClick={closeMenu}>
-            <Icon name="favorite" />
-            Favourites
-          </Link>
-          <Link id="map" className="menu-item" to="/" onClick={closeMenu}>
-            <Icon name="globe" />
-            Back to Map
-          </Link>
-          <Link
-            id="logout"
-            className="menu-item"
-            onClick={handleLogout}
-            to="/homepage"
-          >
-            <Icon name="log out" />
-            Logout
-          </Link>
-        </Menu>
+            <div className="menu-profile">
+              <Image id="profile-img" src={state.user.primary_image} avatar />
+              <p id="profile-name">{state.user.name}</p>
+            </div>
+            <Link
+              id="profile"
+              className="menu-item"
+              to={`/user/${localStorage.getItem("user_id")}`}
+              onClick={closeMenu}
+            >
+              <Icon name="user" />
+              Profile
+            </Link>
+            <Link
+              id="conversations"
+              className="menu-item"
+              to="/conversations"
+              onClick={closeMenu}
+            >
+              <Icon name="mail" />
+              Conversations{" "}
+              {state.unreads > 0 && <Label>{state.unreads}</Label>}
+            </Link>
+            <Link
+              id="favorites"
+              className="menu-item"
+              to="/favourites"
+              onClick={closeMenu}
+            >
+              <Icon name="favorite" />
+              Favourites
+            </Link>
+            <Link id="map" className="menu-item" to="/" onClick={closeMenu}>
+              <Icon name="globe" />
+              Back to Map
+            </Link>
+            <Link
+              id="logout"
+              className="menu-item"
+              onClick={handleLogout}
+              to="/homepage"
+            >
+              <Icon name="log out" />
+              Logout
+            </Link>
+          </Menu>
         </>
       ) : null}
       <div id="page-wrap">
@@ -141,7 +153,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/edit-user">
-            <EditProfile user={state.user}/>
+            <EditProfile user={state.user} />
           </Route>
           <Route path="/messages/:id">
             <Message />
@@ -156,8 +168,8 @@ function App() {
             {localStorage.getItem("user_id") ? (
               <MapContainer users={state.users} user={state.user} />
             ) : (
-                <Homepage />
-              )}
+              <Homepage />
+            )}
           </Route>
         </Switch>
       </div>
