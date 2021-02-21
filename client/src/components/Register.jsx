@@ -12,7 +12,7 @@ import {
 } from "semantic-ui-react";
 import history from "../history";
 import dogpile from "../images/dogpile.png";
-import logo from "../images/icons/logo.png";
+import logo from "../images/icons/logo.svg";
 import "./Register.css";
 
 export default function Register(props) {

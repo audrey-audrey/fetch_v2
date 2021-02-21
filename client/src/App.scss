@@ -1,5 +1,8 @@
 .App {
   position: relative;
+  // background-color: black;
+  width: 100vw;
+  height: 100vh;
 
   .logo-top {
     img {
@@ -9,6 +12,8 @@
       padding-top: 2em;
       padding-bottom: 1em;
       padding-right: 2em;
+      height: 87px;
+      width: 228px;
     }
   }
 }
@@ -48,14 +53,22 @@
   }
 }
 
+.menu-profile{
+  #profile-img {
+    display: flex;
+    margin: auto;
+    object-fit: cover;
+    width: 10rem;
+    height: 10rem;
+    outline: none;
+  }
 
-#profile-img {
-  margin: auto;
-  object-fit: cover;
-  width: 15rem;
-  height: 15rem;
-  outline: none;
-  margin-bottom: 2em;
+  #profile-name {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1em;
+    font-size: x-large;
+  }
 }
 
 // #outer-container > div ~ #page-wrap {

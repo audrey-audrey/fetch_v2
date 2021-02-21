@@ -1,71 +1,88 @@
-.filter {
-  display: flex;
-  flex-direction: column;
+.map-container {
+  padding: 7em 2em 0 2em;
 
   .buttonContainer{
     display: flex;
-    justify-content: space-around;
-  }
-}
-
-.map-info-window {
-  // display: flex;
-  // flex-direction: column;
-   width: 22em;
-
-  img {
-    height: 20em;
-    width: 20em;
-    border-radius: 50%;
+    justify-content: space-between;
+    padding-bottom: 0.75em;
   }
 
-  p {
-    margin:auto;
-  }
-
-  .button {
-    margin: auto;
-  }
-}
-
-
-.map-container {
-  .filter {
-    padding-top: 7em;
-  }
-
-  .carousel {
+  .map-info-window {
     display: flex;
-    padding-top: 1em;
-    padding-bottom: 1em;
-    
-    .ui.card{
-      margin: auto;
+    flex-direction: column;
+    width: 17em;
+    align-items: center;
+
+    .fave-button {
+      position: absolute;
+      top: 8em;
+      right: 2em;
+    }
+  
+    img {
+      margin-top: 1em;
+      margin-bottom: 1em;
+      object-fit: cover;
+      height: 15em;
       width: 15em;
+      border-radius: 50%;
+    }
   
-      .header {
-        font-size: 1em;
-        margin-bottom: 0;
-      }
-  
-      .card-image {
-        object-fit: cover;
-        height: 10em;
-        width: 10em;
-        margin: auto;
-        border-radius: 50%;
-      }
-  
-      .distance-button {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-  
-        .icon {
-          text-decoration: none;
-        }
-      }
-  
+    .info-name {
+      margin:auto;
+      font-size:medium;
+      font-weight:600;
+    }
+
+    .info-distance {
+      margin:auto;
+      padding-bottom:0.25em;
     }
   }
+
+  .map-section-bottom {
+    padding-top: 1em;
+
+    .carousel {
+      display: flex;
+      padding-bottom: 1em;
+      
+      .ui.card{
+        display: flex;
+        margin: auto;
+        margin-top: 0.25em;
+        width: 13em;
+    
+        .header {
+          font-size: 0.8em;
+          margin-bottom: 0;
+        }
+    
+        .card-image {
+          object-fit: cover;
+          height: 10em;
+          width: 13em;
+          margin: auto;
+        }
+    
+        .card-section-bottom {
+          display: flex;
+          align-items: center;
+          flex-direction: column;
+    
+          .icon {
+            text-decoration: none;
+          }
+        }
+    
+      }
+    }
+
+    .slider {
+      height: 15em !important;
+    }
+
+  }
+
+
 }

@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Image, Button } from "semantic-ui-react";
 import ella from "../images/ella.png";
-import logo from "../images/icons/logo.png";
+import logo from "../images/icons/logo.svg";
 
 import "./Homepage.scss";
 

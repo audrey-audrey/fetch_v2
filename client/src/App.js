@@ -1,14 +1,13 @@
-import { React, useState, useEffect, useLocation } from "react";
+import { React, useState, useEffect } from "react";
 import axios from "axios";
 import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { Image, Icon } from "semantic-ui-react";
+import { Image, Icon, Label } from "semantic-ui-react";
 
 import "./App.scss";
 import history from "./history";
 import Login from "./components/Login";
 import Register from "./components/Register";
-// import Profile from "./components/Profile";
 import Conversations from "./components/Conversations";
 import Message from "./components/Message";
 import Profile from "./components/Profile";
@@ -17,7 +16,7 @@ import Favourites from "./components/Favourites";
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
 
-import appLogo from "./images/icons/logo.png";
+import appLogo from "./images/icons/logo.svg";
 
 import { slide as Menu } from "react-burger-menu";
 import "./BurgerMenu.css";
@@ -30,13 +29,16 @@ function App() {
   const [state, setState] = useState({
     users: [],
     user: {},
-    unreads: 0,
+    unreads: 1,
+    menuOpen: false
   });
 
   // setStates
   const setUsers = (users) => setState((prev) => ({ ...prev, users }));
   const setUser = (user) => setState((prev) => ({ ...prev, user }));
   const setUnreads = (unreads) => setState((prev) => ({ ...prev, unreads }));
+  const closeMenu = () => setState((prev) => ({ ...prev, menuOpen: false }));
+  const handleStateChange = () => setState((prev) => ({...prev, menuOpen: state.isOpen}))
 
   // fetch users data from backend
   useEffect(() => {
@@ -74,26 +76,37 @@ function App() {
       {localStorage.getItem("user_id") ? (
         <>
         <div className='logo-top'>
-          <Link to='/'><img src={appLogo} /></Link>
+          <Link to='/'>
+            <img 
+            src={appLogo}
+            // onClick={closeMenu} 
+            />
+            </Link>
         </div>
         <Menu
           pageWrapId={"page-wrap"}
           outerContainerId={"App"}
-        >
-          <Image id="profile-img" src={state.user.primary_image} avatar />
+          isOpen={state.menuOpen}
+          onStateChange={handleStateChange}
+        > 
+          <div className='menu-profile'>
+            <Image id="profile-img" src={state.user.primary_image} avatar />
+            <p id='profile-name'>{state.user.name}</p>
+          </div>
           <Link
             id="profile"
             className="menu-item"
             to={`/user/${localStorage.getItem("user_id")}`}
+            onClick={closeMenu}
           >
             <Icon name="user" />
             Profile
           </Link>
-          <Link id="conversations" className="menu-item" to="/conversations">
-            <Icon name="mail outline" />
-            Conversations <small>{state.unreads}</small>
+          <Link id="conversations" className="menu-item" to="/conversations" onClick={closeMenu}>
+            <Icon name="mail" />
+            Conversations {state.unreads > 0 && <Label>{state.unreads}</Label>}
           </Link>
-          <Link id="favorites" className="menu-item" to="/favourites">
+          <Link id="favorites" className="menu-item" to="/favourites" onClick={closeMenu}>
             <Icon name="favorite" />
             Favourites
           </Link>
@@ -124,7 +137,7 @@ function App() {
             <Profile />
           </Route>
           <Route path="/edit-user">
-            <EditProfile />
+            <EditProfile user={state.user}/>
           </Route>
           <Route path="/messages/:id">
             <Message />

@@ -3,6 +3,7 @@ import axios from "axios";
 import { useLocation, Link } from "react-router-dom";
 import history from "../history";
 import { Comment, Icon, Message, Button } from "semantic-ui-react";
+import Loading from "./Loading";
 
 import "./Conversations.scss";
 
@@ -115,7 +116,7 @@ export default function Conversations(props) {
     <div className="conversation-container">
       <h1>Conversations</h1>
       {loading ? (
-        <span>Loading</span>
+        <Loading />
       ) : (
         <div className="conversation">
           {recipients}

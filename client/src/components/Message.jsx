@@ -4,6 +4,7 @@ import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import history from "../history";
 import { Comment, Icon, Segment } from "semantic-ui-react";
 import Moment from "react-moment";
+import Loading from "./Loading";
 
 import "./Message.scss";
 
@@ -92,10 +93,10 @@ export default function Message(props) {
   const timeSince = function (time) {};
 
   return (
-    <div className="container">
+    <div className="container" id="message-container">
       <h1>Messages</h1>
       <Segment className="message-container">
-        {loading ? <span>Loading</span> : <div>{messages}</div>}
+        {loading ? <Loading /> : <div>{messages}</div>}
       </Segment>
       <form className="new-message" onSubmit={handleSubmit}>
         <label htmlFor="message">New Message:</label>
