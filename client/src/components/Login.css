@@ -8,3 +8,8 @@
   padding-top: 5em;
   position: absolute;
 }
+
+.loading-container {
+  margin-left: auto;
+  margin-right: auto;
+}
