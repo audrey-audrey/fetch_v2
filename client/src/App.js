@@ -16,7 +16,7 @@ import Favourites from "./components/Favourites";
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
 
-import appLogo from "./images/icons/logo.png";
+import appLogo from "./images/icons/logo.svg";
 
 import { slide as Menu } from "react-burger-menu";
 import "./BurgerMenu.css";

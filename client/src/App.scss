@@ -1,5 +1,8 @@
 .App {
   position: relative;
+  // background-color: black;
+  width: 100vw;
+  height: 100vh;
 
   .logo-top {
     img {
@@ -9,6 +12,8 @@
       padding-top: 2em;
       padding-bottom: 1em;
       padding-right: 2em;
+      height: 87px;
+      width: 228px;
     }
   }
 }

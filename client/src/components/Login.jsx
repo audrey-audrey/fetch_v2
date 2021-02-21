@@ -12,7 +12,7 @@ import {
 } from "semantic-ui-react";
 import history from "../history";
 import rupert from "../images/rupert.png";
-import logo from "../images/icons/logo.png";
+import logo from "../images/icons/logo.svg";
 
 import "./Login.css";
 
