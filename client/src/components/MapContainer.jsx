@@ -245,7 +245,7 @@ function MapContainer(props) {
         {/* <div className='profile-section-top'>
           <Link to='/'><img src={appLogo} /></Link>
         </div> */}
-      <div className='filter'>
+
         <div className='buttonContainer'>
           <Button toggle active={state.playful} onClick={togglePlayful}>Playful</Button>
           <Button toggle active={state.affectionate} onClick={toggleAffectionate}>Affectionate</Button>
@@ -256,7 +256,7 @@ function MapContainer(props) {
           <Button toggle active={!state.showToggle} onClick={toggleShow}>Show All!</Button>
         </div>
         {/* <p>{message}</p> */}
-      </div>
+
       <LoadScript googleMapsApiKey={process.env.REACT_APP_API_KEY}>
         <GoogleMap
           mapContainerStyle={mapStyles}

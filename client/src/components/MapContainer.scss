@@ -1,37 +1,29 @@
-.filter {
-  display: flex;
-  flex-direction: column;
+.map-container {
+  padding-top: 7em;
 
   .buttonContainer{
     display: flex;
     justify-content: space-around;
   }
-}
 
-.map-info-window {
-  // display: flex;
-  // flex-direction: column;
-   width: 22em;
-
-  img {
-    height: 20em;
-    width: 20em;
-    border-radius: 50%;
-  }
-
-  p {
-    margin:auto;
-  }
-
-  .button {
-    margin: auto;
-  }
-}
-
-
-.map-container {
-  .filter {
-    padding-top: 7em;
+  .map-info-window {
+    // display: flex;
+    // flex-direction: column;
+     width: 22em;
+  
+    img {
+      height: 20em;
+      width: 20em;
+      border-radius: 50%;
+    }
+  
+    p {
+      margin:auto;
+    }
+  
+    .button {
+      margin: auto;
+    }
   }
 
   .carousel {
