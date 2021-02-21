@@ -93,7 +93,7 @@ export default function Message(props) {
   const timeSince = function (time) {};
 
   return (
-    <div className="container">
+    <div className="container" id="message-container">
       <h1>Messages</h1>
       <Segment className="message-container">
         {loading ? <Loading /> : <div>{messages}</div>}
