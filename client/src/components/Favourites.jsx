@@ -23,31 +23,27 @@ export default function Favourites(props) {
     const params = { user_id };
 
     axios.get(`/api/users/${user_id}/favorites/`, { params }).then((res) => {
-      console.log(res);
       setState({ favourites: res.data });
     });
   }, []);
 
-  // const handleDelete = function (event) {
-  //   event.preventDefault();
-  //   const user_id = localStorage.getItem("user_id");
-  //   // const params = { user_id, favoritee: favoritee_id };
-  //   console.log("favourites", state.favourites.favoritee_id)
-
-  //   // return axios
-  //   // .delete(`/api/users/${user_id}/favorites/${favoritee_id}`, params)
-  //   // .then((res) => {
-  //   //   axios
-  //   //     .get(`/api/users/${user_id}/favorites/`)
-  //   //     .then((res) =>
-  //   //       setState((prev) => ({ ...prev, favourites: res.data}))
-  //   //     );
-  //   // })
-  //   // .catch((err) => {
-  //   //   throw err;
-  //   // });
-
-  // }
+  const handleDelete = function (event, id) {
+    event.preventDefault();
+    const user_id = localStorage.getItem("user_id");
+    const params = { user_id, favoritee: id };
+    return axios
+      .delete(`/api/users/${user_id}/favorites/${id}`, params)
+      .then((res) => {
+        axios
+          .get(`/api/users/${user_id}/favorites/`)
+          .then((res) =>
+            setState((prev) => ({ ...prev, favourites: res.data }))
+          );
+      })
+      .catch((err) => {
+        throw err;
+      });
+  };
 
   return (
     <div className="favourites-container">
@@ -89,7 +85,7 @@ export default function Favourites(props) {
                   basic
                   color="orange"
                   floated="right"
-                  // onClick={handleDelete}
+                  onClick={(event) => handleDelete(event, favoritee_id)}
                 >
                   <Button.Content visible>Delete</Button.Content>
                   <Button.Content hidden>
