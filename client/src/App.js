@@ -94,6 +94,10 @@ function App() {
               <Image id="profile-img" src={state.user.primary_image} avatar />
               <p id="profile-name">{state.user.name}</p>
             </div>
+            <Link id="map" className="menu-item" to="/" onClick={closeMenu}>
+              <Icon name="globe" />
+              Back to Map
+            </Link>
             <Link
               id="profile"
               className="menu-item"
@@ -121,10 +125,6 @@ function App() {
             >
               <Icon name="favorite" />
               Favourites
-            </Link>
-            <Link id="map" className="menu-item" to="/" onClick={closeMenu}>
-              <Icon name="globe" />
-              Back to Map
             </Link>
             <Link
               id="logout"
