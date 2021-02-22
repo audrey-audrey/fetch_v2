@@ -28,7 +28,7 @@ export default function Login(props) {
 
   const handleSubmit = function (event) {
     event.preventDefault();
-    setLoading(true);
+    // setLoading(true);
 
     const params = { email: state.email, password: state.password };
     return axios
@@ -38,10 +38,11 @@ export default function Login(props) {
           return;
         }
         localStorage.setItem("user_id", res.data[0].id); // <-- adds navbar
-        setTimeout(() => {
-          history.push("/");
-          window.location.reload();
-        }, 4000);
+        history.push("/");
+        window.location.reload();
+        // setTimeout(() => {
+        //   setLoading(false);
+        // }, 4000);
       })
       .catch((err) => {
         setState({ errorMessage: err.message });
