@@ -79,6 +79,7 @@ export default function Message(props) {
       conversation_id: conversation_id,
       user_id: localStorage.getItem("user_id"),
     };
+    setMessage("");
     axios
       .post(`/api/conversations/${conversation_id}/messages/`, params)
       .then((res) => {
@@ -108,12 +109,13 @@ export default function Message(props) {
           type="text"
           id="message"
           name="message"
+          value={message}
           onChange={(event) => {
             setMessage(event.target.value);
           }}
         />
         <Button className="btn btn-primary" type="submit" color="orange">
-          <Icon name="send"/>
+          <Icon name="send" />
           Send Message
         </Button>
       </form>
