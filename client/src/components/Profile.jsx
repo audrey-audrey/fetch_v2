@@ -109,7 +109,7 @@ export default function Profile(props) {
   return (
     <div className="profile-container">
       <div className="carousel">
-        <Carousel initialSlideHeight={0.4}>
+        <Carousel initialSlideHeight={0.4} wrapAround>
           <img className="profile-image" src={state.user.primary_image} />
           <img src={state.user.image_2} />
           <img src={state.user.image_3} />
