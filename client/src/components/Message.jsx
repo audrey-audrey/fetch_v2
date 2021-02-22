@@ -2,7 +2,7 @@ import React, { useState, useEffect, forceUpdate } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, useLocation } from "react-router-dom";
 import history from "../history";
-import { Comment, Icon, Segment } from "semantic-ui-react";
+import { Comment, Icon, Segment, Button } from "semantic-ui-react";
 import Moment from "react-moment";
 import Loading from "./Loading";
 
@@ -112,9 +112,9 @@ export default function Message(props) {
             setMessage(event.target.value);
           }}
         />
-        <button className="btn btn-primary" type="submit">
+        <Button className="btn btn-primary" type="submit" color="orange">
           Send Message
-        </button>
+        </Button>
       </form>
     </div>
   );
