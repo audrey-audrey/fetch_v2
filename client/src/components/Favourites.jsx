@@ -48,7 +48,7 @@ export default function Favourites(props) {
   return (
     <div className="favourites-container">
       <Header size="huge" textAlign="center">
-        Good Dogs.
+        Good Dogs
       </Header>
       <Card.Group>
         {state.favourites.map((favourite) => {

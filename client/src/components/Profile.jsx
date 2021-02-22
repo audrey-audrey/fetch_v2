@@ -15,14 +15,13 @@ import "./Profile.scss";
 import Carousel from "nuka-carousel";
 import rupert from "../images/rupert.png";
 
-
 export default function Profile(props) {
   const profile_id = useLocation().pathname.split("/")[2];
 
   const { user_id } = useParams();
   const [state, setState] = useState({
     user: {},
-    favourites: []
+    favourites: [],
   });
 
   const [isProfileOwner, setIsProfileOwner] = useState(false);
@@ -68,7 +67,9 @@ export default function Profile(props) {
     });
   };
 
-  const isFavourited = state.favourites.find((fave) => fave.id === state.user.id);
+  const isFavourited = state.favourites.find(
+    (fave) => fave.id === state.user.id
+  );
 
   const handleFavourite = function (event) {
     event.preventDefault();
@@ -83,7 +84,11 @@ export default function Profile(props) {
           axios
             .get(`/api/users/${user_id}/favorites/`)
             .then((res) =>
-              setState((prev) => ({ ...prev, favourites: res.data, favorited: false }))
+              setState((prev) => ({
+                ...prev,
+                favourites: res.data,
+                favorited: false,
+              }))
             );
         })
         .catch((err) => {
@@ -96,20 +101,40 @@ export default function Profile(props) {
           axios
             .get(`/api/users/${user_id}/favorites/`)
             .then((res) =>
-              setState((prev) => ({ ...prev, favourites: res.data, favorited: true }))
+              setState((prev) => ({
+                ...prev,
+                favourites: res.data,
+                favorited: true,
+              }))
             );
         })
         .catch((err) => {
           throw err;
         });
     }
-
   };
 
   return (
     <div className="profile-container">
       <div className="carousel">
-        <Carousel initialSlideHeight={0.4}>
+        <Carousel
+          initialSlideHeight={0.4}
+          initialSlideWidth={0.4}
+          wrapAround
+          renderTopCenterControls={({ currentSlide }) => (
+            <div></div>
+          )}
+          renderCenterLeftControls={({ previousSlide }) => (
+            <Button onClick={previousSlide} color="orange">
+              <Icon name="arrow alternate circle left"/>Prev</Button>
+          )}
+          renderCenterRightControls={({ nextSlide }) => (
+            <Button onClick={nextSlide} color="orange">
+              Next
+              <Icon name="arrow alternate circle right" />
+              </Button>
+          )}
+        >
           <img className="profile-image" src={state.user.primary_image} />
           <img src={state.user.image_2} />
           <img src={state.user.image_3} />
@@ -118,7 +143,7 @@ export default function Profile(props) {
         </Carousel>
       </div>
 
-      <div className='header-button'>
+      <div className="header-button">
         <Header textAlign="center" size="large">
           {state.user.name} & {state.user.dog_name}
           <Header.Subheader>Toronto, ON</Header.Subheader>
@@ -126,20 +151,29 @@ export default function Profile(props) {
 
         {isProfileOwner ? (
           <Link to="/edit-user">
-            <Button>Edit Profile</Button>
+            <Button basic color="orange" icon>
+              <Icon name="edit"/>
+              &nbsp;Edit Profile</Button>
           </Link>
         ) : null}
 
-        <div className='buttons-non-user'>
+        <div className="buttons-non-user">
           {!isProfileOwner && !favourited ? (
-            <Button color="yellow" basic={!isFavourited} onClick={handleFavourite}>
+            <Button
+              color="yellow"
+              basic={!isFavourited}
+              onClick={handleFavourite}
+              icon
+            >
               <Icon name="star" /> Favourite
             </Button>
           ) : null}
 
           {!isProfileOwner ? (
             <Link>
-              <Button onClick={handleChat}>Start a Chat!</Button>
+              <Button onClick={handleChat} icon>
+                Start a Chat!&nbsp;<Icon name="chat"/>
+                </Button>
             </Link>
           ) : null}
         </div>
@@ -147,36 +181,36 @@ export default function Profile(props) {
 
       <Card fluid>
         <Card.Content>
-          <Card.Description>{state.user.bio}</Card.Description>
+          <Card.Description as="h5">{state.user.bio}</Card.Description>
         </Card.Content>
         <Card.Content>
           {state.user.playful ? (
-            <Label as="a" tag>
+            <Label as="a" tag color="orange">
               Playful
             </Label>
           ) : null}
           {state.user.affectionate ? (
-            <Label as="a" tag>
+            <Label as="a" tag color="orange">
               Affectionate
             </Label>
           ) : null}
           {state.user.shy ? (
-            <Label as="a" tag>
+            <Label as="a" tag color="orange">
               Shy
             </Label>
           ) : null}
           {state.user.high_energy ? (
-            <Label as="a" tag>
+            <Label as="a" tag color="orange">
               High-energy
             </Label>
           ) : null}
           {state.user.well_trained ? (
-            <Label as="a" tag>
+            <Label as="a" tag color="orange">
               Well-trained
             </Label>
           ) : null}
           {state.user.large ? (
-            <Label as="a" tag>
+            <Label as="a" tag color="orange">
               Large
             </Label>
           ) : null}

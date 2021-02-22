@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from "react";
+import { React, useState, useEffect, useRef } from "react";
 import {
   GoogleMap,
   LoadScript,
@@ -61,6 +61,33 @@ function MapContainer(props) {
       setState({ favourites: res.data });
     });
   }, []);
+
+  // map position
+  const [position, setPosition] = useState({
+    lat: null, 
+    lng: null
+  });
+
+  const mapRef = useRef(null);
+
+  function handleLoad(map) {
+    mapRef.current = map;
+  }
+
+  function handleCenter() {
+    if (!mapRef.current) return;
+
+    const newPos = mapRef.current.getCenter().toJSON();
+    setPosition(newPos);
+  }
+
+  useEffect(() => {
+    setPosition(
+      {
+        lat: parseFloat(props.user.lat),
+        lng: parseFloat(props.user.lng),
+      })
+  }, [props]);
 
   // button toggles
   const togglePlayful = () =>
@@ -190,16 +217,6 @@ function MapContainer(props) {
     width: "100%",
   };
 
-  const defaultCenter = {
-    lat: parseFloat(props.user.lat) || parseFloat('43.651070'),
-    lng: parseFloat(props.user.lng) || parseFloat('-79.347015'),
-  };
-
-  // const message =
-  //   filteredPins.length > 0
-  //     ? `There are ${filteredPins.length} dogs matching your criteria`
-  //     : "There are no dogs matching all your criteria!";
-
   const styles = require("../styles/map/GoogleMapStyles.json");
 
   const isFavourited = state.favourites.find((fave) => fave.id === selected.id);
@@ -257,7 +274,7 @@ function MapContainer(props) {
           <GoogleMap
             mapContainerStyle={mapStyles}
             zoom={15}
-            center={defaultCenter}
+            center={position}
             options={{ styles: styles }}
           >
             {filteredPins.length &&
@@ -267,14 +284,16 @@ function MapContainer(props) {
                     key={item.name}
                     position={item.location}
                     icon={item.icon}
-                    onClick={() => onSelect(item)}
+                    onClick={
+                      () => onSelect(item)
+                      }
                   />
                 );
               })}
             {selected.location && (
               <InfoWindow
                 position={selected.location}
-                options={{disableAutoPan: true}}
+                options={{disableAutoPan: false}}
                 clickable={true}
                 onCloseClick={() => setSelected({})}
               >

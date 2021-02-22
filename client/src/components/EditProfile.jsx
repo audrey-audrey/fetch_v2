@@ -172,8 +172,8 @@ export default function EditProfile(props) {
             </Form.Group>
 
             <div className='submit-cancel'>
-              <Button content="Submit" color='teal'/>
-              <Button content="Cancel" color='red' onClick={onClick} />
+              <Button content="Submit" color='orange'/>
+              <Button content="Cancel" basic color='orange' onClick={onClick} />
             </div>
           </Form>
         </div>
