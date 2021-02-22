@@ -151,7 +151,9 @@ export default function Profile(props) {
 
         {isProfileOwner ? (
           <Link to="/edit-user">
-            <Button basic color="orange">Edit Profile</Button>
+            <Button basic color="orange" icon>
+              <Icon name="edit"/>
+              &nbsp;Edit Profile</Button>
           </Link>
         ) : null}
 
@@ -161,6 +163,7 @@ export default function Profile(props) {
               color="yellow"
               basic={!isFavourited}
               onClick={handleFavourite}
+              icon
             >
               <Icon name="star" /> Favourite
             </Button>
@@ -168,7 +171,9 @@ export default function Profile(props) {
 
           {!isProfileOwner ? (
             <Link>
-              <Button onClick={handleChat}>Start a Chat!</Button>
+              <Button onClick={handleChat} icon>
+                Start a Chat!&nbsp;<Icon name="chat"/>
+                </Button>
             </Link>
           ) : null}
         </div>
