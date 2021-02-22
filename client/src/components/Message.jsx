@@ -113,6 +113,7 @@ export default function Message(props) {
           }}
         />
         <Button className="btn btn-primary" type="submit" color="orange">
+          <Icon name="send"/>
           Send Message
         </Button>
       </form>
