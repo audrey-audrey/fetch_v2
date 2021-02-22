@@ -15,6 +15,7 @@ import EditProfile from "./components/EditProfile";
 import Favourites from "./components/Favourites";
 import MapContainer from "./components/MapContainer";
 import Homepage from "./components/Homepage";
+import Loading from "./components/Loading";
 
 import appLogo from "./images/icons/logo.svg";
 
@@ -32,6 +33,7 @@ function App() {
     unreads: 1,
     menuOpen: false,
   });
+  const [loading, setLoading] = useState(true);
 
   // setStates
   const setUsers = (users) => setState((prev) => ({ ...prev, users }));
@@ -44,8 +46,6 @@ function App() {
   // fetch users data from backend
   useEffect(() => {
     axios.get("/api/users").then((res) => setUsers(res.data));
-  }, []);
-  useEffect(() => {
     const params = { id: localStorage.getItem("user_id") };
     axios.get(`/api/conversations`, { params }).then((res) => {
       let unreads = 0;
@@ -56,21 +56,26 @@ function App() {
       }
       setUnreads(unreads);
     });
-  }, []);
-  const handleLogout = function (event) {
-    localStorage.removeItem("user_id");
-
-    history.push("/");
-    window.location.reload();
-  };
-
-  // fetch current user data
-  useEffect(() => {
     const currentUserId = localStorage.getItem("user_id");
     axios.get(`/api/users/${currentUserId}`).then((res) => {
       setUser(res.data[0]);
     });
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 4000);
+  }, [state]);
+
+  const handleLogout = function (event) {
+    localStorage.removeItem("user_id");
+
+    history.push("/homepage");
+    window.location.reload();
+  };
+
+  // fetch current user data
 
   return (
     <div className="App">
@@ -165,10 +170,14 @@ function App() {
             <Favourites />
           </Route>
           <Route path="/">
-            {localStorage.getItem("user_id") ? (
+            {loading ? (
+              <div className="loading-container">
+                <Loading />
+              </div>
+            ) : localStorage.getItem("user_id") ? (
               <MapContainer users={state.users} user={state.user} />
             ) : (
-              <Homepage />
+              <div>failed to load</div>
             )}
           </Route>
         </Switch>
