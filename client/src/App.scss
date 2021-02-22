@@ -3,18 +3,15 @@
   // background-color: black;
   width: 100vw;
   height: 100vh;
-
   .logo-top {
-    img {
-      position: absolute;
-      top: 0;
-      right: 0;
-      padding-top: 2em;
-      padding-bottom: 1em;
-      padding-right: 2em;
-      height: 87px;
-      width: 228px;
-    }
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding-top: 2em;
+    padding-bottom: 1em;
+    padding-right: 2em;
+    height: 87px;
+    width: 228px;
   }
 }
 
@@ -53,7 +50,7 @@
   }
 }
 
-.menu-profile{
+.menu-profile {
   #profile-img {
     display: flex;
     margin: auto;
@@ -69,6 +66,11 @@
     margin-bottom: 1em;
     font-size: x-large;
   }
+}
+
+.loading-container {
+  padding-top: 10em;
+  padding-left: 4.5em;
 }
 
 // #outer-container > div ~ #page-wrap {
