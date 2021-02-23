@@ -101,7 +101,7 @@ function App() {
             </div>
             <Link id="map" className="menu-item" to="/" onClick={closeMenu}>
               <Icon name="globe" />
-              Back to Map
+              Map
             </Link>
             <Link
               id="profile"

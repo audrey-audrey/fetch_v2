@@ -344,6 +344,7 @@ function MapContainer(props) {
             <Header as='h1'>Nearby</Header>
             <div className='carousel'>
               <Carousel
+              wrapAround
               renderCenterLeftControls={({ previousSlide }) => (
                 <Button onClick={previousSlide} color="orange">
                   <Icon name="arrow alternate circle left"/>Prev</Button>
