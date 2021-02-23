@@ -47,7 +47,7 @@ export default function Favourites(props) {
 
   return (
     <div className="favourites-container">
-      <Header size="huge" textAlign="center">
+      <Header size="huge">
         Good Dogs
       </Header>
       <Card.Group>

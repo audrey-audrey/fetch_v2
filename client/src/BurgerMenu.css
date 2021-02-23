@@ -39,9 +39,10 @@ Note: Beware of modifying this element as it can break the animations - you shou
 
 /* General sidebar styles */
 .bm-menu {
-  background: #A44200;
   padding: 2.5em 1.5em 0;
   font-size: 1.15em;
+  background-color: #2B2D42;
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
 }
 
 /* Morph shape necessary with bubble or elastic */

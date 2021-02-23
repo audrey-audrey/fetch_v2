@@ -6,7 +6,27 @@ user_list = [
   [ "111 Lombard St, Toronto", Geocoder.search("111 Lombard St, Toronto").first.coordinates[0], Geocoder.search("111 Lombard St, Toronto").first.coordinates[1] ],
   [ "350 Victoria St, Toronto", Geocoder.search("350 Victoria St, Toronto").first.coordinates[0], Geocoder.search("350 Victoria St, Toronto").first.coordinates[1] ],
   [ "600 University Ave, Toronto", Geocoder.search("600 University Ave, Toronto").first.coordinates[0], Geocoder.search("600 University Ave, Toronto").first.coordinates[1] ],
-  [ "66 Nassau St, Toronto", Geocoder.search("66 Nassau St, Toronto").first.coordinates[0], Geocoder.search("66 Nassau St, Toronto").first.coordinates[1] ]
+  [ "593 Dundas St E, Toronto", Geocoder.search("593 Dundas St E, Toronto").first.coordinates[0], Geocoder.search("593 Dundas St E, Toronto").first.coordinates[1] ],
+  [ "31 Howard St, Toronto", Geocoder.search("31 Howard St, Toronto").first.coordinates[0], Geocoder.search("31 Howard St, Toronto").first.coordinates[1] ],
+  [ "202 Davenport Rd, Toronto", Geocoder.search("202 Davenport Rd, Toronto").first.coordinates[0], Geocoder.search("202 Davenport Rd, Toronto").first.coordinates[1] ],
+  [ "1440 Bathurst St, Toronto", Geocoder.search("1440 Bathurst St, Toronto").first.coordinates[0], Geocoder.search("1440 Bathurst St, Toronto").first.coordinates[1] ],
+  [ "167 Dupont St, Toronto", Geocoder.search("167 Dupont St, Toronto").first.coordinates[0], Geocoder.search("167 Dupont St, Toronto").first.coordinates[1] ],
+  [ "375 Mt Pleasant Rd, Toronto", Geocoder.search("375 Mt Pleasant Rd, Toronto").first.coordinates[0], Geocoder.search("375 Mt Pleasant Rd, Toronto").first.coordinates[1] ],
+  [ "1000 Gerrard St E, Toronto", Geocoder.search("1000 Gerrard St E, Toronto").first.coordinates[0], Geocoder.search("1000 Gerrard St E, Toronto").first.coordinates[1] ],
+  [ "617 Gerrard St, Toronto", Geocoder.search("617 Gerrard St, Toronto").first.coordinates[0], Geocoder.search("617 Gerrard St, Toronto").first.coordinates[1] ],
+  [ "920 Queen St E, Toronto", Geocoder.search("920 Queen St E, Toronto").first.coordinates[0], Geocoder.search("920 Queen St E, Toronto").first.coordinates[1] ],
+  [ "550 Bayview Ave, Toronto", Geocoder.search("550 Bayview Ave, Toronto").first.coordinates[0], Geocoder.search("550 Bayview Ave, Toronto").first.coordinates[1] ],
+  [ "490 Front St E, Toronto", Geocoder.search("490 Front St E, Toronto").first.coordinates[0], Geocoder.search("490 Front St E, Toronto").first.coordinates[1] ],
+  [ "761 Dundas St E, Toronto", Geocoder.search("761 Dundas St E, Toronto").first.coordinates[0], Geocoder.search("761 Dundas St E, Toronto").first.coordinates[1] ],
+  [ "201 Winchester St, Toronto", Geocoder.search("201 Winchester St, Toronto").first.coordinates[0], Geocoder.search("201 Winchester St, Toronto").first.coordinates[1] ],
+  [ "2 Whitehall Rd, Toronto", Geocoder.search("2 Whitehall Rd, Toronto").first.coordinates[0], Geocoder.search("2 Whitehall Rd, Toronto").first.coordinates[1] ],
+  [ "44 Price St, Toronto", Geocoder.search("44 Price St, Toronto").first.coordinates[0], Geocoder.search("44 Price St, Toronto").first.coordinates[1] ],
+  [ "1 Forest Hill Rd, Toronto", Geocoder.search("1 Forest Hill Rd, Toronto").first.coordinates[0], Geocoder.search("1 Forest Hill Rd, Toronto").first.coordinates[1] ],
+  [ "33 Forest Hill Rd, Toronto", Geocoder.search("33 Forest Hill Rd, Toronto").first.coordinates[0], Geocoder.search("33 Forest Hill Rd, Toronto").first.coordinates[1] ],
+  [ "650 Dupont St, Toronto", Geocoder.search("650 Dupont St, Toronto").first.coordinates[0], Geocoder.search("650 Dupont St, Toronto").first.coordinates[1] ],
+  [ "1076 Bloor St W, Toronto", Geocoder.search("1076 Bloor St W, Toronto").first.coordinates[0], Geocoder.search("1076 Bloor St W, Toronto").first.coordinates[1] ],
+  [ "171 E Liberty St, Toronto", Geocoder.search("171 E Liberty St, Toronto").first.coordinates[0], Geocoder.search("171 E Liberty St, Toronto").first.coordinates[1] ],
+  [ "1150 Queen St W, Toronto", Geocoder.search("1150 Queen St W, Toronto").first.coordinates[0], Geocoder.search("1150 Queen St W, Toronto").first.coordinates[1] ],
 ]
 
 user = User.create!(
@@ -165,7 +185,7 @@ user2 = User.create!(
 Conversation.destroy_all
 user_list.each do |location, lat, lng|
   newUser = User.create!(
-    name: Faker::Name.name,
+    name: Faker::Name.first_name,
     email: Faker::Internet.unique.email,
     password: "password",
     location: location,

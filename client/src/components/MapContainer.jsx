@@ -213,7 +213,7 @@ function MapContainer(props) {
     });
 
   const mapStyles = {
-    height: "60vh",
+    height: "55vh",
     width: "100%",
   };
 
@@ -344,6 +344,15 @@ function MapContainer(props) {
             <Header as='h1'>Nearby</Header>
             <div className='carousel'>
               <Carousel
+              wrapAround
+              renderCenterLeftControls={({ previousSlide }) => (
+                <Button onClick={previousSlide} color="orange">
+                  <Icon name="arrow alternate circle left"/>Prev</Button>
+              )}
+              renderCenterRightControls={({ nextSlide }) => (
+                <Button onClick={nextSlide} color="orange">Next
+                <Icon name="arrow alternate circle right"/></Button>
+              )}
                 slidesToShow={3}
                 initialSlideHeight={120}
                 renderBottomCenterControls={false}
