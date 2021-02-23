@@ -130,7 +130,7 @@ user2 = User.create!(
     image_3: 'https://i.imgur.com/RE6jF3D.jpg',
     image_4: 'https://i.imgur.com/vJNXmDj.jpg',
     image_5: 'https://i.imgur.com/1IdBXXI.jpg',
-    bio: "Zoe and Ella here, we enjoy taking long walks and eating carrots. Message if you want to eat some carrots with us! And if that doesn't sounds fun, then we don't carrot all",
+    bio: "Zoe and Ella here, we enjoy taking long walks and eating carrots. Message if you want to eat some carrots with us! And if that doesn't sound fun, then we don't carrot all",
     playful: false,
     affectionate: true,
     high_energy: false,
