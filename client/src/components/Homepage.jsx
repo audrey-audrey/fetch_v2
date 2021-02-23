@@ -8,6 +8,7 @@ import "./Homepage.scss";
 
 export default function Homepage(props) {
   return (
+    <div className='container'>
     <Container textAlign="center">
       <Image src={logo} centered />
       <Image src={ella} circular centered />
@@ -21,5 +22,6 @@ export default function Homepage(props) {
         </Button>
       </Button.Group>
     </Container>
+    </div>
   );
 }
