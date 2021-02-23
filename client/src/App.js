@@ -106,8 +106,12 @@ function App() {
             <Link
               id="profile"
               className="menu-item"
-              to={`/user/${localStorage.getItem("user_id")}`}
-              onClick={closeMenu}
+              to={`/user/1`}
+              onClick={() => {
+                closeMenu();
+                history.push("/user/1");
+                window.location.reload();
+              }}
             >
               <Icon name="user" />
               Profile
@@ -119,8 +123,7 @@ function App() {
               onClick={closeMenu}
             >
               <Icon name="mail" />
-              Conversations{" "}
-              {state.unreads > 0 && <Label>{state.unreads}</Label>}
+              <span>Conversations {state.unreads > 0 && state.unreads}</span>
             </Link>
             <Link
               id="favorites"
@@ -154,7 +157,10 @@ function App() {
           <Route path="/register">
             <Register />
           </Route>
-          <Route path="/user/:id">
+          <Route exact path="/user/1">
+            <Profile />
+          </Route>
+          <Route path="/user/:id" children={<Profile />}>
             <Profile />
           </Route>
           <Route path="/edit-user">
