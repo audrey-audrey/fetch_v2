@@ -213,7 +213,7 @@ function MapContainer(props) {
     });
 
   const mapStyles = {
-    height: "55vh",
+    height: "60vh",
     width: "100%",
   };
 

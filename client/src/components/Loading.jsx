@@ -11,7 +11,7 @@ import "./Loading.scss";
 export default function Loading(props) {
   return (
     <div className="loading-item">
-      <h1 className="loading-title">Fetching your floofy friends!</h1>
+      <h1 className="loading-title">Making fetch happen!</h1>
       <img src={loading} alt="loading..." />
     </div>
   );

@@ -1,9 +1,13 @@
-// .loading-item {
-//   margin-left: 140px;
-//   margin-right: auto;
-// }
+.loading-container {
+  margin: 0;
+  padding: 0;
 
-.loading-title {
-  text-align: center;
-  width: 640px;
+  .loading-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10em;
+    padding-right: 10em;
+  }
 }
+
