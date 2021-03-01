@@ -25,8 +25,7 @@ user_list = [
   [ "33 Forest Hill Rd, Toronto", Geocoder.search("33 Forest Hill Rd, Toronto").first.coordinates[0], Geocoder.search("33 Forest Hill Rd, Toronto").first.coordinates[1] ],
   [ "650 Dupont St, Toronto", Geocoder.search("650 Dupont St, Toronto").first.coordinates[0], Geocoder.search("650 Dupont St, Toronto").first.coordinates[1] ],
   [ "1076 Bloor St W, Toronto", Geocoder.search("1076 Bloor St W, Toronto").first.coordinates[0], Geocoder.search("1076 Bloor St W, Toronto").first.coordinates[1] ],
-  [ "171 E Liberty St, Toronto", Geocoder.search("171 E Liberty St, Toronto").first.coordinates[0], Geocoder.search("171 E Liberty St, Toronto").first.coordinates[1] ],
-  [ "1150 Queen St W, Toronto", Geocoder.search("1150 Queen St W, Toronto").first.coordinates[0], Geocoder.search("1150 Queen St W, Toronto").first.coordinates[1] ],
+  [ "171 E Liberty St, Toronto", Geocoder.search("171 E Liberty St, Toronto").first.coordinates[0], Geocoder.search("171 E Liberty St, Toronto").first.coordinates[1] ]
 ]
 
 user = User.create!(
