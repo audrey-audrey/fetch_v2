@@ -22,10 +22,10 @@ import {
 import Carousel from 'nuka-carousel';
 
 import "./MapContainer.scss";
-import appLogo from "../images/icons/logo.png"
 import no_photo from "../images/placeholder-headshot.png"
 
 function MapContainer(props) {
+
   // State
   const [selected, setSelected] = useState({});
 

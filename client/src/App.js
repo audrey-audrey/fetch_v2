@@ -65,7 +65,7 @@ function App() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 4000);
+    }, 2000);
   }, [state]);
 
   const handleLogout = function (event) {
