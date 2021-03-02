@@ -7,8 +7,6 @@
     <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/icons/logo.svg" alt="Logo" height="80">
   </a>
 
-  <h3 align="center">fetch.</h3>
-
   <p align="center">
     A location-based friend finding app to connect dog owners for playdates!
     <!-- <br />
