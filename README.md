@@ -53,8 +53,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-![Product Screenshot](https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/fetch.png)
+<p align="center">
+ <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/fetch.png" alt="fetch.">
+</p>
 
 This app was built as part of Lighthouse Labs' final project. The project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) for the frontend, Rails 6 for the backend, and PostgreSQL as the database.
 
@@ -129,38 +130,43 @@ From the root directory in a new terminal, type the following commands:
 
 <!-- USAGE EXAMPLES -->
 ## Usage
-<p float="left">
+<p align="center">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/landing.png" width="400">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/signup.png" width="400">
 </p>
 User can sign up for an account or log in to an existing account from the landing page. 
 <br>
-<p float="left">
+
+<p align="center">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/map.png" width="400">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/card.png" width="400">
 </p>
 After logging in, user can see others in their area. Current user's marker is coloured yellow, and other users are orange. 
 Clicking on a marker will open an info window with a profile photo, approximate distance away, an option to favourite the user, and a button to the user's profile page. 
 <br>
-<p float="left">
+
+<p align="center">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/navbar.png" width="400">
 </p>
 Clicking on the burger icon on the top left corner will open a side navigration bar where users can navigate to different pages. 
 <br>
-<p float="left">
+
+<p align="center">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/profile.png" width="400">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/edit.png" width="400">
 </p>
 User can navigate to their own Profile page, where they are able to edit information, such as their name, dog information, address, email, etc. 
 (Currently working on a feature where user will be able to upload photos)
 <br>
-<p float="left">
+
+<p align="center">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/fav.png" width="400">
 <img src="https://github.com/audrey-audrey/fetch_v2/blob/main/client/src/images/screenshots/message.png" width="400">
 </p>
 User can also navigate to their Favourites page, where they can view other profiles that they have saved. 
 Navigate to the Conversations page to view messages and chat with other users to set up a meeting. 
 <br>
+
 <!-- ROADMAP -->
 ## Roadmap
 
