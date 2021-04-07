@@ -13,8 +13,8 @@
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br /> -->
     <br />
-    <a href="">View Demo - TBD</a>
-    ·
+<!--     <a href="">View Demo - TBD</a>
+    · -->
     <a href="https://github.com/audrey-audrey/fetch_v2/issues">Report Bug</a>
     ·
     <a href="https://github.com/audrey-audrey/fetch_v2/issues">Request Feature</a>
